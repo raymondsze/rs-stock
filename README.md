@@ -1,4 +1,4 @@
-# Web-Gateway
+# RS-STOCK
 ----------
 ## Get Started
 ##### 1. Create .env copy from .env.example
