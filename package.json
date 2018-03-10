@@ -1,0 +1,94 @@
+{
+  "name": "rs-stock",
+  "private": true,
+  "version": "0.0.1",
+  "author": "szer0601@gmail.com",
+  "license": "MIT",
+  "description": "This is the web gateway as a bridge from service to api gateway.",
+  "main": "build/index.js",
+  "scripts": {
+    "start": "node build/index.js",
+    "build": "concurrently \"npm run copy-assets\" \"tsc\"",
+    "watch": "concurrently \"npm run copy-assets:watch\" \"npm run tsc:watch\" \"nodemon --delay 2.5 --exec npm run start | bunyan -o short\"",
+    "test": "jest",
+    "tsc:build": "tsc",
+    "tsc:watch": "tsc -w",
+    "copy-assets": "cpx \"src/**/*.{json}\" build",
+    "copy-assets:watch": "cpx \"src/**/*.{json}\" build --watch",
+    "lint": "tslint -c tslint.json -p .",
+    "precommit": "lint-staged",
+    "prepush": "concurrently \"npm run lint\" \"npm run test\"",
+    "postinstall": "npm run build"
+  },
+  "lint-staged": {
+    "src/**/*.{ts, json}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/__tests__/**/*.ts?(x)",
+      "**/?(*.)(spec|test).ts?(x)"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx"
+    ],
+    "mapCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.{ts, tsx}"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "statements": 100,
+        "branches": 100,
+        "functions": 100,
+        "lines": 100
+      }
+    },
+    "transform": {
+      "\\.(ts|tsx)$": "ts-jest"
+    },
+    "setupTestFrameworkScriptFile": "<rootDir>/src/setupTests.ts"
+  },
+  "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/bluebird": "^3.5.18",
+    "@types/body-parser": "^1.16.8",
+    "@types/bunyan": "^1.8.3",
+    "@types/lodash": "^4.14.85",
+    "concurrently": "^3.5.0",
+    "cpx": "^1.5.0",
+    "husky": "^0.14.3",
+    "jest": "^20.0.4",
+    "lint-staged": "^4.0.2",
+    "nodemon": "^1.12.1",
+    "prettier": "^1.5.3",
+    "ts-jest": "^21.2.3",
+    "tslint": "^5.8.0",
+    "tslint-config-airbnb": "^5.7.0",
+    "typescript": "^2.6.1"
+  },
+  "dependencies": {
+    "@types/cheerio": "^0.22.7",
+    "@types/form-data": "^2.2.1",
+    "@types/fs-extra": "^5.0.1",
+    "@types/qs": "^6.5.1",
+    "@types/slack-node": "^0.1.2",
+    "axios": "^0.16.2",
+    "bluebird": "^3.5.0",
+    "bunyan": "^1.8.10",
+    "cheerio": "^1.0.0-rc.2",
+    "dotenv": "^4.0.0",
+    "form-data": "^2.3.2",
+    "fs-extra": "^5.0.0",
+    "lodash": "^4.17.4",
+    "module-alias": "^2.0.2",
+    "moment": "^2.18.1",
+    "qs": "^6.5.1",
+    "slack-node": "^0.1.8",
+    "source-map-support": "^0.5.0"
+  }
+}

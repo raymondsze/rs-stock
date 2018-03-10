@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "outDir": "build",
+    "module": "commonjs",
+    "target": "es6",
+    "lib": ["esnext", "es6", "dom"],
+    "sourceMap": true,
+    "allowJs": true,
+    "jsx": "preserve",
+    "moduleResolution": "node",
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "strict": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "noUnusedLocals": true,
+    "experimentalDecorators": true,
+    "baseUrl": ".",
+    "rootDir": "src",
+    "paths": {
+      "~/*": ["src/*"]
+    }
+  },
+  "exclude": [
+    ".vscode",
+    ".git",
+    "node_modules",
+    "build",
+    "coverage",
+    "scripts",
+    "src/setupTests.ts"
+  ]
+}
