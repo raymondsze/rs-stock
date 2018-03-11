@@ -1,0 +1,2933 @@
+kill: usage: kill [-s sigspec | -n signum | -sigspec] pid | jobspec ... or kill -l [sigspec]
+Already up-to-date.
+yarn install v1.5.1
+[1/4] Resolving packages...
+success Already up-to-date.
+$ npm run build
+
+> rs-stock@0.0.1 build /home/ubuntu/rs-stock
+> concurrently "npm run copy-assets" "npm run tsc:build"
+
+[0] 
+[0] > rs-stock@0.0.1 copy-assets /home/ubuntu/rs-stock
+[0] > cpx "src/**/*.{json}" build
+[0] 
+[1] 
+[1] > rs-stock@0.0.1 tsc:build /home/ubuntu/rs-stock
+[1] > tsc
+[1] 
+[0] npm run copy-assets exited with code 0
+[1] npm run tsc:build exited with code 0
+Done in 7.29s.
+yarn run v1.5.1
+$ concurrently "npm run copy-assets" "npm run tsc:build"
+[0] 
+[0] > rs-stock@0.0.1 copy-assets /home/ubuntu/rs-stock
+[0] > cpx "src/**/*.{json}" build
+[0] 
+[1] 
+[1] > rs-stock@0.0.1 tsc:build /home/ubuntu/rs-stock
+[1] > tsc
+[1] 
+[0] npm run copy-assets exited with code 0
+[1] npm run tsc:build exited with code 0
+Done in 6.30s.
+Nothing specified, nothing added.
+Maybe you wanted to say 'git add .'?
+husky > npm run -s precommit (node v9.8.0)
+
+[?25l[17:15:30] Running tasks for src/**/*.{ts, json} [started]
+[17:15:30] Running tasks for src/**/*.{ts, json} [skipped]
+[17:15:30] → No staged files match src/**/*.{ts, json}
+[?25h[?25hOn branch master
+Your branch is up-to-date with 'origin/master'.
+Changes not staged for commit:
+	modified:   data/144_2018_1.json
+	modified:   data/1558_2018_1.json
+	modified:   data/3306_2018_1.json
+	modified:   data/700_2018_1.json
+	modified:   update.sh
+
+Untracked files:
+	nohup.out
+	testing
+
+no changes added to commit
+warning: push.default is unset; its implicit value has changed in
+Git 2.0 from 'matching' to 'simple'. To squelch this message
+and maintain the traditional behavior, use:
+
+  git config --global push.default matching
+
+To squelch this message and adopt the new behavior now, use:
+
+  git config --global push.default simple
+
+When push.default is set to 'matching', git will push local branches
+to the remote branches that already exist with the same name.
+
+Since Git 2.0, Git defaults to the more conservative 'simple'
+behavior, which only pushes the current branch to the corresponding
+remote branch that 'git pull' uses to update the current branch.
+
+See 'git help config' and search for 'push.default' for further information.
+(the 'simple' mode was introduced in Git 1.7.11. Use the similar mode
+'current' instead of 'simple' if you sometimes use older versions of Git)
+
+kill: usage: kill [-s sigspec | -n signum | -sigspec] pid | jobspec ... or kill -l [sigspec]
+Already up-to-date.
+yarn install v1.5.1
+[1/4] Resolving packages...
+success Already up-to-date.
+$ npm run build
+
+> rs-stock@0.0.1 build /home/ubuntu/rs-stock
+> concurrently "npm run copy-assets" "npm run tsc:build"
+
+[1] 
+[1] > rs-stock@0.0.1 tsc:build /home/ubuntu/rs-stock
+[1] > tsc
+[1] 
+[0] 
+[0] > rs-stock@0.0.1 copy-assets /home/ubuntu/rs-stock
+[0] > cpx "src/**/*.{json}" build
+[0] 
+[0] npm run copy-assets exited with code 0
+[1] npm run tsc:build exited with code 0
+Done in 7.16s.
+yarn run v1.5.1
+$ concurrently "npm run copy-assets" "npm run tsc:build"
+[1] 
+[1] > rs-stock@0.0.1 tsc:build /home/ubuntu/rs-stock
+[1] > tsc
+[1] 
+[0] 
+[0] > rs-stock@0.0.1 copy-assets /home/ubuntu/rs-stock
+[0] > cpx "src/**/*.{json}" build
+[0] 
+[0] npm run copy-assets exited with code 0
+[1] npm run tsc:build exited with code 0
+Done in 6.30s.
+Nothing specified, nothing added.
+Maybe you wanted to say 'git add .'?
+husky > npm run -s precommit (node v9.8.0)
+
+[?25l[17:15:55] Running tasks for src/**/*.{ts, json} [started]
+[17:15:55] Running tasks for src/**/*.{ts, json} [skipped]
+[17:15:55] → No staged files match src/**/*.{ts, json}
+[?25h[?25hOn branch master
+Your branch is up-to-date with 'origin/master'.
+Changes not staged for commit:
+	modified:   data/144_2018_1.json
+	modified:   data/1558_2018_1.json
+	modified:   data/3306_2018_1.json
+	modified:   data/700_2018_1.json
+	modified:   update.sh
+
+Untracked files:
+	nohup.out
+	testing
+
+no changes added to commit
+warning: push.default is unset; its implicit value has changed in
+Git 2.0 from 'matching' to 'simple'. To squelch this message
+and maintain the traditional behavior, use:
+
+  git config --global push.default matching
+
+To squelch this message and adopt the new behavior now, use:
+
+  git config --global push.default simple
+
+When push.default is set to 'matching', git will push local branches
+to the remote branches that already exist with the same name.
+
+Since Git 2.0, Git defaults to the more conservative 'simple'
+behavior, which only pushes the current branch to the corresponding
+remote branch that 'git pull' uses to update the current branch.
+
+See 'git help config' and search for 'push.default' for further information.
+(the 'simple' mode was introduced in Git 1.7.11. Use the similar mode
+'current' instead of 'simple' if you sometimes use older versions of Git)
+
+husky > npm run -s prepush (node v9.8.0)
+
+[1] No tests found
+[1] In /home/ubuntu/rs-stock
+[1]   7 files checked.
+[1]   testMatch: **/__tests__/**/*.ts?(x),**/?(*.)(spec|test).ts?(x) - 0 matches
+[1]   testPathIgnorePatterns: /node_modules/ - 7 matches
+[1] Pattern: "" - 0 matches
+[1] npm run test exited with code 0
+[0] npm run lint exited with code 0
+Everything up-to-date
+yarn run v1.5.1
+yarn run v1.5.1
+$ node scripts/stock.js
+$ node build/index.js
+{"name":"rs-stock","hostname":"ip-172-31-11-211","pid":19200,"level":30,"msg":"Server is now running on http://localhost:3000","time":"2018-03-11T17:16:05.519Z","v":0}
+{"name":"rs-stock","hostname":"ip-172-31-11-211","pid":19200,"req_id":"6c9088be-4570-4e43-b6a9-8f524a81372f","level":30,"remote-address":"::ffff:34.207.213.117","ip":"::ffff:34.207.213.117","method":"POST","url":"/analyze","referer":"-","user-agent":{"family":"Slackbot","major":"1","minor":"0","patch":"0","device":{"family":"Spider","major":"0","minor":"0","patch":"0"},"os":{"family":"Other","major":"0","minor":"0","patch":"0"}},"body":{"token":"WEsyNk3F7KoQwZdKX3yX9siv","team_id":"T9M60LSGK","team_domain":"stocktrader","channel_id":"C9MR8HMV0","channel_name":"stock","user_id":"U9MCGHXGD","user_name":"szer0601","command":"/analyze","text":"700","response_url":"https://hooks.slack.com/commands/T9M60LSGK/329110893255/bSkI5SLcjK3kieAdr5wVJjJm","trigger_id":"328180189877.327204706563.270ee2e0eeafa5daf611a76ccb266b59"},"short-body":"{ token: 'WEsyNk3F7K","http-version":"1.1","response-time":19.10409,"response-hrtime":[0,19104090],"status-code":200,"req-headers":{"user-agent":"Slackbot 1.0 (+https://api.slack.com/robots)","accept-encoding":"gzip,deflate","accept":"application/json,*/*","content-length":"355","content-type":"application/x-www-form-urlencoded","host":"54.206.97.111:3000","cache-control":"max-age=259200","connection":"keep-alive"},"res-headers":{"x-dns-prefetch-control":"off","x-frame-options":"SAMEORIGIN","strict-transport-security":"max-age=15552000; includeSubDomains","x-download-options":"noopen","x-content-type-options":"nosniff","x-xss-protection":"1; mode=block","content-type":"application/json; charset=utf-8","content-length":"47","etag":"W/\"2f-S22HKlE73yyq8yFia2yESa4OiZ0\""},"req":{"method":"POST","url":"/analyze","headers":{"user-agent":"Slackbot 1.0 (+https://api.slack.com/robots)","accept-encoding":"gzip,deflate","accept":"application/json,*/*","content-length":"355","content-type":"application/x-www-form-urlencoded","host":"54.206.97.111:3000","cache-control":"max-age=259200","connection":"keep-alive"},"remoteAddress":"::ffff:34.207.213.117","remotePort":54872},"res":{"statusCode":200,"header":"HTTP/1.1 200 OK\r\nX-DNS-Prefetch-Control: off\r\nX-Frame-Options: SAMEORIGIN\r\nStrict-Transport-Security: max-age=15552000; includeSubDomains\r\nX-Download-Options: noopen\r\nX-Content-Type-Options: nosniff\r\nX-XSS-Protection: 1; mode=block\r\nContent-Type: application/json; charset=utf-8\r\nContent-Length: 47\r\nETag: W/\"2f-S22HKlE73yyq8yFia2yESa4OiZ0\"\r\nDate: Sun, 11 Mar 2018 17:16:12 GMT\r\nConnection: keep-alive\r\n\r\n"},"incoming":"<--","msg":"::ffff:34.207.213.117 <-- POST /analyze HTTP/1.1 200 47 - Slackbot 1.0 Other 0.0.0 19.10409 ms","time":"2018-03-11T17:16:12.289Z","v":0}
+Potential Stock Found: 00700.HK@447
+./update.sh: line 12: 19158 Hangup                  yarn stock
+./update.sh: line 12: 19159 Hangup                  yarn start
+kill: usage: kill [-s sigspec | -n signum | -sigspec] pid | jobspec ... or kill -l [sigspec]
+Already up-to-date.
+yarn install v1.5.1
+[1/4] Resolving packages...
+success Already up-to-date.
+$ npm run build
+
+> rs-stock@0.0.1 build /home/ubuntu/rs-stock
+> concurrently "npm run copy-assets" "npm run tsc:build"
+
+[1] 
+[1] > rs-stock@0.0.1 tsc:build /home/ubuntu/rs-stock
+[1] > tsc
+[1] 
+[0] 
+[0] > rs-stock@0.0.1 copy-assets /home/ubuntu/rs-stock
+[0] > cpx "src/**/*.{json}" build
+[0] 
+[0] npm run copy-assets exited with code 0
+[1] npm run tsc:build exited with code 0
+Done in 7.35s.
+yarn run v1.5.1
+$ concurrently "npm run copy-assets" "npm run tsc:build"
+[1] 
+[1] > rs-stock@0.0.1 tsc:build /home/ubuntu/rs-stock
+[1] > tsc
+[1] 
+[0] 
+[0] > rs-stock@0.0.1 copy-assets /home/ubuntu/rs-stock
+[0] > cpx "src/**/*.{json}" build
+[0] 
+[0] npm run copy-assets exited with code 0
+[1] npm run tsc:build exited with code 0
+Done in 6.24s.
+Nothing specified, nothing added.
+Maybe you wanted to say 'git add .'?
+husky > npm run -s precommit (node v9.8.0)
+
+[?25l[17:19:39] Running tasks for src/**/*.{ts, json} [started]
+[17:19:39] Running tasks for src/**/*.{ts, json} [skipped]
+[17:19:39] → No staged files match src/**/*.{ts, json}
+[?25h[?25hOn branch master
+Your branch is up-to-date with 'origin/master'.
+Changes not staged for commit:
+	modified:   data/1033_2018_1.json
+	modified:   data/1044_2018_1.json
+	modified:   data/1050_2018_1.json
+	modified:   data/1117_2018_1.json
+	modified:   data/1122_2018_1.json
+	modified:   data/1127_2018_1.json
+	modified:   data/1129_2018_1.json
+	modified:   data/1143_2018_1.json
+	modified:   data/1219_2018_1.json
+	modified:   data/1220_2018_1.json
+	modified:   data/1223_2018_1.json
+	modified:   data/1224_2018_1.json
+	modified:   data/144_2018_1.json
+	modified:   data/1558_2018_1.json
+	modified:   data/1788_2018_1.json
+	modified:   data/3306_2018_1.json
+	modified:   data/354_2018_1.json
+	modified:   data/3908_2018_1.json
+	modified:   data/464_2018_1.json
+	modified:   data/474_2018_1.json
+	modified:   data/489_2018_1.json
+	modified:   data/493_2018_1.json
+	modified:   data/509_2018_1.json
+	modified:   data/530_2018_1.json
+	modified:   data/535_2018_1.json
+	modified:   data/538_2018_1.json
+	modified:   data/542_2018_1.json
+	modified:   data/543_2018_1.json
+	modified:   data/548_2018_1.json
+	modified:   data/552_2018_1.json
+	modified:   data/569_2018_1.json
+	modified:   data/6116_2018_1.json
+	modified:   data/700_2018_1.json
+	modified:   data/762_2018_1.json
+	modified:   update.sh
+
+Untracked files:
+	data/1174_2018_3.json
+	data/1221_2016_1.json
+	data/1221_2016_2.json
+	data/1221_2016_3.json
+	data/1221_2017_1.json
+	data/1221_2017_2.json
+	data/1221_2018_2.json
+	data/1221_2018_4.json
+	data/462_2016_4.json
+	data/462_2017_2.json
+	data/462_2018_3.json
+	data/529_2016_2.json
+	data/529_2017_2.json
+	data/529_2017_4.json
+	data/529_2018_1.json
+	data/529_2018_4.json
+	nohup.out
+	testing
+
+no changes added to commit
+warning: push.default is unset; its implicit value has changed in
+Git 2.0 from 'matching' to 'simple'. To squelch this message
+and maintain the traditional behavior, use:
+
+  git config --global push.default matching
+
+To squelch this message and adopt the new behavior now, use:
+
+  git config --global push.default simple
+
+When push.default is set to 'matching', git will push local branches
+to the remote branches that already exist with the same name.
+
+Since Git 2.0, Git defaults to the more conservative 'simple'
+behavior, which only pushes the current branch to the corresponding
+remote branch that 'git pull' uses to update the current branch.
+
+See 'git help config' and search for 'push.default' for further information.
+(the 'simple' mode was introduced in Git 1.7.11. Use the similar mode
+'current' instead of 'simple' if you sometimes use older versions of Git)
+
+husky > npm run -s prepush (node v9.8.0)
+
+[1] No tests found
+[1] In /home/ubuntu/rs-stock
+[1]   7 files checked.
+[1]   testMatch: **/__tests__/**/*.ts?(x),**/?(*.)(spec|test).ts?(x) - 0 matches
+[1]   testPathIgnorePatterns: /node_modules/ - 7 matches
+[1] Pattern: "" - 0 matches
+[1] npm run test exited with code 0
+[0] npm run lint exited with code 0
+Everything up-to-date
+yarn run v1.5.1
+yarn run v1.5.1
+$ node build/index.js
+$ node scripts/stock.js
+{"name":"rs-stock","hostname":"ip-172-31-11-211","pid":19644,"level":30,"msg":"Server is now running on http://localhost:3000","time":"2018-03-11T17:19:49.532Z","v":0}
+{"name":"rs-stock","hostname":"ip-172-31-11-211","pid":19644,"req_id":"f5353755-aad1-45d2-b23c-19e18beab43f","level":30,"remote-address":"::ffff:54.165.241.61","ip":"::ffff:54.165.241.61","method":"POST","url":"/analyze","referer":"-","user-agent":{"family":"Slackbot","major":"1","minor":"0","patch":"0","device":{"family":"Spider","major":"0","minor":"0","patch":"0"},"os":{"family":"Other","major":"0","minor":"0","patch":"0"}},"body":{"token":"WEsyNk3F7KoQwZdKX3yX9siv","team_id":"T9M60LSGK","team_domain":"stocktrader","channel_id":"C9MR8HMV0","channel_name":"stock","user_id":"U9MCGHXGD","user_name":"szer0601","command":"/analyze","text":"1061","response_url":"https://hooks.slack.com/commands/T9M60LSGK/328180914853/e3maIdbySTfpVkQaZpcfZC7k","trigger_id":"328031739012.327204706563.132d67c6e1c26013f6cbb719f10200a1"},"short-body":"{ token: 'WEsyNk3F7K","http-version":"1.1","response-time":38.722059,"response-hrtime":[0,38722059],"status-code":200,"req-headers":{"user-agent":"Slackbot 1.0 (+https://api.slack.com/robots)","accept-encoding":"gzip,deflate","accept":"application/json,*/*","content-length":"356","content-type":"application/x-www-form-urlencoded","host":"54.206.97.111:3000","cache-control":"max-age=259200","connection":"keep-alive"},"res-headers":{"x-dns-prefetch-control":"off","x-frame-options":"SAMEORIGIN","strict-transport-security":"max-age=15552000; includeSubDomains","x-download-options":"noopen","x-content-type-options":"nosniff","x-xss-protection":"1; mode=block","content-type":"application/json; charset=utf-8","content-length":"47","etag":"W/\"2f-S22HKlE73yyq8yFia2yESa4OiZ0\""},"req":{"method":"POST","url":"/analyze","headers":{"user-agent":"Slackbot 1.0 (+https://api.slack.com/robots)","accept-encoding":"gzip,deflate","accept":"application/json,*/*","content-length":"356","content-type":"application/x-www-form-urlencoded","host":"54.206.97.111:3000","cache-control":"max-age=259200","connection":"keep-alive"},"remoteAddress":"::ffff:54.165.241.61","remotePort":51212},"res":{"statusCode":200,"header":"HTTP/1.1 200 OK\r\nX-DNS-Prefetch-Control: off\r\nX-Frame-Options: SAMEORIGIN\r\nStrict-Transport-Security: max-age=15552000; includeSubDomains\r\nX-Download-Options: noopen\r\nX-Content-Type-Options: nosniff\r\nX-XSS-Protection: 1; mode=block\r\nContent-Type: application/json; charset=utf-8\r\nContent-Length: 47\r\nETag: W/\"2f-S22HKlE73yyq8yFia2yESa4OiZ0\"\r\nDate: Sun, 11 Mar 2018 17:20:23 GMT\r\nConnection: keep-alive\r\n\r\n"},"incoming":"<--","msg":"::ffff:54.165.241.61 <-- POST /analyze HTTP/1.1 200 47 - Slackbot 1.0 Other 0.0.0 38.722059 ms","time":"2018-03-11T17:20:23.174Z","v":0}
+Potential Stock Found: 01061.HK@7.35
+Killed
+error An unexpected error occurred: "Command failed.
+Exit code: 137
+Command: sh
+Arguments: -c node scripts/stock.js
+Directory: /home/ubuntu/rs-stock
+Output:
+".
+info If you think this is a bug, please open a bug report with the information provided in "/home/ubuntu/rs-stock/yarn-error.log".
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+Terminated
+error An unexpected error occurred: "Command failed.
+Exit code: 143
+Command: sh
+Arguments: -c node build/index.js
+Directory: /home/ubuntu/rs-stock
+Output:
+".
+info If you think this is a bug, please open a bug report with the information provided in "/home/ubuntu/rs-stock/yarn-error.log".
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+kill: usage: kill [-s sigspec | -n signum | -sigspec] pid | jobspec ... or kill -l [sigspec]
+Already up-to-date.
+yarn install v1.5.1
+[1/4] Resolving packages...
+success Already up-to-date.
+$ npm run build
+
+> rs-stock@0.0.1 build /home/ubuntu/rs-stock
+> concurrently "npm run copy-assets" "npm run tsc:build"
+
+[0] 
+[0] > rs-stock@0.0.1 copy-assets /home/ubuntu/rs-stock
+[0] > cpx "src/**/*.{json}" build
+[0] 
+[1] 
+[1] > rs-stock@0.0.1 tsc:build /home/ubuntu/rs-stock
+[1] > tsc
+[1] 
+[0] npm run copy-assets exited with code 0
+[1] npm run tsc:build exited with code 0
+Done in 7.20s.
+yarn run v1.5.1
+$ concurrently "npm run copy-assets" "npm run tsc:build"
+[0] 
+[0] > rs-stock@0.0.1 copy-assets /home/ubuntu/rs-stock
+[0] > cpx "src/**/*.{json}" build
+[0] 
+[1] 
+[1] > rs-stock@0.0.1 tsc:build /home/ubuntu/rs-stock
+[1] > tsc
+[1] 
+[0] npm run copy-assets exited with code 0
+[1] npm run tsc:build exited with code 0
+Done in 6.28s.
+Nothing specified, nothing added.
+Maybe you wanted to say 'git add .'?
+husky > npm run -s precommit (node v9.8.0)
+
+[?25l[17:39:39] Running tasks for src/**/*.{ts, json} [started]
+[17:39:39] Running tasks for src/**/*.{ts, json} [skipped]
+[17:39:39] → No staged files match src/**/*.{ts, json}
+[?25h[?25hOn branch master
+Your branch is up-to-date with 'origin/master'.
+Untracked files:
+	data/1174_2018_3.json
+	data/1221_2016_1.json
+	data/1221_2016_2.json
+	data/1221_2016_3.json
+	data/1221_2017_1.json
+	data/1221_2017_2.json
+	data/1221_2018_2.json
+	data/1221_2018_4.json
+	data/462_2016_4.json
+	data/462_2017_2.json
+	data/462_2018_3.json
+	data/529_2016_2.json
+	data/529_2017_2.json
+	data/529_2017_4.json
+	data/529_2018_1.json
+	data/529_2018_4.json
+	nohup.out
+	testing
+
+nothing added to commit but untracked files present
+warning: push.default is unset; its implicit value has changed in
+Git 2.0 from 'matching' to 'simple'. To squelch this message
+and maintain the traditional behavior, use:
+
+  git config --global push.default matching
+
+To squelch this message and adopt the new behavior now, use:
+
+  git config --global push.default simple
+
+When push.default is set to 'matching', git will push local branches
+to the remote branches that already exist with the same name.
+
+Since Git 2.0, Git defaults to the more conservative 'simple'
+behavior, which only pushes the current branch to the corresponding
+remote branch that 'git pull' uses to update the current branch.
+
+See 'git help config' and search for 'push.default' for further information.
+(the 'simple' mode was introduced in Git 1.7.11. Use the similar mode
+'current' instead of 'simple' if you sometimes use older versions of Git)
+
+husky > npm run -s prepush (node v9.8.0)
+
+[1] No tests found
+[1] In /home/ubuntu/rs-stock
+[1]   7 files checked.
+[1]   testMatch: **/__tests__/**/*.ts?(x),**/?(*.)(spec|test).ts?(x) - 0 matches
+[1]   testPathIgnorePatterns: /node_modules/ - 7 matches
+[1] Pattern: "" - 0 matches
+[1] npm run test exited with code 0
+[0] npm run lint exited with code 0
+Everything up-to-date
+yarn run v1.5.1
+$ node build/index.js
+{"name":"rs-stock","hostname":"ip-172-31-11-211","pid":20702,"level":30,"msg":"Server is now running on http://localhost:3000","time":"2018-03-11T17:39:48.881Z","v":0}
+Terminated
+error An unexpected error occurred: "Command failed.
+Exit code: 143
+Command: sh
+Arguments: -c node build/index.js
+Directory: /home/ubuntu/rs-stock
+Output:
+".
+info If you think this is a bug, please open a bug report with the information provided in "/home/ubuntu/rs-stock/yarn-error.log".
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+kill: usage: kill [-s sigspec | -n signum | -sigspec] pid | jobspec ... or kill -l [sigspec]
+Already up-to-date.
+yarn install v1.5.1
+[1/4] Resolving packages...
+success Already up-to-date.
+$ npm run build
+
+> rs-stock@0.0.1 build /home/ubuntu/rs-stock
+> concurrently "npm run copy-assets" "npm run tsc:build"
+
+[0] 
+[0] > rs-stock@0.0.1 copy-assets /home/ubuntu/rs-stock
+[0] > cpx "src/**/*.{json}" build
+[0] 
+[1] 
+[1] > rs-stock@0.0.1 tsc:build /home/ubuntu/rs-stock
+[1] > tsc
+[1] 
+[0] npm run copy-assets exited with code 0
+[1] npm run tsc:build exited with code 0
+Done in 7.17s.
+yarn run v1.5.1
+$ concurrently "npm run copy-assets" "npm run tsc:build"
+[0] 
+[0] > rs-stock@0.0.1 copy-assets /home/ubuntu/rs-stock
+[0] > cpx "src/**/*.{json}" build
+[0] 
+[1] 
+[1] > rs-stock@0.0.1 tsc:build /home/ubuntu/rs-stock
+[1] > tsc
+[1] 
+[0] npm run copy-assets exited with code 0
+[1] npm run tsc:build exited with code 0
+Done in 6.26s.
+Nothing specified, nothing added.
+Maybe you wanted to say 'git add .'?
+husky > npm run -s precommit (node v9.8.0)
+
+[?25l[17:42:52] Running tasks for src/**/*.{ts, json} [started]
+[17:42:52] Running tasks for src/**/*.{ts, json} [skipped]
+[17:42:52] → No staged files match src/**/*.{ts, json}
+[?25h[?25hOn branch master
+Your branch is up-to-date with 'origin/master'.
+Changes not staged for commit:
+	modified:   update.sh
+
+Untracked files:
+	data/1174_2018_3.json
+	data/1221_2016_1.json
+	data/1221_2016_2.json
+	data/1221_2016_3.json
+	data/1221_2017_1.json
+	data/1221_2017_2.json
+	data/1221_2018_2.json
+	data/1221_2018_4.json
+	data/462_2016_4.json
+	data/462_2017_2.json
+	data/462_2018_3.json
+	data/529_2016_2.json
+	data/529_2017_2.json
+	data/529_2017_4.json
+	data/529_2018_1.json
+	data/529_2018_4.json
+	nohup.out
+	testing
+
+no changes added to commit
+warning: push.default is unset; its implicit value has changed in
+Git 2.0 from 'matching' to 'simple'. To squelch this message
+and maintain the traditional behavior, use:
+
+  git config --global push.default matching
+
+To squelch this message and adopt the new behavior now, use:
+
+  git config --global push.default simple
+
+When push.default is set to 'matching', git will push local branches
+to the remote branches that already exist with the same name.
+
+Since Git 2.0, Git defaults to the more conservative 'simple'
+behavior, which only pushes the current branch to the corresponding
+remote branch that 'git pull' uses to update the current branch.
+
+See 'git help config' and search for 'push.default' for further information.
+(the 'simple' mode was introduced in Git 1.7.11. Use the similar mode
+'current' instead of 'simple' if you sometimes use older versions of Git)
+
+husky > npm run -s prepush (node v9.8.0)
+
+[1] No tests found
+[1] In /home/ubuntu/rs-stock
+[1]   7 files checked.
+[1]   testMatch: **/__tests__/**/*.ts?(x),**/?(*.)(spec|test).ts?(x) - 0 matches
+[1]   testPathIgnorePatterns: /node_modules/ - 7 matches
+[1] Pattern: "" - 0 matches
+[1] npm run test exited with code 0
+[0] npm run lint exited with code 0
+Everything up-to-date
+yarn run v1.5.1
+yarn run v1.5.1
+$ node scripts/stock.js
+$ node build/index.js
+{"name":"rs-stock","hostname":"ip-172-31-11-211","pid":21240,"level":30,"msg":"Server is now running on http://localhost:3000","time":"2018-03-11T17:43:02.318Z","v":0}
+Downloading Stock Data /home/ubuntu/rs-stock/data/1006_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1006_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1006_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1006_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1006_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1006_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1006_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1006_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1006_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1006_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1006_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1006_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1337_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1337_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1337_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1337_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1337_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1337_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1337_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1337_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1337_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1337_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1337_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1337_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1788_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1788_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1788_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1788_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1788_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1788_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1788_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1788_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1788_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1788_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1788_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1788_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1789_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1789_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1789_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1789_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1789_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1789_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1789_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1789_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1789_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1789_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1789_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1789_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1798_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1798_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1798_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1798_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1798_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1798_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1798_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1798_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1798_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1798_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1798_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1798_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1799_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1799_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1799_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1799_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1799_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1799_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1799_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1799_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1799_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1799_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1799_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1799_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1800_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1800_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1800_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1800_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1800_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1800_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1800_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1800_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1800_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1800_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1800_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1800_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1808_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1808_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1808_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1808_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1808_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1808_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1808_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1808_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1808_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1808_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1808_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1808_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1811_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1811_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1811_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1811_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1811_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1811_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1811_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1811_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1811_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1811_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1811_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1811_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1197_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1197_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1197_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1197_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1197_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1197_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1197_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1197_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1197_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1197_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1197_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1197_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1193_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1193_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1193_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1193_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1193_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1193_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1193_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1193_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1193_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1193_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1193_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1193_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1230_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1230_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1230_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1230_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1230_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1230_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1230_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1230_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1230_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1230_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1230_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1230_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1702_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1702_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1702_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1702_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1702_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1702_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1702_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1702_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1702_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1702_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1702_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1702_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1706_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1706_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1706_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1706_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1706_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1706_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1706_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1706_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1706_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1706_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1706_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1706_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1778_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1778_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1778_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1778_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1778_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1778_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1778_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1778_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1778_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1778_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1778_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1778_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1339_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1339_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1339_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1339_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1339_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1339_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1339_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1339_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1339_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1339_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1339_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1339_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1302_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1302_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1302_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1302_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1302_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1302_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1302_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1302_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1302_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1302_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1302_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1302_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1929_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1929_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1929_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1929_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1929_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1929_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1929_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1929_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1929_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1929_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1929_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1929_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1963_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1963_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1963_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1963_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1963_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1963_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1963_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1963_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1963_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1963_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1963_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1963_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1972_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1972_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1972_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1972_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1972_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1972_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1972_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1972_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1972_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1972_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1972_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1972_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1323_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1323_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1323_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1323_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1323_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1323_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1323_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1323_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1323_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1323_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1323_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1323_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1336_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1336_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1336_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1336_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1336_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1336_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1336_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1336_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1336_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1336_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1336_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1336_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1979_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1979_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1979_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1979_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1979_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1979_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1979_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1979_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1979_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1979_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1979_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1979_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1982_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1982_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1982_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1982_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1982_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1982_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1982_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1982_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1982_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1982_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1982_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1982_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1357_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1357_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1357_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1357_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1357_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1357_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1357_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1357_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1357_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1357_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1357_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1357_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1349_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1349_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1349_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1349_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1349_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1349_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1349_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1349_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1349_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1349_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1349_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1349_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1988_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1988_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1988_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1988_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1988_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1988_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1988_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1988_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1988_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1988_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1988_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1988_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1358_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1358_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1358_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1358_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1358_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1358_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1358_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1358_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1358_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1358_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1358_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1358_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1986_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1986_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1986_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1986_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1986_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1986_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1986_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1986_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1986_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1986_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1986_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1986_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1371_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1371_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1371_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1371_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1371_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1371_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1371_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1371_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1371_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1371_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1371_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1371_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1381_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1381_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1381_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1381_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1381_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1381_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1381_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1381_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1381_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1381_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1381_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1381_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1396_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1396_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1396_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1396_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1396_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1396_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1396_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1396_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1396_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1396_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1396_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1396_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1997_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1997_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1997_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1997_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1997_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1997_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1997_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1997_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1997_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1997_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1997_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1997_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1999_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1999_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1999_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1999_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1999_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1999_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1999_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1999_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1999_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1999_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1999_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1999_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1415_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1415_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1415_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1415_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1415_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1415_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1415_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1415_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1415_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1415_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1415_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1415_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2007_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2007_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2007_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2007_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2007_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2007_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2007_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2007_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2007_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2007_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2007_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2007_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2008_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2008_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2008_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2008_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2008_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2008_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2008_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2008_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2008_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2008_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2008_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2008_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1430_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1430_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1430_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1430_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1430_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1430_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1430_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1430_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1430_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1430_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1430_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1430_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1439_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1439_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1439_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1439_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1439_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1439_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1439_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1439_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1439_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1439_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1439_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1439_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2014_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2014_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2014_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2014_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2014_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2014_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2014_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2014_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2014_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2014_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2014_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2014_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2016_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2016_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2016_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2016_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2016_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2016_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2016_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2016_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2016_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2016_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2016_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2016_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1447_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1447_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1447_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1447_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1447_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1447_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1447_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1447_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1447_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1447_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1447_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1447_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2025_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2025_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2025_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2025_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2025_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2025_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2025_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2025_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2025_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2025_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2025_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2025_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2022_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2022_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2022_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2022_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2022_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2022_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2022_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2022_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2022_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2022_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2022_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2022_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1486_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1486_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1486_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1486_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1486_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1486_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1486_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1486_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1486_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1486_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1486_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1486_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2030_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2030_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2030_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2030_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2030_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2030_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2030_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2030_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2030_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2030_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2030_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2030_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1488_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1488_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1488_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1488_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1488_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1488_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1488_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1488_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1488_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1488_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1488_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1488_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1508_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1508_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1508_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1508_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1508_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1508_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1508_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1508_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1508_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1508_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1508_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1508_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2033_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2033_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2033_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2033_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2033_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2033_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2033_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2033_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2033_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2033_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2033_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2033_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2039_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2039_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2039_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2039_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2039_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2039_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2039_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2039_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2039_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2039_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2039_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2039_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1528_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1528_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1528_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1528_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1528_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1528_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1528_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1528_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1528_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1528_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1528_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1528_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2068_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2068_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2068_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2068_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2068_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2068_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2068_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2068_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2068_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2068_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2068_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2068_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2078_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2078_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2078_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2078_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2078_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2078_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2078_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2078_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2078_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2078_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2078_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2078_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2083_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2083_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2083_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2083_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2083_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2083_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2083_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2083_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2083_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2083_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2083_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2083_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2098_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2098_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2098_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2098_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2098_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2098_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2098_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2098_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2098_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2098_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2098_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2098_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2099_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2099_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2099_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2099_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2099_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2099_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2099_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2099_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2099_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2099_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2099_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2099_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2100_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2100_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2100_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2100_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2100_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2100_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2100_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2100_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2100_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2100_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2100_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2100_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1548_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1548_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1548_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1548_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1548_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1548_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1548_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1548_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1548_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1548_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1548_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1548_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1551_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1551_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1551_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1551_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1551_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1551_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1551_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1551_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1551_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1551_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1551_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1551_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1003_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1003_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1003_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1003_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1003_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1003_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1003_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1003_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1003_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1003_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1003_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1003_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1572_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1572_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1572_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1572_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1572_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1572_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1572_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1572_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1572_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1572_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1572_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1572_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1005_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1005_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1005_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1005_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1005_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1005_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1005_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1005_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1005_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1005_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1005_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1005_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1579_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1579_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1579_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1579_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1579_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1579_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1579_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1579_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1579_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1579_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1579_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1579_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1019_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1019_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1019_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1019_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1019_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1019_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1019_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1019_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1019_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1019_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1019_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1019_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1596_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1596_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1596_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1596_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1596_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1596_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1596_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1596_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1596_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1596_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1596_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1596_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1600_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1600_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1600_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1600_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1600_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1600_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1600_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1600_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1600_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1600_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1600_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1600_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1023_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1023_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1023_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1023_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1023_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1023_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1023_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1023_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1023_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1023_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1023_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1023_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1610_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1610_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1610_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1610_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1610_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1610_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1610_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1610_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1610_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1610_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1610_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1610_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1028_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1028_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1028_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1028_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1028_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1028_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1028_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1028_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1028_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1028_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1028_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1028_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1029_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1029_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1029_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1029_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1029_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1029_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1029_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1029_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1029_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1029_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1029_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1029_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1630_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1630_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1630_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1630_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1630_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1630_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1630_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1630_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1630_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1630_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1630_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1630_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1033_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1033_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1033_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1033_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1033_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1033_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1033_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1033_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1033_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1033_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1033_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1033_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1632_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1632_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1632_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1632_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1632_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1632_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1632_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1632_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1632_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1632_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1632_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1632_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1035_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1035_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1035_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1035_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1035_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1035_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1035_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1035_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1035_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1035_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1035_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1035_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1031_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1031_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1031_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1031_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1031_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1031_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1031_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1031_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1031_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1031_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1031_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1031_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1635_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1635_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1635_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1635_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1635_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1635_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1635_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1635_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1635_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1635_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1635_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1635_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1036_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1036_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1036_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1036_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1036_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1036_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1036_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1036_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1036_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1036_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1036_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1036_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1639_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1639_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1639_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1639_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1639_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1639_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1639_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1639_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1639_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1639_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1639_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1639_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1038_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1038_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1038_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1038_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1038_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1038_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1038_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1038_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1038_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1038_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1038_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1038_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1044_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1044_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1044_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1044_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1044_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1044_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1044_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1044_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1044_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1044_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1044_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1044_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1039_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1039_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1039_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1039_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1039_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1039_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1039_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1039_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1039_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1039_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1039_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1039_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1838_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1838_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1838_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1838_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1838_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1838_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1838_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1838_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1838_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1838_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1838_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1838_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1848_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1848_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1848_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1848_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1848_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1848_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1848_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1848_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1848_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1848_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1848_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1848_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1882_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1882_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1882_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1882_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1882_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1882_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1882_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1882_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1882_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1882_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1882_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1882_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1055_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1055_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1055_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1055_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1055_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1055_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1055_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1055_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1055_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1055_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1055_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1055_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1885_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1885_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1885_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1885_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1885_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1885_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1885_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1885_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1885_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1885_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1885_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1885_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1060_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1060_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1060_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1060_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1060_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1060_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1060_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1060_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1060_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1060_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1060_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1060_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1898_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1898_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1898_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1898_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1898_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1898_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1898_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1898_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1898_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1898_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1898_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1898_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1966_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1966_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1966_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1966_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1966_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1966_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1966_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1966_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1966_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1966_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1966_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1966_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1076_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1076_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1076_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1076_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1076_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1076_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1076_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1076_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1076_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1076_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1076_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1076_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1970_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1970_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1970_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1970_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1970_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1970_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1970_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1970_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1970_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1970_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1970_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1970_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1980_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1980_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1980_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1980_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1980_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1980_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1980_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1980_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1980_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1980_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1980_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1980_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1080_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1080_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1080_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1080_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1080_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1080_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1080_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1080_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1080_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1080_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1080_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1080_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1088_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1088_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1088_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1088_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1088_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1088_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1088_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1088_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1088_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1088_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1088_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1088_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2012_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2012_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2012_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2012_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2012_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2012_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2012_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2012_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2012_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2012_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2012_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2012_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1089_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1089_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1089_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1089_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1089_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1089_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1089_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1089_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1089_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1089_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1089_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1089_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2018_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2018_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2018_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2018_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2018_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2018_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2018_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2018_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2018_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2018_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2018_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2018_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1103_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1103_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1103_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1103_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1103_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1103_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1103_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1103_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1103_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1103_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1103_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1103_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2038_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2038_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2038_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2038_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2038_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2038_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2038_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2038_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2038_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2038_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2038_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2038_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1107_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1107_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1107_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1107_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1107_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1107_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1107_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1107_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1107_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1107_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1107_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1107_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2066_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2066_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2066_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2066_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2066_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2066_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2066_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2066_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2066_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2066_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2066_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2066_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1106_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1106_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1106_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1106_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1106_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1106_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1106_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1106_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1106_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1106_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1106_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1106_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1113_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1113_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1113_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1113_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1113_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1113_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1113_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1113_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1113_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1113_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1113_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1113_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2136_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2136_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2136_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2136_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2136_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2136_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2136_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2136_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2136_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2136_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2136_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2136_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1115_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1115_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1115_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1115_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1115_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1115_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1115_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1115_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1115_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1115_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1115_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1115_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2183_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2183_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2183_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2183_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2183_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2183_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2183_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2183_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2183_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2183_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2183_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2183_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1112_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1112_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1112_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1112_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1112_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1112_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1112_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1112_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1112_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1112_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1112_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1112_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1117_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1117_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1117_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1117_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1117_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1117_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1117_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1117_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1117_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1117_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1117_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1117_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2213_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2213_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2213_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2213_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2213_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2213_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2213_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2213_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2213_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2213_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2213_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2213_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1137_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1137_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1137_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1137_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1137_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1137_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1137_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1137_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1137_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1137_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1137_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1137_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2232_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2232_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2232_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2232_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2232_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2232_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2232_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2232_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2232_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2232_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2232_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2232_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2280_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2280_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2280_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2280_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2280_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2280_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2280_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2280_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2280_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2280_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2280_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2280_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2282_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2282_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2282_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2282_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2282_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2282_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2282_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2282_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2282_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2282_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2282_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2282_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1151_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1151_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1151_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1151_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1151_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1151_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1151_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1151_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1151_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1151_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1151_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1151_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1149_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1149_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1149_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1149_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1149_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1149_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1149_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1149_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1149_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1149_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1149_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1149_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1165_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1165_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1165_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1165_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1165_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1165_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1165_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1165_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1165_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1165_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1165_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1165_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1571_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1571_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1571_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1571_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1571_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1571_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1571_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1571_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1571_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1571_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1571_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1571_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1665_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1665_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1665_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1665_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1665_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1665_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1665_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1665_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1665_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1665_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1665_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1665_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1170_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1170_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1170_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1170_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1170_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1170_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1170_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1170_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1170_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1170_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1170_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1170_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1172_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1172_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1172_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1172_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1172_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1172_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1172_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1172_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1172_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1172_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1172_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1172_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1181_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1181_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1181_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1181_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1181_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1181_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1181_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1181_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1181_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1181_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1181_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1181_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1819_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1819_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1819_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1819_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1819_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1819_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1819_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1819_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1819_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1819_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1819_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1819_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1812_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1812_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1812_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1812_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1812_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1812_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1812_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1812_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1812_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1812_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1812_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1812_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1183_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1183_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1183_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1183_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1183_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1183_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1183_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1183_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1183_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1183_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1183_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1183_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1822_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1822_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1822_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1822_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1822_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1822_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1822_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1822_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1822_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1822_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1822_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1822_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1828_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1828_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1828_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1828_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1828_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1828_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1828_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1828_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1828_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1828_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1828_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1828_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1826_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1826_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1826_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1826_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1826_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1826_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1826_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1826_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1826_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1826_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1826_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1826_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1198_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1198_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1198_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1198_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1198_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1198_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1198_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1198_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1198_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1198_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1198_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1198_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1201_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1201_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1201_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1201_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1201_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1201_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1201_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1201_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1201_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1201_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1201_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1201_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1206_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1206_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1206_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1206_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1206_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1206_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1206_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1206_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1206_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1206_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1206_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1206_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1862_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1862_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1862_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1862_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1862_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1862_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1862_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1862_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1862_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1862_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1862_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1862_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1208_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1208_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1208_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1208_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1208_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1208_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1208_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1208_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1208_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1208_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1208_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1208_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1216_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1216_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1216_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1216_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1216_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1216_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1216_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1216_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1216_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1216_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1216_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1216_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1863_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1863_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1863_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1863_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1863_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1863_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1863_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1863_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1863_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1863_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1863_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1863_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1868_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1868_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1868_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1868_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1868_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1868_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1868_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1868_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1868_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1868_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1868_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1868_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1224_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1224_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1224_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1224_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1224_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1224_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1224_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1224_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1224_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1224_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1224_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1224_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1886_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1886_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1886_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1886_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1886_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1886_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1886_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1886_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1886_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1886_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1886_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1886_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1888_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1888_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1888_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1888_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1888_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1888_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1888_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1888_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1888_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1888_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1888_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1888_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1231_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1231_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1231_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1231_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1231_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1231_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1231_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1231_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1231_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1231_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1231_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1231_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1233_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1233_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1233_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1233_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1233_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1233_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1233_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1233_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1233_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1233_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1233_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1233_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1893_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1893_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1893_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1893_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1893_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1893_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1893_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1893_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1893_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1893_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1893_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1893_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1236_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1236_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1236_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1236_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1236_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1236_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1236_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1236_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1236_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1236_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1236_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1236_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1899_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1899_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1899_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1899_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1899_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1899_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1899_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1899_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1899_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1899_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1899_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1899_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1908_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1908_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1908_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1908_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1908_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1908_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1908_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1908_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1908_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1908_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1908_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1908_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1257_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1257_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1257_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1257_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1257_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1257_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1257_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1257_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1257_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1257_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1257_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1257_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1918_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1918_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1918_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1918_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1918_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1918_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1918_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1918_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1918_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1918_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1918_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1918_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1258_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1258_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1258_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1258_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1258_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1258_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1258_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1258_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1258_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1258_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1258_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1258_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1913_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1913_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1913_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1913_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1913_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1913_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1913_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1913_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1913_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1913_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1913_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1913_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1268_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1268_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1268_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1268_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1268_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1268_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1268_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1268_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1268_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1268_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1268_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1268_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1270_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1270_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1270_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1270_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1270_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1270_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1270_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1270_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1270_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1270_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1270_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1270_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1282_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1282_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1282_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1282_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1282_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1282_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1282_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1282_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1282_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1282_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1282_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1282_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1290_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1290_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1290_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1290_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1290_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1290_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1290_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1290_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1290_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1290_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1290_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1290_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1293_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1293_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1293_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1293_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1293_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1293_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1293_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1293_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1293_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1293_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1293_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1293_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1299_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1299_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1299_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1299_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1299_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1299_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1299_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1299_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1299_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1299_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1299_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1299_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1030_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1030_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1030_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1030_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1030_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1030_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1030_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1030_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1030_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1030_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1030_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1030_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1200_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1200_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1200_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1200_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1200_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1200_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1200_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1200_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1200_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1200_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1200_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1200_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1458_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1458_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1458_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1458_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1458_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1458_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1458_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1458_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1458_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1458_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1458_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1458_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1466_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1466_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1466_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1466_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1466_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1466_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1466_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1466_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1466_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1466_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1466_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1466_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2112_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2112_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2112_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2112_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2112_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2112_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2112_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2112_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2112_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2112_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2112_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2112_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1558_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1558_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1558_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1558_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1558_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1558_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1558_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1558_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1558_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1558_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1558_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1558_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1566_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1566_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1566_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1566_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1566_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1566_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1566_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1566_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1566_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1566_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1566_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1566_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1569_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1569_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1569_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1569_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1569_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1569_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1569_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1569_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1569_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1569_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1569_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1569_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1583_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1583_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1583_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1583_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1583_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1583_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1583_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1583_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1583_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1583_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1583_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1583_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2128_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2128_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2128_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2128_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2128_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2128_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2128_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2128_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2128_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2128_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2128_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2128_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2139_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2139_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2139_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2139_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2139_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2139_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2139_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2139_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2139_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2139_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2139_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2139_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2138_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2138_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2138_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2138_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2138_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2138_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2138_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2138_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2138_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2138_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2138_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2138_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1618_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1618_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1618_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1618_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1618_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1618_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1618_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1618_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1618_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1618_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1618_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1618_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1622_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1622_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1622_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1622_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1622_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1622_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1622_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1622_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1622_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1622_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1622_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1622_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2186_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2186_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2186_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2186_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2186_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2186_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2186_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2186_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2186_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2186_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2186_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2186_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1668_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1668_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1668_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1668_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1668_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1668_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1668_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1668_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1668_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1668_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1668_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1668_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2199_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2199_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2199_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2199_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2199_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2199_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2199_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2199_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2199_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2199_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2199_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2199_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2202_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2202_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2202_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2202_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2202_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2202_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2202_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2202_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2202_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2202_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2202_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2202_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1698_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1698_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1698_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1698_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1698_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1698_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1698_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1698_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1698_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1698_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1698_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1698_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2208_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2208_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2208_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2208_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2208_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2208_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2208_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2208_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2208_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2208_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2208_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2208_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2221_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2221_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2221_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2221_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2221_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2221_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2221_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2221_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2221_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2221_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2221_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2221_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1777_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1777_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1777_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1777_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1777_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1777_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1777_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1777_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1777_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1777_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1777_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1777_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2222_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2222_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2222_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2222_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2222_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2222_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2222_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2222_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2222_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2222_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2222_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2222_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1803_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1803_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1803_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1803_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1803_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1803_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1803_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1803_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1803_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1803_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1803_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1803_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2228_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2228_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2228_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2228_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2228_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2228_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2228_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2228_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2228_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2228_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2228_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2228_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1813_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1813_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1813_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1813_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1813_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1813_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1813_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1813_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1813_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1813_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1813_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1813_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1816_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1816_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1816_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1816_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1816_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1816_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1816_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1816_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1816_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1816_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1816_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1816_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2233_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2233_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2233_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2233_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2233_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2233_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2233_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2233_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2233_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2233_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2233_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2233_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1818_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1818_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1818_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1818_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1818_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1818_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1818_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1818_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1818_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1818_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1818_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1818_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2236_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2236_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2236_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2236_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2236_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2236_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2236_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2236_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2236_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2236_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2236_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2236_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2255_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2255_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2255_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2255_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2255_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2255_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2255_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2255_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2255_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2255_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2255_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2255_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1829_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1829_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1829_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1829_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1829_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1829_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1829_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1829_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1829_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1829_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1829_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1829_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2239_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2239_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2239_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2239_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2239_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2239_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2239_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2239_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2239_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2239_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2239_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2239_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2268_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2268_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2268_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2268_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2268_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2268_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2268_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2268_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2268_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2268_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2268_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2268_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1919_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1919_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1919_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1919_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1919_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1919_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1919_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1919_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1919_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1919_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1919_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1919_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2269_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2269_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2269_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2269_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2269_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2269_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2269_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2269_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2269_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2269_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2269_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2269_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2283_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2283_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2283_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2283_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2283_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2283_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2283_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2283_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2283_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2283_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2283_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2283_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1958_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1958_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1958_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1958_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1958_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1958_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1958_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1958_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1958_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1958_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1958_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1958_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1962_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1962_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1962_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1962_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1962_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1962_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1962_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1962_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1962_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1962_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1962_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/1962_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2005_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2005_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2005_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2005_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2005_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2005_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2005_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2005_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2005_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2005_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2005_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2005_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2006_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2006_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2006_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2006_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2006_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2006_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2006_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2006_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2006_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2006_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2006_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2006_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2009_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2009_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2009_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2009_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2009_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2009_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2009_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2009_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2009_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2009_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2009_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2009_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2020_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2020_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2020_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2020_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2020_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2020_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2020_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2020_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2020_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2020_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2020_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2020_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2118_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2118_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2118_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2118_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2118_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2118_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2118_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2118_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2118_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2118_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2118_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2118_2018_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2238_2016_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2238_2016_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2238_2016_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2238_2016_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2238_2017_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2238_2017_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2238_2017_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2238_2017_4.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2238_2018_1.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2238_2018_2.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2238_2018_3.json
+Downloading Stock Data /home/ubuntu/rs-stock/data/2238_2018_4.json
