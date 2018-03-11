@@ -7,6 +7,7 @@
   "description": "This is the web gateway as a bridge from service to api gateway.",
   "main": "build/index.js",
   "scripts": {
+    "stock": "node scripts/stock.js",
     "start": "node build/index.js",
     "build": "concurrently \"npm run copy-assets\" \"npm run tsc:build\"",
     "watch": "concurrently \"npm run copy-assets:watch\" \"npm run tsc:watch\" \"nodemon --delay 2.5 --exec npm run start | bunyan -o short\"",

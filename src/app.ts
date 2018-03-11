@@ -46,24 +46,35 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // analyze
-app.post('/analyze', async (req, res, next) => {
+app.post('/analyze', async (req, res) => {
   try {
-    const { text } = qs.parse(req.body);
+    const { text, channel_name } = qs.parse(req.body);
+    if (channel_name !== 'general' || channel_name !== 'stock') {
+      res.json({ text: '請於 #general 或 #stock 跟我說話...' });
+      return;
+    }
     const stockIds = _.defaultTo(text, '').split(' ') as string[];
+    res.json({ text: '收到！宜家即刻幫你分析！' });
     await Promise.all(stockIds.map(stockId => summarizeStock(+stockId)));
   } catch (e) {
     console.error(e);
-    next(e);
+    res.json({ text: '程式發生錯誤...' });
   }
 });
 
 // analze all stock
-app.post('/analyzeAll', async (req, res, next) => {
+app.post('/analyzeAll', async (req, res) => {
   try {
+    const { channel_name } = qs.parse(req.body);
+    if (channel_name !== 'general' || channel_name !== 'stock') {
+      res.json({ text: '請於 #general 或 #stock 跟我說話...' });
+      return;
+    }
+    res.json({ text: '收到！宜家即刻幫你分析！' });
     await summarizeAllStocks();
   } catch (e) {
     console.error(e);
-    next(e);
+    res.json({ text: '程式發生錯誤...' });
   }
 });
 
