@@ -8,7 +8,7 @@
   "main": "build/index.js",
   "scripts": {
     "start": "node build/index.js",
-    "build": "concurrently \"npm run copy-assets\" \"tsc\"",
+    "build": "concurrently \"npm run copy-assets\" \"npm run tsc:build\"",
     "watch": "concurrently \"npm run copy-assets:watch\" \"npm run tsc:watch\" \"nodemon --delay 2.5 --exec npm run start | bunyan -o short\"",
     "test": "jest",
     "tsc:build": "tsc",
@@ -22,7 +22,6 @@
   },
   "lint-staged": {
     "src/**/*.{ts, json}": [
-      "prettier --write",
       "git add"
     ]
   },
@@ -58,7 +57,14 @@
     "@types/bluebird": "^3.5.18",
     "@types/body-parser": "^1.16.8",
     "@types/bunyan": "^1.8.3",
+    "@types/cheerio": "^0.22.7",
+    "@types/form-data": "^2.2.1",
+    "@types/fs-extra": "^5.0.1",
+    "@types/helmet": "^0.0.37",
     "@types/lodash": "^4.14.85",
+    "@types/qs": "^6.5.1",
+    "@types/slack-node": "^0.1.2",
+    "@types/uuid": "^3.4.3",
     "concurrently": "^3.5.0",
     "cpx": "^1.5.0",
     "husky": "^0.14.3",
@@ -72,23 +78,21 @@
     "typescript": "^2.6.1"
   },
   "dependencies": {
-    "@types/cheerio": "^0.22.7",
-    "@types/form-data": "^2.2.1",
-    "@types/fs-extra": "^5.0.1",
-    "@types/qs": "^6.5.1",
-    "@types/slack-node": "^0.1.2",
     "axios": "^0.16.2",
     "bluebird": "^3.5.0",
+    "body-parser": "^1.18.2",
     "bunyan": "^1.8.10",
     "cheerio": "^1.0.0-rc.2",
     "dotenv": "^4.0.0",
     "form-data": "^2.3.2",
     "fs-extra": "^5.0.0",
+    "helmet": "^3.12.0",
     "lodash": "^4.17.4",
     "module-alias": "^2.0.2",
     "moment": "^2.18.1",
     "qs": "^6.5.1",
     "slack-node": "^0.1.8",
-    "source-map-support": "^0.5.0"
+    "source-map-support": "^0.5.0",
+    "uuid": "^3.2.1"
   }
 }
