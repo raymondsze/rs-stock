@@ -144,6 +144,7 @@ async function getStockSeasonData(
     'data',
     `${stockId}_${year}_${season}.json`,
   );
+  console.log(`Downloading Stock Data ${filePath}`);
   const tradeDate = await getLastTradingDate();
   let forceFetch = !fs.existsSync(filePath);
   if (year === moment().year() && monthToSeason[+month] === season) {
@@ -314,6 +315,7 @@ async function getTradingData(
   jumpyThreshold: number,
   category: '1y' | '6m' | '3m' | '1m' | '1d' = '1m',
 ): Promise<StockTradingData> {
+  console.log(`Downloading ${category} Trading Data of ${stockId}`);
   const {
     data,
   }: {
