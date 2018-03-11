@@ -983,7 +983,7 @@ export async function summarizeAllStocks() {
   const stockIds = Object.keys(stocks);
   // if call too frequently, may got banned
   const summaries = await Promise.all(
-    stockIds.map(stockId => analyzeStock(+stockId, true)),
+    stockIds.map(stockId => analyzeStock(+stockId, false)),
   );
   // const summaries = await Bluebird.mapSeries(stockIds, stockId => analyzeStock(+stockId));
   const filteredSummaries = await Promise.all(
