@@ -650,13 +650,13 @@ async function getStockProfile(stockId: number): Promise<StockProfile> {
   const profile = data[0];
   return {
     name: profile['name'],
-    pe: profile['PE'],
-    open: profile['Open'],
-    close: profile['lastClosePrice'],
-    high: profile['High'],
-    low: profile['Low'],
-    volume: profile['Vol'],
-    mktCap: profile['MktCap'],
+    pe: +profile['PE'],
+    open: +profile['Open'],
+    close: +profile['lastClosePrice'],
+    high: +profile['High'],
+    low: +profile['Low'],
+    volume: +profile['Vol'],
+    mktCap: +profile['MktCap'],
   };
 }
 
@@ -711,8 +711,8 @@ async function analyzeStock(stockId: number, ignoreConditions?: boolean) {
   const profile = await getStockProfile(stockId);
   // if the stock is already stopped, the volume should be empty or 0
   // we should ignore it
-  if (profile.volume != null) return undefined;
-  if (ignoreConditions || profile.mktCap > 1000000000) {
+  if (profile.volume == null) return undefined;
+  if (ignoreConditions || (profile.mktCap > 1000000000)) {
     // getStockData is a time consuming process
     // we only get 2 years data
     const stockData = await getStockData(
