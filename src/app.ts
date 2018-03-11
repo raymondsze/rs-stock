@@ -49,7 +49,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.post('/analyze', async (req, res, next) => {
   try {
     const { text } = qs.parse(req.body);
-    const stockIds = (text || '').split(' ') as string[];
+    const stockIds = _.defaultTo(text, '').split(' ') as string[];
     await Promise.all(stockIds.map(stockId => summarizeStock(+stockId)));
   } catch (e) {
     console.error(e);

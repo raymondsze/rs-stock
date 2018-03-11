@@ -444,8 +444,8 @@ async function getTradingData(
 }
 
 function getTradingPriceRatio(dailyData: StockDailyTradingData) {
-  const priceRange = dailyData ? +dailyData.high - +dailyData.low : 0;
-  const tradingPriceRange = dailyData ? +dailyData.close - +dailyData.open : 0;
+  const priceRange = +dailyData.high - +dailyData.low;
+  const tradingPriceRange = +dailyData.close - +dailyData.open;
   const ratio = tradingPriceRange / priceRange;
   // if ratio >= 0.4 = 大陽燭
   // if ratio <= -0.4 = 大陰燭
@@ -711,7 +711,7 @@ async function analyzeStock(stockId: number, ignoreConditions?: boolean) {
   const profile = await getStockProfile(stockId);
   // if the stock is already stopped, the volume should be empty or 0
   // we should ignore it
-  if (!profile.volume) return undefined;
+  if (profile.volume != null) return undefined;
   if (ignoreConditions || profile.mktCap > 1000000000) {
     // getStockData is a time consuming process
     // we only get 2 years data
@@ -860,8 +860,8 @@ async function sendStockToSlack(summary: StockSummary, channel: '#general' | '#s
                 value:
                   `
 股價: *${summary.price.toFixed(2)}*
-每股盈利/市盈率: *${summary.pe ? (summary.price / summary.pe).toFixed(2) : '-'}*, ` + 
-`*${summary.pe ? (+summary.pe).toFixed(2) : '-'}*
+每股盈利/市盈率: *${(summary.pe != null) ? (summary.price / summary.pe).toFixed(2) : '-'}*, ` + 
+`*${(summary.pe != null) ? (+summary.pe).toFixed(2) : '-'}*
 升幅 (百分率，股價): *${summary.changePercent.toFixed(
                     2,
                   )}%*, *${summary.change.toFixed(2)}*
