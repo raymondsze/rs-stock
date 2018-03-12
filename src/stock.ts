@@ -844,7 +844,6 @@ async function sendHeaderToSlack(stockIds: string[], channel: '#general' | '#sto
   return new Promise((resolve, reject) => {
     slack.webhook(
       {
-        channel,
         username: 'stockBot',
         text:
           '<!everyone>' + `心水股: ${stockIds.map(s => `*${s}*`).join(', ')}`,
@@ -882,7 +881,6 @@ async function sendStockToSlack(summary: StockSummary, channel: '#general' | '#s
   return new Promise((resolve, reject) => {
     slack.webhook(
       {
-        channel,
         username: 'stockBot',
         attachments: [
           {
