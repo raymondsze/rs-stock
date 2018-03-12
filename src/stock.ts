@@ -378,7 +378,7 @@ async function getTradingData(
     };
   });
   const prevData = [] as StockDailyTradingData[];
-  return normalizedData.reduce(
+  const returnResult = normalizedData.reduce(
     (result, dailyData, index) => {
       const ratio = getTradingPriceRatio(dailyData);
       const newData = {
@@ -442,6 +442,7 @@ async function getTradingData(
     },
     {},
   );
+  return returnResult;
 }
 
 function getTradingPriceRatio(dailyData: StockDailyTradingData) {
@@ -689,6 +690,7 @@ interface StockProfile {
 }
 
 async function getStockProfile(stockId: number): Promise<StockProfile> {
+  console.log(`Get Stock Profile of ${stockId}`);
   const { data } = await axios({
     method: 'get',
     url: `https://quote.ticker.com.hk/api/quote/detail/${stockId}.HK`,
@@ -772,6 +774,7 @@ interface Top5Data {
 }
 
 async function getTop5VolData(stockId: number) {
+  console.log(`Get Top5 Vol Data of ${stockId}`);
   const res = await axios({
     method: 'get',
     url:

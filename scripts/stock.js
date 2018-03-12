@@ -27,6 +27,13 @@ dotenvFiles.forEach(dotenvFile => {
     });
   }
 });
+// integrate bunyan error logging when uncaught exception
+process.on('uncaughtException', (err) => {
+  console.error(err);
+  process.exit(1);
+});
 
 const stock = require('../build/stock');
-stock.summarizeStock(+process.argv[2]);  
+(async () => {
+  await stock.summarizeStock(+process.argv[2]).catch(err => console.error(err));  
+})();
