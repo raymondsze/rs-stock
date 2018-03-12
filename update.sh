@@ -4,8 +4,8 @@ kill $(lsof -t -i:3000)
 git pull
 yarn install
 yarn build
-# yarn stock
-git add
+git add --all
 git commit -m "update stock data"
 git push
+yarn stocks &
 yarn start
