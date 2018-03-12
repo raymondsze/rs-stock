@@ -148,12 +148,14 @@ async function getStockSeasonData(
   let forceFetch = !fs.existsSync(filePath);
   if (year === moment().year() && monthToSeason[+month] === season) {
     if (fs.existsSync(filePath)) {
-      data = JSON.parse(
-        fs.readFileSync(filePath, { encoding: 'utf-8' }),
-      ) as StockData;
-      if (data[moment(tradeDate).toISOString()] == null) {
-        forceFetch = true;
-      }
+      try {
+        data = JSON.parse(
+          fs.readFileSync(filePath, { encoding: 'utf-8' }),
+        ) as StockData;
+        if (data[moment(tradeDate).toISOString()] == null) {
+          forceFetch = true;
+        }
+      } catch (error) {}
     } else {
       forceFetch = true;
     }
