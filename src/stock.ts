@@ -146,6 +146,17 @@ async function getStockSeasonData(
   );
   const tradeDate = await getLastTradingDate();
   let forceFetch = !fs.existsSync(filePath);
+  
+  if (fs.existsSync(filePath)) {
+    try {
+      data = JSON.parse(
+        fs.readFileSync(filePath, { encoding: 'utf-8' }),
+      ) as StockData;
+    } catch (error) {
+      forceFetch = true;
+    }
+  }
+
   if (year === moment().year() && monthToSeason[+month] === season) {
     if (fs.existsSync(filePath)) {
       try {
