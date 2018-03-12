@@ -16,4 +16,4 @@ RUN yarn install --production=false
 # expose 3000 port
 # EXPOSE 3000
 
-CMD yarn env && yarn start
+CMD yarn build && yarn start
