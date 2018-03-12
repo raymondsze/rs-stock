@@ -155,7 +155,9 @@ async function getStockSeasonData(
         if (data[moment(tradeDate).toISOString()] == null) {
           forceFetch = true;
         }
-      } catch (error) {}
+      } catch (error) {
+        forceFetch = true;
+      }
     } else {
       forceFetch = true;
     }
