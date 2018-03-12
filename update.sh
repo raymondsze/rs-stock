@@ -7,5 +7,5 @@ yarn build
 git add --all
 git commit -m "update stock data"
 git push
-yarn stock &
+yarn stocks &
 yarn start
