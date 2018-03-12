@@ -11128,3 +11128,121 @@ $ concurrently "npm run copy-assets" "npm run tsc:build"
 [0] npm run copy-assets exited with code 0
 [1] npm run tsc:build exited with code 0
 Done in 6.41s.
+[master 6155b8f] update stock data
+ Committer: Ubuntu <ubuntu@ip-172-31-11-211.ap-southeast-2.compute.internal>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 1198 insertions(+)
+ delete mode 100644 .update.sh.swp
+warning: push.default is unset; its implicit value has changed in
+Git 2.0 from 'matching' to 'simple'. To squelch this message
+and maintain the traditional behavior, use:
+
+  git config --global push.default matching
+
+To squelch this message and adopt the new behavior now, use:
+
+  git config --global push.default simple
+
+When push.default is set to 'matching', git will push local branches
+to the remote branches that already exist with the same name.
+
+Since Git 2.0, Git defaults to the more conservative 'simple'
+behavior, which only pushes the current branch to the corresponding
+remote branch that 'git pull' uses to update the current branch.
+
+See 'git help config' and search for 'push.default' for further information.
+(the 'simple' mode was introduced in Git 1.7.11. Use the similar mode
+'current' instead of 'simple' if you sometimes use older versions of Git)
+
+husky > npm run -s prepush (node v9.8.0)
+
+[1] No tests found
+[1] In /home/ubuntu/rs-stock
+[1]   7 files checked.
+[1]   testMatch: **/__tests__/**/*.ts?(x),**/?(*.)(spec|test).ts?(x) - 0 matches
+[1]   testPathIgnorePatterns: /node_modules/ - 7 matches
+[1] Pattern: "" - 0 matches
+[1] npm run test exited with code 0
+[0] npm run lint exited with code 0
+To git@github.com:raymondsze/rs-stock.git
+   5e2b90b..6155b8f  master -> master
+yarn run v1.5.1
+yarn run v1.5.1
+$ node scripts/stocks.js
+$ node build/index.js
+{"name":"rs-stock","hostname":"ip-172-31-11-211","pid":3240,"level":30,"msg":"Server is now running on http://localhost:3000","time":"2018-03-12T17:18:28.393Z","v":0}
+(node:3239) UnhandledPromiseRejectionWarning: SyntaxError: Unexpected token < in JSON at position 0
+SyntaxError: Unexpected token < in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at /home/ubuntu/rs-stock/build/stock.js:113:29
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/ubuntu/rs-stock/build/stock.js:4:58)
+    at <anonymous>
+    at process._tickCallback (internal/process/next_tick.js:118:7)
+From previous event:
+    at runCallback (timers.js:763:18)
+    at tryOnImmediate (timers.js:734:5)
+    at processImmediate (timers.js:716:5)
+From previous event:
+    at Object.<anonymous> (/home/ubuntu/rs-stock/build/stock.js:708:42)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/ubuntu/rs-stock/build/stock.js:4:58)
+    at <anonymous>
+    at process._tickCallback (internal/process/next_tick.js:118:7)
+(node:3239) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 1)
+(node:3239) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+Done in 23.07s.
+Terminated
+error An unexpected error occurred: "Command failed.
+Exit code: 143
+Command: sh
+Arguments: -c node build/index.js
+Directory: /home/ubuntu/rs-stock
+Output:
+".
+info If you think this is a bug, please open a bug report with the information provided in "/home/ubuntu/rs-stock/yarn-error.log".
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+Already up-to-date.
+yarn install v1.5.1
+[1/4] Resolving packages...
+success Already up-to-date.
+$ npm run build
+
+> rs-stock@0.0.1 build /home/ubuntu/rs-stock
+> concurrently "npm run copy-assets" "npm run tsc:build"
+
+[0] 
+[0] > rs-stock@0.0.1 copy-assets /home/ubuntu/rs-stock
+[0] > cpx "src/**/*.{json}" build
+[0] 
+[1] 
+[1] > rs-stock@0.0.1 tsc:build /home/ubuntu/rs-stock
+[1] > tsc
+[1] 
+[0] npm run copy-assets exited with code 0
+[1] npm run tsc:build exited with code 0
+Done in 7.38s.
+yarn run v1.5.1
+$ concurrently "npm run copy-assets" "npm run tsc:build"
+[1] 
+[1] > rs-stock@0.0.1 tsc:build /home/ubuntu/rs-stock
+[1] > tsc
+[1] 
+[0] 
+[0] > rs-stock@0.0.1 copy-assets /home/ubuntu/rs-stock
+[0] > cpx "src/**/*.{json}" build
+[0] 
+[0] npm run copy-assets exited with code 0
+[1] npm run tsc:build exited with code 0
+Done in 6.39s.
