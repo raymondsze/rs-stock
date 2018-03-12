@@ -29,4 +29,4 @@ dotenvFiles.forEach(dotenvFile => {
 });
 
 const stock = require('../build/stock');
-stock.summarizeStock(+process.argv[2]);  
+stock.summarizeAllStocks();  

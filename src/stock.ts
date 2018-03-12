@@ -144,7 +144,6 @@ async function getStockSeasonData(
     'data',
     `${stockId}_${year}_${season}.json`,
   );
-  console.log(`Downloading Stock Data ${filePath}`);
   const tradeDate = await getLastTradingDate();
   let forceFetch = !fs.existsSync(filePath);
   if (year === moment().year() && monthToSeason[+month] === season) {
@@ -613,7 +612,25 @@ function getHighestBuyTradingVolumeData(tradingData: StockTradingData) {
     0,
   );
   const data = values.find(data => data.positive && data.volume === max);
-  return data == null ? null : data;
+  return data == null ? {
+    time: moment(),
+    close: Number.NaN,
+    high: Number.NaN,
+    low: Number.NaN,
+    open: Number.NaN,
+    volume: 0,
+    ratio: false,
+    positive: false,
+    negative: false,
+    bigPositive: false,
+    bigNegative: false,
+    crossStar: false,
+    sanbaibing: false,
+    duobaibing: false,
+    sanhaibing: false,
+    duohaibing: false,
+    jumpyBuy: false,
+  } : data;
 }
 
 // 當日最高賣出額
@@ -624,7 +641,25 @@ function getHighestSellTradingVolumeData(tradingData: StockTradingData) {
     0,
   );
   const data = values.find(data => data.negative && data.volume === max);
-  return data == null ? null : data;
+  return data == null ?  {
+    time: moment(),
+    close: Number.NaN,
+    high: Number.NaN,
+    low: Number.NaN,
+    open: Number.NaN,
+    volume: 0,
+    ratio: false,
+    positive: false,
+    negative: false,
+    bigPositive: false,
+    bigNegative: false,
+    crossStar: false,
+    sanbaibing: false,
+    duobaibing: false,
+    sanhaibing: false,
+    duohaibing: false,
+    jumpyBuy: false,
+  } : data;
 }
 
 // 市值
@@ -637,6 +672,8 @@ interface StockProfile {
   low: number;
   volume: number;
   mktCap: number;
+  changePrice: number;
+  changePercent: number;
 }
 
 async function getStockProfile(stockId: number): Promise<StockProfile> {
@@ -659,6 +696,8 @@ async function getStockProfile(stockId: number): Promise<StockProfile> {
     low: +profile['Low'],
     volume: +profile['Vol'],
     mktCap: +profile['MktCap'],
+    changePrice: +profile['ChangePrice'],
+    changePercent: +profile['ChangePercent'].substring(0, profile['ChangePercent'].length - 1),
   };
 }
 
@@ -722,16 +761,12 @@ async function analyzeStock(stockId: number, ignoreConditions?: boolean) {
       moment().year() - 2,
       moment().year(),
     );
-    const lastTradingDate = (() => {
-      const values = Object.values(stockData);
-      return moment(values[values.length - 1].date);
-    })();
-    const lastStockData = stockData[moment(lastTradingDate).toISOString()];
+    const lastTradingDate = await getLastTradingDate();
     const abnormalVol = isAbnormalVolume(stockData);
     if (ignoreConditions || abnormalVol) {
       const tradingData3M = await getTradingData(
         stockId,
-        lastStockData.open * 0.025,
+        profile.open * 0.025,
         0.03,
         '3m',
       );
@@ -740,7 +775,7 @@ async function analyzeStock(stockId: number, ignoreConditions?: boolean) {
       if (lastTradingDataInDay != null && (ignoreConditions || !lastTradingDataInDay.bigNegative)) {
         const tradingData1D = await getTradingData(
           stockId,
-          lastStockData.open * 0.025,
+          profile.open * 0.025,
           0.03,
           '1d',
         );
@@ -784,9 +819,9 @@ async function analyzeStock(stockId: number, ignoreConditions?: boolean) {
             crossStar,
             id: +stockId.toString().padStart(5, '0'),
             name: profile.name,
-            price: lastStockData.close,
-            changePercent: lastStockData.change_percent,
-            change: lastStockData.change,
+            price: profile.close,
+            changePercent: profile.changePercent,
+            change: profile.changePrice,
             pe: profile.pe,
             hasYield: profile.pe > 0,
             active: activeRate > 0.5,
