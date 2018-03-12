@@ -225,7 +225,7 @@ async function getStockSeasonData(
         {} as StockData,
       );
     fs.writeFileSync(filePath, JSON.stringify(stockData));
-    return stockData;
+    return JSON.parse(fs.readFileSync(filePath, { encoding: 'utf-8' }));
   }
   return JSON.parse(fs.readFileSync(filePath, { encoding: 'utf-8' }));
 }
@@ -1016,11 +1016,12 @@ export async function summarizeAllStocks() {
   }
   const stocks = await getStocks();
   const stockIds = Object.keys(stocks);
+  // const stockIds = ['1698', '627', '1399'];
   // if call too frequently, may got banned
-  const summaries = await Promise.all(
-    stockIds.map(stockId => analyzeStock(+stockId, false)),
-  );
-  // const summaries = await Bluebird.mapSeries(stockIds, stockId => analyzeStock(+stockId));
+  // const summaries = await Promise.all(
+  //   stockIds.map(stockId => analyzeStock(+stockId, false)),
+  // );
+  const summaries = await Bluebird.mapSeries(stockIds, stockId => analyzeStock(+stockId));
   const filteredSummaries = await Promise.all(
     (summaries.filter(s => s) as StockSummary[])
       .map(async s => ({ ...s, name: await getStockName(s.id) }) as any),
