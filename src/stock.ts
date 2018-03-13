@@ -146,7 +146,7 @@ async function getStockSeasonData(
   );
   const tradeDate = await getLastTradingDate();
   let forceFetch = !fs.existsSync(filePath);
-  
+
   if (fs.existsSync(filePath)) {
     try {
       data = JSON.parse(
@@ -995,7 +995,7 @@ highestBuyTradings.join('\n') + `\n
 highestSellTradings.join('\n') + `\n\n` +
 `五大成交額 ([超大手買 | 超大手賣], [大手買 | 大手賣], [散戶買 | 散戶賣]):\n` +
 summary.top5data.map(d =>
-  `*${d.catg.toFixed(2)}*: ` + ([
+  `*${(+d.catg).toFixed(2)}*: ` + ([
     `[*${d.ultraBlockBullish}* | *${d.ultraBlockBearish}*]`,
     `[*${d.blockBullish}* | *${d.blockBearish}*]`,
     `[*${d.retailBullish}* | *${d.retailBearish}*]`,
