@@ -349,6 +349,9 @@ async function getTradingData(
     }.HK/${category}`,
     method: 'get',
   });
+  if (Object.keys(data).length === 0) {
+    return getTradingData(stockId, bigCandleThreshold, jumpyThreshold, category);
+  }
   // add some delay to prevent ban
   // .then(res => new Promise<AxiosResponse>(resolve => setTimeout(() => resolve(res), 500)));
   const tempData = data.data.map((dailyData) => {
@@ -802,27 +805,29 @@ async function getTop5VolData(stockId: number) {
   const start = domData.indexOf('summData: {catg') + 'summData: '.length;
   const end = domData.indexOf(']}]}', start) + 4;
   const domStr = '[' + domData.substring(start, end) + ']';
-  // tslint:disable-next-line
-  const [top5data] = eval(domStr);
-  // top5data.find(())
-  // process.exit(1);
-  const data = Array(5).fill(null).map(() => ({})) as any[];
-  const ubb = top5data.data.find((d: any) => d.name === 'Ultra-block Bullish').data;
-  const bb = top5data.data.find((d: any) => d.name === 'Block Bullish').data;
-  const rb = top5data.data.find((d: any) => d.name === 'Retail Bullish').data;
-  const ubbs = top5data.data.find((d: any) => d.name === 'Ultra-block Bearish').data;
-  const bbs = top5data.data.find((d: any) => d.name === 'Block Bearish').data;
-  const rbs = top5data.data.find((d: any) => d.name === 'Retail Bearish').data;
+  try {
+    // tslint:disable-next-line
+    const [top5data] = eval(domStr);
+    const data = Array(5).fill(null).map(() => ({})) as any[];
+    const ubb = top5data.data.find((d: any) => d.name === 'Ultra-block Bullish').data;
+    const bb = top5data.data.find((d: any) => d.name === 'Block Bullish').data;
+    const rb = top5data.data.find((d: any) => d.name === 'Retail Bullish').data;
+    const ubbs = top5data.data.find((d: any) => d.name === 'Ultra-block Bearish').data;
+    const bbs = top5data.data.find((d: any) => d.name === 'Block Bearish').data;
+    const rbs = top5data.data.find((d: any) => d.name === 'Retail Bearish').data;
 
-  top5data.catg.forEach((d: any, i: number) => data[i].catg = d);
-  ubb.forEach((d: any, i: number) => data[i].ultraBlockBullish = d.y);
-  bb.forEach((d: any, i: number) => data[i].blockBullish = d.y);
-  rb.forEach((d: any, i: number) => data[i].retailBullish = d.y);
-  ubbs.forEach((d: any, i: number) => data[i].ultraBlockBearish = d.y);
-  bbs.forEach((d: any, i: number) => data[i].blockBearish = d.y);
-  rbs.forEach((d: any, i: number) => data[i].retailBearish = d.y);
-
-  return data as Top5Data[];
+    top5data.catg.forEach((d: any, i: number) => data[i].catg = d);
+    ubb.forEach((d: any, i: number) => data[i].ultraBlockBullish = d.y);
+    bb.forEach((d: any, i: number) => data[i].blockBullish = d.y);
+    rb.forEach((d: any, i: number) => data[i].retailBullish = d.y);
+    ubbs.forEach((d: any, i: number) => data[i].ultraBlockBearish = d.y);
+    bbs.forEach((d: any, i: number) => data[i].blockBearish = d.y);
+    rbs.forEach((d: any, i: number) => data[i].retailBearish = d.y);
+    return data as Top5Data[];
+  } catch (e) {
+    console.error('Unable to get top5 vol data');
+    return [];
+  }
 }
 
 async function analyzeStock(stockId: number, ignoreConditions?: boolean) {
