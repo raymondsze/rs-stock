@@ -1011,8 +1011,8 @@ async function sendStockToSlack(summary: StockSummary, channel: '#general' | '#s
         `*${moment(dateStr).format('YYYY-MM-DD')}*\n` +
         highestBuyTradings[dateStr].map(
           (td: any, i: number) =>
-            '[:arrow_up:' + highestBuyTradings[dateStr][i] + ' | ' +
-            ':arrow_down:' + highestSellTradings[dateStr][i] + ']',
+            '[' + highestBuyTradings[dateStr][i] + ' | ' +
+            highestSellTradings[dateStr][i] + ']',
         ).join('\n'),
       ]),
       [] as string[],
@@ -1037,9 +1037,9 @@ highestTradings.filter((d, i) => i < 3).join('\n') + '\n' +
 `五大成交額 ([超大手買 | 超大手賣], [大手買 | 大手賣], [散戶買 | 散戶賣]):\n` +
 summary.top5data.map(d =>
   `*${(+d.catg).toFixed(2)}*: ` + ([
-    `[:arrow_up:*${d.ultraBlockBullish}* | :arrow_down:*${d.ultraBlockBearish}*]`,
-    `[:arrow_up:*${d.blockBullish}* | :arrow_down:*${d.blockBearish}*]`,
-    `[:arrow_up:*${d.retailBullish}* | :arrow_down:*${d.retailBearish}*]`,
+    `[*${d.ultraBlockBullish}* | *${d.ultraBlockBearish}*]`,
+    `[*${d.blockBullish}* | *${d.blockBearish}*]`,
+    `[*${d.retailBullish}* | *${d.retailBearish}*]`,
   ].join(', ')))
   .join('\n') +
 `\n\n訊號: ${[
