@@ -1011,8 +1011,8 @@ async function sendStockToSlack(summary: StockSummary, channel: '#general' | '#s
         `*${moment(dateStr).format('YYYY-MM-DD')}*\n` +
         highestBuyTradings[dateStr].map(
           (td: any, i: number) =>
-            ':arrow_up:' + highestBuyTradings[dateStr][i] + ' | ' +
-            ':arrow_down:' + highestSellTradings[dateStr][i],
+            '[:arrow_up:' + highestBuyTradings[dateStr][i] + ' | ' +
+            ':arrow_down:' + highestSellTradings[dateStr][i] + ']',
         ).join('\n'),
       ]),
       [] as string[],
@@ -1033,7 +1033,7 @@ async function sendStockToSlack(summary: StockSummary, channel: '#general' | '#s
 每股盈利/市盈率: *${earnPerUnit}*,*${pe}*
 升幅 (百分率，股價): *${summary.changePercent.toFixed(2)}%*, *${summary.change.toFixed(2)}*
 最高買入/賣出成交量(分鐘) (時間, 成交量，平均價):\n ` +
-highestTradings.join('\n') + '\n' +
+highestTradings.filter((d, i) => i < 3).join('\n') + '\n' +
 `五大成交額 ([超大手買 | 超大手賣], [大手買 | 大手賣], [散戶買 | 散戶賣]):\n` +
 summary.top5data.map(d =>
   `*${(+d.catg).toFixed(2)}*: ` + ([
