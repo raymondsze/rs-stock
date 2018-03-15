@@ -8,6 +8,8 @@ import * as Slack from 'slack-node';
 import * as Bluebird from 'bluebird';
 import * as _ from 'lodash';
 
+const format = require('format-number')(({ truncate: 2 }));
+
 /* tslint:disable */
 axios.interceptors.response.use(
   undefined as any,
@@ -941,7 +943,7 @@ async function sendHeaderToSlack(stockIds: string[], channel: '#general' | '#sto
       {
         username: 'stockBot',
         text:
-          '<!everyone>' + `心水股: ${stockIds.map(s => `*${s}*`).join(', ')}`,
+          '<!everyone>' + `心水股: ${stockIds.map(s => `\`${s}\``).join(', ')}`,
         attachments: [
           {
             color: '#0000FF',
@@ -977,8 +979,8 @@ async function sendStockToSlack(summary: StockSummary, channel: '#general' | '#s
     const color = (summary.change === 0 ? '#666' : summary.change > 0 ? '#00DD00' : '#DD0000');
     const pretext = `*${summary.name}* *${summary.id.toString().padStart(5, '0')}.HK`
       + `@${moment(lastTradingDate).format('YYYY-MM-DD')}*`;
-    const earnPerUnit = (summary.pe != null) ? (summary.price / summary.pe).toFixed(2) : '-';
-    const pe = (summary.pe != null) ? (+summary.pe).toFixed(2) : '-';
+    const earnPerUnit = (summary.pe != null) ? format(summary.price / summary.pe) : '-';
+    const pe = (summary.pe != null) ? format(+summary.pe) : '-';
     const highestBuyTradings = Object.entries(summary.highestBigBuyTradingData)
       .reduceRight(
         (r, [dateStr, results]) => ({
@@ -986,8 +988,8 @@ async function sendStockToSlack(summary: StockSummary, channel: '#general' | '#s
           [dateStr]: 
             results.map(
               d =>
-              `*${moment(d.time).format('HH:mm')}*, *${d.volume}*, ` +
-              `*${((d.close - d.open) / 2 + d.open).toFixed(2)}*`,
+              `*${moment(d.time).format('HH:mm')}*, *${format(d.volume)}*, ` +
+              `*${format(((d.close - d.open) / 2 + d.open))}*`,
             ),
         }),
         {},
@@ -999,8 +1001,8 @@ async function sendStockToSlack(summary: StockSummary, channel: '#general' | '#s
           [dateStr]: 
             results.map(
               d =>
-              `*${moment(d.time).format('HH:mm')}*, *${d.volume}*, ` +
-              `*${((d.close - d.open) / 2 + d.open).toFixed(2)}*`,
+              `\`${moment(d.time).format('HH:mm')}\`, \`${format(d.volume)}\`, ` +
+              `\`${format((d.close - d.open) / 2 + d.open)}\``,
             ),
         }),
         {},
@@ -1030,30 +1032,31 @@ async function sendStockToSlack(summary: StockSummary, channel: '#general' | '#s
                 value:
                   `
 股價: *${summary.price.toFixed(2)}*
-每股盈利/市盈率: *${earnPerUnit}*,*${pe}*
+每股盈利/市盈率: ${summary.hasYield ? `*${earnPerUnit}*` : `\`${earnPerUnit}\``}, ` +
+  `${summary.hasYield ? `*${pe}*` : `\`${pe}\``},
 升幅 (百分率，股價): *${summary.changePercent.toFixed(2)}%*, *${summary.change.toFixed(2)}*
 最高買入/賣出成交量(分鐘) (時間, 成交量，平均價):\n ` +
 highestTradings.filter((d, i) => i < 3).join('\n') + '\n' +
 `五大成交額 ([超大手買 | 超大手賣], [大手買 | 大手賣], [散戶買 | 散戶賣]):\n` +
 summary.top5data.map(d =>
   `*${(+d.catg).toFixed(2)}*: ` + ([
-    `[*${d.ultraBlockBullish}* | *${d.ultraBlockBearish}*]`,
-    `[*${d.blockBullish}* | *${d.blockBearish}*]`,
-    `[*${d.retailBullish}* | *${d.retailBearish}*]`,
+    `[*${format(d.ultraBlockBullish)}* | \`${format(d.ultraBlockBearish)}\`]`,
+    `[*${format(d.blockBullish)}* | \`${format(d.blockBearish)}\`]`,
+    `[*${format(d.retailBullish)}* | \`${format(d.retailBearish)}\`]`,
   ].join(', ')))
   .join('\n') +
 `\n\n訊號: ${[
   summary.bigPositive ? '*大陽燭*' : null,
   !summary.bigPositive && summary.positive ? '*陽燭*' : null,
-  summary.bigNegative ? '*大陰燭*' : null,
+  summary.bigNegative ? '\`大陰燭\`' : null,
   !summary.bigNegative && summary.negative ? '*陰燭*' : null,
   summary.sanbaibing ? '*三白兵*' : null,
   !summary.sanbaibing && summary.duobaibing
     ? '*雙白兵*'
     : null,
-  summary.sanhaibing ? '*三黑兵*' : null,
+  summary.sanhaibing ? '\`三黑兵\`' : null,
   !summary.sanhaibing && summary.duohaibing
-    ? '*雙黑兵*'
+    ? '\`雙黑兵\`'
     : null,
   summary.crossStar ? '*十字星*' : null,
   summary.jumpyBuy ? '*跳價高買*' : null,
