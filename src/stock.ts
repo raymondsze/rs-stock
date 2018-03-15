@@ -359,7 +359,7 @@ async function getTradingData(
     return {
       ...dailyData,
       time:
-        (category === '1d' || category == '5d')
+        (category === '1d' || category === '5d')
           ? new Date(+dailyData.time * 1000)
           : moment(dailyData.time, 'YYYYMMDD').toDate(),
       close: +dailyData.close,
