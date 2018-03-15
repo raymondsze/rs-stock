@@ -6,6 +6,7 @@ import * as cheerio from 'cheerio';
 import * as moment from 'moment';
 import * as Slack from 'slack-node';
 import * as Bluebird from 'bluebird';
+import * as _ from 'lodash';
 
 /* tslint:disable */
 axios.interceptors.response.use(
@@ -327,7 +328,7 @@ async function getTradingData(
   stockId: number,
   bigCandleThreshold: number,
   jumpyThreshold: number,
-  category: '1y' | '6m' | '3m' | '1m' | '1d' = '1m',
+  category: '1y' | '6m' | '3m' | '1m' | '1d' | '5d' = '1m',
 ): Promise<StockTradingData> {
   console.log(`Downloading ${category} Trading Data of ${stockId}`);
   const {
@@ -358,7 +359,7 @@ async function getTradingData(
     return {
       ...dailyData,
       time:
-        category === '1d'
+        (category === '1d' || category == '5d')
           ? new Date(+dailyData.time * 1000)
           : moment(dailyData.time, 'YYYYMMDD').toDate(),
       close: +dailyData.close,
@@ -624,8 +625,7 @@ function isDuohaibing(
 }
 
 // 當日最高買入額
-function getHighestBuyTradingVolumeData(tradingData: StockTradingData, num: number) {
-  const values = Object.values(tradingData);
+function getHighestBuyTradingVolumeData(values: StockDailyTradingData[], num: number) {  
   const sortedValues = values.filter(d => d.positive)
     .sort((d1, d2) => d2.volume - d1.volume);
   const returnValues = [];
@@ -659,8 +659,7 @@ function getHighestBuyTradingVolumeData(tradingData: StockTradingData, num: numb
 }
 
 // 當日最高賣出額
-function getHighestSellTradingVolumeData(tradingData: StockTradingData, num: number) {
-  const values = Object.values(tradingData);
+function getHighestSellTradingVolumeData(values: StockDailyTradingData[], num: number) {
   const sortedValues = values.filter(d => d.negative)
     .sort((d1, d2) => d2.volume - d1.volume);
   const returnValues = [];
@@ -739,8 +738,8 @@ interface StockSummary {
   price: number;
   changePercent: number;
   change: number;
-  highestBigBuyTradingData: StockDailyTradingData[];
-  highestBigSellTradingData: StockDailyTradingData[];
+  highestBigBuyTradingData: {[index: string]: StockDailyTradingData[]};
+  highestBigSellTradingData: {[index: string]: StockDailyTradingData[]};
   positive: boolean;
   negative: boolean;
   bigPositive: boolean;
@@ -856,13 +855,13 @@ async function analyzeStock(stockId: number, ignoreConditions?: boolean) {
       const lastTradingDataInDay =
         tradingData3M[moment(lastTradingDate).toISOString()];
       if (lastTradingDataInDay != null && (ignoreConditions || !lastTradingDataInDay.bigNegative)) {
-        const tradingData1D = await getTradingData(
+        const tradingData5D = await getTradingData(
           stockId,
           profile.open * 0.025,
           0.03,
-          '1d',
+          '5d',
         );
-        const activeRate = getActiveRate(tradingData1D);
+        const activeRate = getActiveRate(tradingData5D);
         console.log(`ActiveRate: ${activeRate}`);
         if (ignoreConditions || activeRate >= 0.2) {
           console.log(
@@ -870,13 +869,23 @@ async function analyzeStock(stockId: number, ignoreConditions?: boolean) {
               lastTradingDataInDay.close
             }`,
           );
-          const highestBigBuyTradingData = getHighestBuyTradingVolumeData(
-            tradingData1D, 3,
+          const groupedData = _.groupBy(
+            tradingData5D,
+            d => moment(d.time).startOf('day').toISOString(),
           );
-          const highestBigSellTradingData = getHighestSellTradingVolumeData(
-            tradingData1D, 3,
-          );
+          
+          const highestBigBuyTradingData = _.mapValues(
+            groupedData,
+            tradingData => getHighestBuyTradingVolumeData(
+              tradingData, 3,
+            ));
 
+          const highestBigSellTradingData = _.mapValues(
+            groupedData,
+            tradingData => getHighestSellTradingVolumeData(
+              tradingData, 3,
+            ));
+  
           const positive = lastTradingDataInDay.positive;
           const negative = lastTradingDataInDay.negative;
           const bigPositive = lastTradingDataInDay.bigPositive;
@@ -970,16 +979,45 @@ async function sendStockToSlack(summary: StockSummary, channel: '#general' | '#s
       + `@${moment(lastTradingDate).format('YYYY-MM-DD')}*`;
     const earnPerUnit = (summary.pe != null) ? (summary.price / summary.pe).toFixed(2) : '-';
     const pe = (summary.pe != null) ? (+summary.pe).toFixed(2) : '-';
-    const highestBuyTradings = summary.highestBigBuyTradingData.map(
-      d =>
-      `*${moment(d.time).format('HH:mm')}*, *${d.volume}*, ` +
-      `*${((d.close - d.open) / 2 + d.open).toFixed(2)}*`,
+    const highestBuyTradings = Object.entries(summary.highestBigBuyTradingData)
+      .reduceRight(
+        (r, [dateStr, results]) => ({
+          ...r,
+          [dateStr]: 
+            results.map(
+              d =>
+              `*${moment(d.time).format('HH:mm')}*, *${d.volume}*, ` +
+              `*${((d.close - d.open) / 2 + d.open).toFixed(2)}*`,
+            ),
+        }),
+        {},
+      );
+    const highestSellTradings = Object.entries(summary.highestBigSellTradingData)
+      .reduceRight(
+        (r, [dateStr, results]) => ({
+          ...r,
+          [dateStr]: 
+            results.map(
+              d =>
+              `*${moment(d.time).format('HH:mm')}*, *${d.volume}*, ` +
+              `*${((d.close - d.open) / 2 + d.open).toFixed(2)}*`,
+            ),
+        }),
+        {},
+      );
+    const highestTradings = Object.entries(highestBuyTradings).reduce(
+      (result, [dateStr, values]) => ([
+        ...result,
+        `*${moment(dateStr).format('YYYY-MM-DD')}*\n` +
+        highestBuyTradings[dateStr].map(
+          (td: any, i: number) =>
+            ':arrow_up:' + highestBuyTradings[dateStr][i] + ' | ' +
+            ':arrow_down:' + highestSellTradings[dateStr][i],
+        ).join('\n'),
+      ]),
+      [] as string[],
     );
-    const highestSellTradings = summary.highestBigSellTradingData.map(
-      d =>
-      `*${moment(d.time).format('HH:mm')}*, *${d.volume}*, ` +
-      `*${((d.close - d.open) / 2 + d.open).toFixed(2)}*`,
-    );
+
     slack.webhook(
       {
         username: 'stockBot',
@@ -994,16 +1032,14 @@ async function sendStockToSlack(summary: StockSummary, channel: '#general' | '#s
 股價: *${summary.price.toFixed(2)}*
 每股盈利/市盈率: *${earnPerUnit}*,*${pe}*
 升幅 (百分率，股價): *${summary.changePercent.toFixed(2)}%*, *${summary.change.toFixed(2)}*
-最高買入成交量(分鐘) (時間, 成交量，平均價):\n ` +
-highestBuyTradings.join('\n') + `\n
-最高賣出成交量(分鐘) (時間, 成交量, 平均價):\n ` +
-highestSellTradings.join('\n') + `\n\n` +
+最高買入/賣出成交量(分鐘) (時間, 成交量，平均價):\n ` +
+highestTradings.join('\n') + '\n' +
 `五大成交額 ([超大手買 | 超大手賣], [大手買 | 大手賣], [散戶買 | 散戶賣]):\n` +
 summary.top5data.map(d =>
   `*${(+d.catg).toFixed(2)}*: ` + ([
-    `[*${d.ultraBlockBullish}* | *${d.ultraBlockBearish}*]`,
-    `[*${d.blockBullish}* | *${d.blockBearish}*]`,
-    `[*${d.retailBullish}* | *${d.retailBearish}*]`,
+    `[:arrow_up:*${d.ultraBlockBullish}* | :arrow_down:*${d.ultraBlockBearish}*]`,
+    `[:arrow_up:*${d.blockBullish}* | :arrow_down:*${d.blockBearish}*]`,
+    `[:arrow_up:*${d.retailBullish}* | :arrow_down:*${d.retailBearish}*]`,
   ].join(', ')))
   .join('\n') +
 `\n\n訊號: ${[
