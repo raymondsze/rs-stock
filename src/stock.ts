@@ -626,72 +626,22 @@ function isDuohaibing(
   return false;
 }
 
+// async function getTradingVolume(tradingData: TradingData[]) {
+//   return _.sumBy(tradingData.filter(d => d.type === 'A' || d.type === 'B'), 'volume');
+// }
+
 // 當日最高買入額
-function getHighestBuyTradingVolumeData(values: StockDailyTradingData[], num: number) {  
-  const sortedValues = values.filter(d => d.positive)
-    .sort((d1, d2) => d2.volume - d1.volume);
-  const returnValues = [];
-  for (let i = 0; i < sortedValues.length; i = i + 1) {
-    if (i < num) {
-      returnValues.push(sortedValues[i]);
-    }
-  }
-  for (let i = returnValues.length; i < num; i = i + 1) {
-    returnValues.push({
-      time: moment(),
-      close: Number.NaN,
-      high: Number.NaN,
-      low: Number.NaN,
-      open: Number.NaN,
-      volume: 0,
-      ratio: false,
-      positive: false,
-      negative: false,
-      bigPositive: false,
-      bigNegative: false,
-      crossStar: false,
-      sanbaibing: false,
-      duobaibing: false,
-      sanhaibing: false,
-      duohaibing: false,
-      jumpyBuy: false,
-    });
-  }
-  return returnValues;
+async function getHighestBuyTradingVolumeData(tradingData: TradingData[], num: number) {
+  const sortedTradingData = _.sortBy(tradingData.filter(d => d.type === 'A'), 'volume');
+  const data = _.takeRight(sortedTradingData, num);
+  return data;
 }
 
 // 當日最高賣出額
-function getHighestSellTradingVolumeData(values: StockDailyTradingData[], num: number) {
-  const sortedValues = values.filter(d => d.negative)
-    .sort((d1, d2) => d2.volume - d1.volume);
-  const returnValues = [];
-  for (let i = 0; i < sortedValues.length; i = i + 1) {
-    if (i < num) {
-      returnValues.push(sortedValues[i]);
-    }
-  }
-  for (let i = returnValues.length; i < num; i = i + 1) {
-    returnValues.push({
-      time: moment(),
-      close: Number.NaN,
-      high: Number.NaN,
-      low: Number.NaN,
-      open: Number.NaN,
-      volume: 0,
-      ratio: false,
-      positive: false,
-      negative: false,
-      bigPositive: false,
-      bigNegative: false,
-      crossStar: false,
-      sanbaibing: false,
-      duobaibing: false,
-      sanhaibing: false,
-      duohaibing: false,
-      jumpyBuy: false,
-    });
-  }
-  return returnValues;
+async function getHighestSellTradingVolumeData(tradingData: TradingData[], num: number) {
+  const sortedTradingData = _.sortBy(tradingData.filter(d => d.type === 'B'), 'volume');
+  const data = _.takeRight(sortedTradingData, num);
+  return data;
 }
 
 // 市值
@@ -740,8 +690,8 @@ interface StockSummary {
   price: number;
   changePercent: number;
   change: number;
-  highestBigBuyTradingData: {[index: string]: StockDailyTradingData[]};
-  highestBigSellTradingData: {[index: string]: StockDailyTradingData[]};
+  highestBigBuyTradingData: {[index: string]: TradingData[]};
+  highestBigSellTradingData: {[index: string]: TradingData[]};
   positive: boolean;
   negative: boolean;
   bigPositive: boolean;
@@ -792,6 +742,59 @@ interface Top5Data {
   retailBearish: number;
 }
 
+interface TradingData {
+  type: string;
+  date: Date;
+  volume: number;
+  auto: boolean;
+  price: number;
+}
+
+async function getAATradingData(stockId: number, date: Date): Promise<TradingData[]> {
+  // first visit to aastock page to obtain the csrf token
+  const res = await axios({
+    method: 'get',
+    url:
+      'http://www.aastocks.com/en/stocks/analysis/transaction.aspx?symbol=' +
+      `${stockId.toString().padStart(6, '0')}`,
+  });
+  const domData = res.data;
+  
+  // const searchUrl = 'http://tldata.aastocks.com/TradeLogServlet/getTradeLog?';
+  const test = domData.match(new RegExp(`.+"&(u=.+&t=.+&d=.+)".+`));
+  const query = qs.stringify({
+    ...qs.parse(test[1]),
+    id: `${stockId.toString().padStart(5, '0')}.HK`,
+    date: moment(date).format('YYYYMMDD'),
+  });
+  const { data: tradingData } = await axios({
+    method: 'get',
+    url: `http://tldata.aastocks.com/TradeLogServlet/getTradeLog?${query}`,
+  });
+  return tradingData.substring(tradingData.indexOf('#') + 1).split('|').map(
+    (data: string) => {
+      const match = data.match(/(\d+);(\d+);(.);(\d+\.\d+);(.)/);
+      if (match !== null) {
+        const [,
+          dateStr,
+          volumeStr,
+          autoStr,
+          priceStr,
+          typeStr,
+        ] = match as any;
+        return {
+          type: typeStr,
+          date: moment(moment(date).format('YYYYMMDD') + dateStr, 'YYYYMMDDHHmmss'),
+          volume: +volumeStr,
+          auto: autoStr === 'Y',
+          price: +priceStr,
+        };
+      }
+      return null;
+    },
+  ).filter((data: any) => data);
+}
+
 async function getTop5VolData(stockId: number) {
   console.log(`Get Top5 Vol Data of ${stockId}`);
   const res = await axios({
@@ -831,6 +834,7 @@ async function getTop5VolData(stockId: number) {
   }
 }
 
+
 async function analyzeStock(stockId: number, ignoreConditions?: boolean) {
   // process.exit(1);
   const profile = await getStockProfile(stockId);
@@ -848,6 +852,7 @@ async function analyzeStock(stockId: number, ignoreConditions?: boolean) {
     const lastTradingDate = await getLastTradingDate();
     const abnormalVol = isAbnormalVolume(stockData);
     if (ignoreConditions || abnormalVol) {
+      // const volume = await getTradingVolume(await getAATradingData(stockId, lastTradingDate));
       const tradingData3M = await getTradingData(
         stockId,
         profile.open * 0.025,
@@ -865,7 +870,7 @@ async function analyzeStock(stockId: number, ignoreConditions?: boolean) {
         );
         const activeRate = getActiveRate(tradingData5D);
         console.log(`ActiveRate: ${activeRate}`);
-        if (ignoreConditions || activeRate >= 0.2) {
+        if (ignoreConditions || activeRate >= 0.1) {
           console.log(
             `Potential Stock Found: ${stockId.toString().padStart(5, '0')}.HK@${
               lastTradingDataInDay.close
@@ -876,17 +881,23 @@ async function analyzeStock(stockId: number, ignoreConditions?: boolean) {
             d => moment(d.time).startOf('day').toISOString(),
           );
           
-          const highestBigBuyTradingData = _.mapValues(
+          const highestBigBuyTradingData = await Bluebird.props(_.mapValues(
             groupedData,
-            tradingData => getHighestBuyTradingVolumeData(
-              tradingData, 3,
-            ));
+            async (tradingData, date) =>
+              await getHighestBuyTradingVolumeData(
+                await getAATradingData(stockId, moment(date).toDate()),
+                3,
+              ),
+          ));
 
-          const highestBigSellTradingData = _.mapValues(
+          const highestBigSellTradingData = await Bluebird.props(_.mapValues(
             groupedData,
-            tradingData => getHighestSellTradingVolumeData(
-              tradingData, 3,
-            ));
+            async (tradingData, date) =>
+              await getHighestSellTradingVolumeData(
+                await getAATradingData(stockId, moment(date).toDate()),
+                3,
+              ),
+          ));
   
           const positive = lastTradingDataInDay.positive;
           const negative = lastTradingDataInDay.negative;
@@ -988,8 +999,8 @@ async function sendStockToSlack(summary: StockSummary, channel: '#general' | '#s
           [dateStr]: 
             results.map(
               d =>
-              `*${moment(d.time).format('HH:mm')}*, *${format(d.volume)}*, ` +
-              `*${format(((d.close - d.open) / 2 + d.open))}*`,
+              `*${moment(d.date).format('HH:mm')}*, *${format(d.volume)}*, ` +
+              `*${format(d.price)}*`,
             ),
         }),
         {},
@@ -1001,8 +1012,8 @@ async function sendStockToSlack(summary: StockSummary, channel: '#general' | '#s
           [dateStr]: 
             results.map(
               d =>
-              `\`${moment(d.time).format('HH:mm')}\`, \`${format(d.volume)}\`, ` +
-              `\`${format((d.close - d.open) / 2 + d.open)}\``,
+              `\`${moment(d.date).format('HH:mm')}\`, \`${format(d.volume)}\`, ` +
+              `\`${format(d.price)}\``,
             ),
         }),
         {},
@@ -1071,10 +1082,13 @@ summary.top5data.map(d =>
               summary.id
             }`,
             image_url:
-              `http://charts.aastocks.com/servlet/Charts?fontsize=12&15MinDelay=T` +
-              `&lang=1&titlestyle=1&vol=1&Indicator=1&indpara1=10&indpara2=20&indpara3=50` +
-              `&indpara4=100&indpara5=150&subChart1=12&ref1para1=0&` +
-              `ref1para2=0&ref3para3=0&scheme=3&com=100&chartwidth=500&chartheight=500&` +
+              'http://charts.aastocks.com/servlet/Charts?' +
+              'fontsize=12&15MinDelay=T&lang=1&titlestyle=1&' + 
+              'vol=1&Indicator=1&' +
+              'indpara1=10&indpara2=20&indpara3=50&indpara4=100&indpara5=150&' + 
+              'subChart1=2&ref1para1=14&ref1para2=0&ref1para3=0&' + 
+              'subChart3=12&ref3para1=0&ref3para2=0&ref3para3=0&' + 
+              'scheme=3&com=100&chartwidth=673&chartheight=560&' +
               `stockid=${summary.id.toString().padStart(
                 6,
                 '0',
