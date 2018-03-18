@@ -690,7 +690,7 @@ export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = 
   if (stockProfile == null || stockProfile.volume == null) return null;
   if (stockProfile.mktCap <= 1000000000) console.log(`[${stockId}]: MarketCap <= 1000000000...`);
   if (stockProfile == null || stockProfile.mktCap <= 1000000000) return null;
-  const changeAcceptable = (stockProfile.changePercent >= -3);
+  const changeAcceptable = true; // (stockProfile.changePercent >= -3);
   if (!ignoreFilter && !changeAcceptable) console.log(`[${stockId}]: Change is lower than -3%...`);
   if (ignoreFilter || changeAcceptable) {
     const stockName = await fetchTickerStockName(stockNumber);
