@@ -1,6 +1,8 @@
 const _ = require('lodash');
 const path = require('path');
 const fs = require('fs');
+const { spawn } = require('child_process');
+const Bluebird = require('bluebird');
 
 const NODE_ENV = _.defaultTo(process.env.NODE_ENV, 'development');
 process.env.NODE_ENV = NODE_ENV;
@@ -33,7 +35,23 @@ process.on('uncaughtException', (err) => {
   process.exit(1);
 });
 
-const stock = require('../build/stock');
+const { fetchStockNumbers, analyzeStock, sendStockNumbersToSlack, sendStockToSlack } = require('../build/stock');
 (async () => {
-  await stock.summarizeAllStocks().catch(err => console.error(err));  
+  const [,, ...options] = process.argv;
+  const ignoreFilter = options.findIndex(d => d === 'ignore') !== -1;
+  // const stockNumbers = await fetchStockNumbers();
+  const stockNumbers = [
+    8, 19, 217, 335, 436, 659,
+    678, 709, 887, 1009, 1068, 1387,
+    1483, 1579, 1681, 1727, 1778, 1862,
+    1966, 2083, 3300, 3708,
+  ];
+  const summaries = await Bluebird.mapSeries(
+    stockNumbers.filter(d => d !== 'ignore'),
+    stockNumber => analyzeStock(+stockNumber, ignoreFilter),
+  );
+  const potentialStockNumbers = summaries.filter(d => d).map(summary => summary.stockNumber);
+  await sendStockNumbersToSlack(potentialStockNumbers, '#general');
+  await sendStockNumbersToSlack(potentialStockNumbers, '#stock');
+  await Bluebird.mapSeries(summaries.filter(d => d), summary => sendStockToSlack(summary, '#stock'));
 })();

@@ -5,10 +5,7 @@ import * as loggerMiddleware from 'express-bunyan-logger';
 import * as helmet from 'helmet';
 import * as _ from 'lodash';
 import * as uuid from 'uuid';
-import {
-  summarizeStock,
-  summarizeAllStocks,
-} from './stock';
+import { spawn } from 'child_process';
 
 const logLevel: bunyan.LogLevel = _.defaultTo(
   process.env.LOG_LEVEL,
@@ -44,7 +41,6 @@ app.use(bodyParser.json());
 // parse body if content-type is url encoded
 app.use(bodyParser.urlencoded({ extended: false }));
 
-let analyzing = false;
 // analyze
 app.post('/analyze', async (req, res) => {
   try {
@@ -53,22 +49,9 @@ app.post('/analyze', async (req, res) => {
       res.json({ text: '請於 #general 或 #stock 跟我說話...' });
       return;
     }
-    const stockIds = _.defaultTo(text, '').split(' ') as string[];
-    if (analyzing) {
-      res.json({ text: '分析緊其他野，我宜家好忙，遲D先搵我！' });
-      return;
-    }
+    const stockNumbers = _.defaultTo(text, '').split(' ') as string[];
     // background job
-    analyzing = true;
-    (async () => {
-      try {
-        await Promise.all(stockIds.map(stockId => summarizeStock(+stockId)));
-      } catch (e) {
-        console.log('Something wrong...');
-      } finally {
-        analyzing = false;
-      }
-    })();
+    spawn('node', [path.join(__dirname, 'stock.js'), ...stockNumbers, 'ignore']);
     res.json({ text: '收到！宜家即刻幫你分析！' });
   } catch (e) {
     console.error(e);
@@ -77,35 +60,20 @@ app.post('/analyze', async (req, res) => {
 });
 
 // analze all stock
-app.post('/analyzeAll', async (req, res) => {
-  try {
-    const { channel_name } = req.body;
-    if (channel_name !== 'general' && channel_name !== 'stock') {
-      res.json({ text: '請於 #general 或 #stock 跟我說話...' });
-      return;
-    }
-    if (analyzing) {
-      res.json({ text: '分析緊其他野，我宜家好忙，遲D先搵我！' });
-      return;
-    }
-    res.json({ text: '收到！宜家即刻幫你分析！' });
-    // background job
-    analyzing = true;
-    (async () => {
-      try {
-        await summarizeAllStocks();
-      } catch (e) {
-        console.log('Something wrong...');
-      } finally {
-        analyzing = false;
-      }
-    })();
-    res.json({ text: '收到！宜家即刻幫你分析！' });
-  } catch (e) {
-    console.error(e);
-    res.json({ text: '程式發生錯誤...' });
-  }
-});
+// app.post('/analyzeAll', async (req, res) => {
+//   try {
+//     const { channel_name } = req.body;
+//     if (channel_name !== 'general' && channel_name !== 'stock') {
+//       res.json({ text: '請於 #general 或 #stock 跟我說話...' });
+//       return;
+//     }
+//     spawn('node', [path.join(__dirname, 'stocks.js')]);
+//     res.json({ text: '收到！宜家即刻幫你分析！' });
+//   } catch (e) {
+//     console.error(e);
+//     res.json({ text: '程式發生錯誤...' });
+//   }
+// });
 
 app.listen(process.env.PORT, (err: Error) => {
   if (err != null) {

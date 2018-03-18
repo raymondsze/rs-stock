@@ -1,6 +1,7 @@
 const _ = require('lodash');
 const path = require('path');
 const fs = require('fs');
+const Bluebird = require('bluebird');
 
 const NODE_ENV = _.defaultTo(process.env.NODE_ENV, 'development');
 process.env.NODE_ENV = NODE_ENV;
@@ -33,7 +34,13 @@ process.on('uncaughtException', (err) => {
   process.exit(1);
 });
 
-const stock = require('../build/stock');
+const { analyzeStock, sendStockToSlack } = require('../build/stock');
 (async () => {
-  await stock.summarizeStock(+process.argv[2]).catch(err => console.error(err));  
+  const [,, ...stockNumbers] = process.argv;
+  const ignoreFilter = stockNumbers.findIndex(d => d === 'ignore') !== -1;
+  const summaries = await Bluebird.mapSeries(
+    stockNumbers.filter(d => d !== 'ignore'),
+    stockNumber => analyzeStock(+stockNumber, ignoreFilter),
+  );
+  await Bluebird.mapSeries(summaries.filter(d => d), summary => sendStockToSlack(summary, '#stock'));
 })();
