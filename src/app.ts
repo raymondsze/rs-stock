@@ -52,7 +52,13 @@ app.post('/analyze', async (req, res) => {
     }
     const stockNumbers = _.defaultTo(text, '').split(' ') as string[];
     // background job
-    spawn('node', [path.join(__dirname, 'stock.js'), ...stockNumbers, 'ignore']);
+    const exec = spawn('node', [path.join(__dirname, 'stock.js'), ...stockNumbers]);
+    exec.stdout.on('data', (data) => {
+      console.log(`${data.toString()}`);
+    });
+    exec.stderr.on('data', (data) => {
+      console.error(`${data.toString()}`);
+    });
     res.json({ text: '收到！宜家即刻幫你分析！' });
   } catch (e) {
     console.error(e);
