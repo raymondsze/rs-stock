@@ -39,13 +39,13 @@ const { fetchStockNumbers, analyzeStock, sendStockNumbersToSlack, sendStockToSla
 (async () => {
   const [,, ...options] = process.argv;
   const ignoreFilter = options.findIndex(d => d === 'ignore') !== -1;
-  // const stockNumbers = await fetchStockNumbers();
-  const stockNumbers = [
-    8, 19, 217, 335, 436, 659,
-    678, 709, 887, 1009, 1068, 1387,
-    1483, 1579, 1681, 1727, 1778, 1862,
-    1966, 2083, 3300, 3708,
-  ];
+  const stockNumbers = await fetchStockNumbers();
+  // const stockNumbers = [
+  //   8, 19, 217, 335, 436, 659,
+  //   678, 709, 887, 1009, 1068, 1387,
+  //   1483, 1579, 1681, 1727, 1778, 1862,
+  //   1966, 2083, 3300, 3708,
+  // ];
   const summaries = await Bluebird.mapSeries(
     stockNumbers.filter(d => d !== 'ignore'),
     stockNumber => analyzeStock(+stockNumber, ignoreFilter),
