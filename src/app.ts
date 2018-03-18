@@ -54,7 +54,7 @@ app.post('/analyze', async (req, res) => {
     // background job
     (async () => {
       const summaries = await Bluebird.mapSeries(
-        ['ignore', ...stockNumbers],
+        stockNumbers,
         (stockNumber: any) => analyzeStock(+stockNumber, true),
       );
       await Bluebird.mapSeries(
