@@ -52,12 +52,14 @@ app.post('/analyze', async (req, res) => {
     }
     const stockNumbers = _.defaultTo(text, '').split(' ') as string[];
     // background job
-    const summaries = await Bluebird.mapSeries(
-      stockNumbers,
-      (stockNumber: any) => analyzeStock(+stockNumber, true),
-    );
-    Bluebird.mapSeries(
-      summaries.filter(d => d), summary => sendStockToSlack(summary as any, '#stock'));
+    (async () => {
+      const summaries = await Bluebird.mapSeries(
+        stockNumbers,
+        (stockNumber: any) => analyzeStock(+stockNumber, true),
+      );
+      await Bluebird.mapSeries(
+        summaries.filter(d => d), summary => sendStockToSlack(summary as any, '#stock'));
+    })();
     res.json({ text: '收到！宜家即刻幫你分析！' });
   } catch (e) {
     console.error(e);
