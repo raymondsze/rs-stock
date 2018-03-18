@@ -691,7 +691,7 @@ export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = 
   if (stockProfile.mktCap <= 1000000000) console.log(`[${stockId}]: MarketCap <= 1000000000...`);
   if (stockProfile == null || stockProfile.mktCap <= 1000000000) return null;
   const changeAcceptable = (stockProfile.changePercent >= -3);
-  if (!changeAcceptable) console.log(`[${stockId}]: Change is lower than -3%...`);
+  if (!ignoreFilter && !changeAcceptable) console.log(`[${stockId}]: Change is lower than -3%...`);
   if (ignoreFilter || changeAcceptable) {
     const stockName = await fetchTickerStockName(stockNumber);
     // read the monthly data
@@ -758,7 +758,7 @@ export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = 
         const activeRate = getActiveRate(latestData);
         const active = activeRate >= 0.5;
         if (activeRate < 0.1) console.log(`[${stockId}]: Active Rate < 0.1...`);
-        if (activeRate < 0.1) return null;
+        if (!ignoreFilter && activeRate < 0.1) return null;
 
         const ubbullVol = _.sumBy(latestData.filter(
           d => d.category === 'ubbull'),

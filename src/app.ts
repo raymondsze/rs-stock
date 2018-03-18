@@ -5,8 +5,8 @@ import * as loggerMiddleware from 'express-bunyan-logger';
 import * as helmet from 'helmet';
 import * as _ from 'lodash';
 import * as uuid from 'uuid';
-import * as path from 'path';
-import { spawn } from 'child_process';
+import { analyzeStock, sendStockToSlack } from './stock';
+import * as Bluebird from 'bluebird';
 
 const logLevel: bunyan.LogLevel = _.defaultTo(
   process.env.LOG_LEVEL,
@@ -52,13 +52,12 @@ app.post('/analyze', async (req, res) => {
     }
     const stockNumbers = _.defaultTo(text, '').split(' ') as string[];
     // background job
-    const exec = spawn('node', [path.join(__dirname, 'stock.js'), ...stockNumbers]);
-    exec.stdout.on('data', (data) => {
-      console.log(`${data.toString()}`);
-    });
-    exec.stderr.on('data', (data) => {
-      console.error(`${data.toString()}`);
-    });
+    const summaries = await Bluebird.mapSeries(
+      stockNumbers,
+      (stockNumber: any) => analyzeStock(+stockNumber, true),
+    );
+    Bluebird.mapSeries(
+      summaries.filter(d => d), summary => sendStockToSlack(summary as any, '#stock'));
     res.json({ text: '收到！宜家即刻幫你分析！' });
   } catch (e) {
     console.error(e);
