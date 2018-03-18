@@ -5,6 +5,7 @@ import * as loggerMiddleware from 'express-bunyan-logger';
 import * as helmet from 'helmet';
 import * as _ from 'lodash';
 import * as uuid from 'uuid';
+import * as path from 'path';
 import { spawn } from 'child_process';
 
 const logLevel: bunyan.LogLevel = _.defaultTo(
