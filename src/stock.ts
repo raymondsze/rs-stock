@@ -593,8 +593,9 @@ export async function seedStock(stockNumber: number) {
       console.log(`[${stockId}]: Fetching Stock profile from Ticker...`);
       const profile = await fetchTickerStockProfile(stockNumber);
       fs.writeFileSync(profilePath, JSON.stringify(profile), { encoding:'utf8', flag: 'w' });
-      fs.writeFileSync(profilePath2, JSON.stringify(profile), { encoding:'utf8', flag: 'w' });
     }
+    const data = fs.readFileSync(profilePath, { encoding: 'utf8' });
+    fs.writeFileSync(profilePath2, data, { encoding:'utf8', flag: 'w' });
   }
 
   const filePath = path.join(__dirname, '../data', `${stockId}.json`);
