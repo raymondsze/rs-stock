@@ -582,64 +582,72 @@ export async function seedStock(stockNumber: number) {
   fs.ensureDirSync(dir);
   const stockId = `${stockNumber.toString().padStart(6, '0')}.HK`;
 
-  // fetch last 1 month data
-  console.log(`[${stockId}]: Fetching 1 year data from Sina...`);
-  const sinaCandles = await fetchSinaCandles(stockNumber);
-  // get the last valid trading 4 date
-  const lastNTradingDates = _.takeRight(sinaCandles, 1).map(d => d.date);
-  console.log(`[${stockId}]: Fetching latest 1 day data from AAStock...`);
-  const aasDatas = await Bluebird.mapSeries(
-    lastNTradingDates,
-    date => fetchAASTradingData(stockNumber, date),
-  );
+  const lastTradingDate = await fetchLatestTradingDate();
 
-  console.log(`[${stockId}]: Fetching Stock profile from Ticker...`);
-  console.log('write profile');
   const profilePath = path.join(__dirname, '../data', 
     `${stockId}_pf.json`);
   const profilePath2 = path.join(__dirname, '../data', 
-    `${stockId}_pf${moment(lastNTradingDates[0]).format('YYYYMMDD')}.json`);
-  const profile = await fetchTickerStockProfile(stockNumber);
-  fs.writeFileSync(profilePath, JSON.stringify(profile), { encoding:'utf8', flag: 'w' });
-  fs.writeFileSync(profilePath2, JSON.stringify(profile), { encoding:'utf8', flag: 'w' });
-  const aasCandles = _.sortBy(
-    _.reduce(
-      await Bluebird.mapSeries(
-        aasDatas,
-        data => convertAATradingDataToCandles(data, 'day'),
-      ),
-      (result, d) => ([
-        ...result,
-        ...d,
-      ]),
-      [] as AASCandle[],
-    ),
-    'date',
-  );
-  console.log(`[${stockId}]: Merging Sina data and AAStock data...`);
-  const tradingData = await mergeSinaNAASCandles(aasCandles, sinaCandles);
-  console.log(`[${stockId}]: Updating database...`);
+    `${stockId}_pf${moment(lastTradingDate).format('YYYYMMDD')}.json`);
+  if (fs.existsSync(profilePath)) {
+    if (moment(fs.statSync(profilePath).mtime).diff(lastTradingDate) < 0) {
+      console.log(`[${stockId}]: Fetching Stock profile from Ticker...`);
+      const profile = await fetchTickerStockProfile(stockNumber);
+      fs.writeFileSync(profilePath, JSON.stringify(profile), { encoding:'utf8', flag: 'w' });
+      fs.writeFileSync(profilePath2, JSON.stringify(profile), { encoding:'utf8', flag: 'w' });
+    }
+  }
+
   const filePath = path.join(__dirname, '../data', `${stockId}.json`);
   if (fs.existsSync(filePath)) {
-    const data = JSON.parse(fs.readFileSync(filePath, { encoding: 'utf8' }));
-    const output = _.sortBy(Object.values(_.merge(
-      mapArrayToObject(data),
-      mapArrayToObject(tradingData),
-    )), 'date');
-    fs.writeFileSync(filePath, JSON.stringify(output), { encoding:'utf8', flag: 'w' });
-  } else {
-    const output = tradingData;
-    fs.writeFileSync(filePath, JSON.stringify(output), { encoding:'utf8', flag: 'w' });  
+    if (moment(fs.statSync(filePath).mtime).diff(lastTradingDate) < 0) {
+      // fetch last 1 month data
+      console.log(`[${stockId}]: Fetching 1 year data from Sina...`);
+      const sinaCandles = await fetchSinaCandles(stockNumber);
+      // get the last valid trading 4 date
+      const lastNTradingDates = _.takeRight(sinaCandles, 1).map(d => d.date);
+      console.log(`[${stockId}]: Fetching latest 1 day data from AAStock...`);
+      const aasDatas = await Bluebird.mapSeries(
+        lastNTradingDates,
+        date => fetchAASTradingData(stockNumber, date),
+      );
+      const aasCandles = _.sortBy(
+        _.reduce(
+          await Bluebird.mapSeries(
+            aasDatas,
+            data => convertAATradingDataToCandles(data, 'day'),
+          ),
+          (result, d) => ([
+            ...result,
+            ...d,
+          ]),
+          [] as AASCandle[],
+        ),
+        'date',
+      );
+      console.log(`[${stockId}]: Merging Sina data and AAStock data...`);
+      const tradingData = await mergeSinaNAASCandles(aasCandles, sinaCandles);
+      console.log(`[${stockId}]: Updating database...`);
+      if (fs.existsSync(filePath)) {
+        const data = JSON.parse(fs.readFileSync(filePath, { encoding: 'utf8' }));
+        const output = _.sortBy(Object.values(_.merge(
+          mapArrayToObject(data),
+          mapArrayToObject(tradingData),
+        )), 'date');
+        fs.writeFileSync(filePath, JSON.stringify(output), { encoding:'utf8', flag: 'w' });
+      } else {
+        const output = tradingData;
+        fs.writeFileSync(filePath, JSON.stringify(output), { encoding:'utf8', flag: 'w' });  
+      }
+      lastNTradingDates.map(
+        (date, i) => fs.writeFileSync(
+          path.join(__dirname, '..', `data/${stockId}_${moment(date).format('YYYYMMDD')}.json`),
+          JSON.stringify(aasDatas[i]),
+          { encoding:'utf8', flag: 'w' },
+        ),
+      );  
+    }
   }
-  lastNTradingDates.map(
-    (date, i) => fs.writeFileSync(
-      path.join(__dirname, '..', `data/${stockId}_${moment(date).format('YYYYMMDD')}.json`),
-      JSON.stringify(aasDatas[i]),
-      { encoding:'utf8', flag: 'w' },
-    ),
-  );
-
-  console.log(`[${stockId}]: Done!`);
+  console.log(`[${stockId}]: Fetching Done!`);
 }
 
 export async function fetchStockNumbers(): Promise<number[]> {
@@ -703,7 +711,6 @@ export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = 
   const changeAcceptable = true; // (stockProfile.changePercent >= -3);
   if (!ignoreFilter && !changeAcceptable) console.log(`[${stockId}]: Change is lower than -3%...`);
   if (ignoreFilter || changeAcceptable) {
-    const stockName = await fetchTickerStockName(stockNumber);
     // read the monthly data
     const profilePath = path.join(__dirname, '..', `data/${stockId}_pf.json`);
     const filePath = path.join(__dirname, '..', `data/${stockId}.json`);
@@ -756,7 +763,7 @@ export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = 
           0.03,
         );
         const last4TradingDates = _.takeRight(candles, 4).map(d => d.date);
-        console.log(`[${stockId}]: Fetching latest 4 days data from AAStock...`);
+        console.log(`[${stockId}]: Get latest 4 days data...`);
         const aasDatas = await Bluebird.mapSeries(
           last4TradingDates,
           date => {
@@ -801,6 +808,7 @@ export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = 
             await convertAATradingDataTotopNVolData(
               aasDatas[aasDatas.length - 3].filter(d => d.category === 'ubbull' || d.category === 'ubbear')),
           ];
+          const stockName = await fetchTickerStockName(stockNumber);
           const summary = {
             stockNumber,
             name: stockName,
