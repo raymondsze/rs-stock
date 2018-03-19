@@ -581,10 +581,6 @@ export async function seedStock(stockNumber: number) {
   const dir = path.join(__dirname, '../data');
   fs.ensureDirSync(dir);
   const stockId = `${stockNumber.toString().padStart(6, '0')}.HK`;
-  console.log(`[${stockId}]: Fetching Stock profile from Ticker...`);
-  const profilePath = path.join(__dirname, '../data', `${stockId}_pf.json`);
-  const profile = await fetchTickerStockProfile(stockNumber);
-  fs.writeFileSync(profilePath, JSON.stringify(profile));
 
   // fetch last 1 month data
   console.log(`[${stockId}]: Fetching 1 year data from Sina...`);
@@ -596,6 +592,16 @@ export async function seedStock(stockNumber: number) {
     lastNTradingDates,
     date => fetchAASTradingData(stockNumber, date),
   );
+
+  console.log(`[${stockId}]: Fetching Stock profile from Ticker...`);
+  console.log('write profile');
+  const profilePath = path.join(__dirname, '../data', 
+    `${stockId}_pf.json`);
+  const profilePath2 = path.join(__dirname, '../data', 
+    `${stockId}_pf${moment(lastNTradingDates[0]).format('YYYYMMDD')}.json`);
+  const profile = await fetchTickerStockProfile(stockNumber);
+  fs.writeFileSync(profilePath, JSON.stringify(profile), { encoding:'utf8', flag: 'w' });
+  fs.writeFileSync(profilePath2, JSON.stringify(profile), { encoding:'utf8', flag: 'w' });
   const aasCandles = _.sortBy(
     _.reduce(
       await Bluebird.mapSeries(
@@ -620,15 +626,16 @@ export async function seedStock(stockNumber: number) {
       mapArrayToObject(data),
       mapArrayToObject(tradingData),
     )), 'date');
-    fs.writeFileSync(filePath, JSON.stringify(output));
+    fs.writeFileSync(filePath, JSON.stringify(output), { encoding:'utf8', flag: 'w' });
   } else {
     const output = tradingData;
-    fs.writeFileSync(filePath, JSON.stringify(output));  
+    fs.writeFileSync(filePath, JSON.stringify(output), { encoding:'utf8', flag: 'w' });  
   }
   lastNTradingDates.map(
     (date, i) => fs.writeFileSync(
       path.join(__dirname, '..', `data/${stockId}_${moment(date).format('YYYYMMDD')}.json`),
       JSON.stringify(aasDatas[i]),
+      { encoding:'utf8', flag: 'w' },
     ),
   );
 
