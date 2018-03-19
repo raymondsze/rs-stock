@@ -49,6 +49,14 @@ axios.interceptors.response.use(
   },
 );
 
+function getTradingVolume(candles: AASTradingData[]) {
+  return _.sumBy(candles, d => d.volume);
+}
+
+function getTradingCount(candles: AASTradingData[]) {
+  return candles.length;
+}
+
 function getActiveRate(candles: AASTradingData[]) {
   const candlesInMin = convertAATradingDataToCandles(candles, 'minute');
   const start = moment('201801010900', 'YYYYMMDDHHmm');
@@ -64,7 +72,7 @@ function isAbnormalVolume(candles: Candle[]) {
   const lastDayData = candles[candles.length - 1];
   const prevData = _.take(candles, candles.length - 1);
   const avgVol = _.sumBy(prevData, 'volume') / prevData.length;
-  return _.defaultTo(lastDayData.volume, lastDayData.normVolume) >= 4.5 * avgVol;
+  return _.defaultTo(lastDayData.volume, lastDayData.normVolume) >= 3 * avgVol;
 }
 
 function getTradingPriceRatio(candle: Candle) {
@@ -720,7 +728,7 @@ export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = 
     const profile = JSON.parse(fs.readFileSync(profilePath, { encoding: 'utf8' })) as TickerStockProfile;
     if (candles.length >= 4 ) {
       const abnormalVol = isAbnormalVolume(candles);
-      if (!abnormalVol) console.log(`[${stockId}]: Volume is not abnormal (450% from year average)...`);
+      if (!abnormalVol) console.log(`[${stockId}]: Volume is not abnormal (300% from year average)...`);
       if (ignoreFilter || abnormalVol) {
         // labelize trading data
         const maxTradingDiff = _.max(candles.map(candle => candle.close - candle.open)) as number;
@@ -774,10 +782,18 @@ export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = 
         );
         const latestData = aasDatas[aasDatas.length - 1];
 
+        const tradingVolume = getTradingVolume(latestData);
+        if (tradingVolume < 1000000) console.log(`[${stockId}]: Block Trading Volume < 1000000...`);
+        if (!ignoreFilter && tradingVolume < 1000000) return null;
+
+        const tradingCount = getTradingCount(latestData);
+        if (tradingCount < 300) console.log(`[${stockId}]: Block Trading Count < 300...`);
+        if (!ignoreFilter && tradingCount < 300) return null;
+
         const activeRate = getActiveRate(latestData);
-        const active = activeRate >= 0.5;
-        if (activeRate < 0.1) console.log(`[${stockId}]: Active Rate < 0.1...`);
-        if (!ignoreFilter && activeRate < 0.1) return null;
+        const active = activeRate >= 0.7;
+        // if (activeRate < 0.2) console.log(`[${stockId}]: Active Rate < 0.2...`);
+        // if (!ignoreFilter && activeRate < 0.2) return null;
 
         const ubbullVol = _.sumBy(
           latestData.filter(d => d.category === 'ubbull'),
@@ -910,7 +926,7 @@ export async function sendStockToSlack(summary: StockSummary, channel: '#general
     const stockName = summary.name;
     const stockNumber = summary.stockNumber;
     const profile = summary.profile;
-    const price = profile.open + profile.changePrice;
+    const price = profile.close;
     const color = (profile.changePrice === 0 ? '#666' : profile.changePrice > 0 ? '#00DD00' : '#DD0000');
     const pretext = `*${stockName}* *${stockNumber.toString().padStart(5, '0')}.HK`
       + `@${moment(last4TradingDates[0]).format('YYYY-MM-DD')}*`;
