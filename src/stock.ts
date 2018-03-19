@@ -582,7 +582,10 @@ export async function seedStock(stockNumber: number) {
   fs.ensureDirSync(dir);
   const stockId = `${stockNumber.toString().padStart(6, '0')}.HK`;
   console.log(`[${stockId}]: Fetching Stock profile from Ticker...`);
-  await fetchTickerStockProfile(stockNumber);
+  const profilePath = path.join(__dirname, '../data', `${stockId}_pf.json`);
+  const profile = await fetchTickerStockProfile(stockNumber);
+  fs.writeFileSync(profilePath, JSON.stringify(profile));
+
   // fetch last 1 month data
   console.log(`[${stockId}]: Fetching 1 year data from Sina...`);
   const sinaCandles = await fetchSinaCandles(stockNumber);
