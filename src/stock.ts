@@ -587,10 +587,10 @@ export async function seedStock(stockNumber: number) {
   console.log(`[${stockId}]: Fetching 1 year data from Sina...`);
   const sinaCandles = await fetchSinaCandles(stockNumber);
   // get the last valid trading 4 date
-  const last4TradingDates = _.takeRight(sinaCandles, 4).map(d => d.date);
-  console.log(`[${stockId}]: Fetching latest 4 days data from AAStock...`);
+  const lastNTradingDates = _.takeRight(sinaCandles, 1).map(d => d.date);
+  console.log(`[${stockId}]: Fetching latest 1 day data from AAStock...`);
   const aasDatas = await Bluebird.mapSeries(
-    last4TradingDates,
+    lastNTradingDates,
     date => fetchAASTradingData(stockNumber, date),
   );
   const aasCandles = _.sortBy(
@@ -622,7 +622,7 @@ export async function seedStock(stockNumber: number) {
     const output = tradingData;
     fs.writeFileSync(filePath, JSON.stringify(output));  
   }
-  last4TradingDates.map(
+  lastNTradingDates.map(
     (date, i) => fs.writeFileSync(
       path.join(__dirname, '..', `data/${stockId}_${moment(date).format('YYYYMMDD')}.json`),
       JSON.stringify(aasDatas[i]),
@@ -689,7 +689,7 @@ export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = 
   const stockProfile = await fetchTickerStockProfile(stockNumber);
   if (stockProfile == null || stockProfile.volume == null) return null;
   if (stockProfile.mktCap <= 1000000000) console.log(`[${stockId}]: MarketCap <= 1000000000...`);
-  if (stockProfile == null || stockProfile.mktCap <= 1000000000) return null;
+  if (stockProfile == null || (!ignoreFilter && stockProfile.mktCap <= 1000000000)) return null;
   const changeAcceptable = true; // (stockProfile.changePercent >= -3);
   if (!ignoreFilter && !changeAcceptable) console.log(`[${stockId}]: Change is lower than -3%...`);
   if (ignoreFilter || changeAcceptable) {
@@ -697,9 +697,7 @@ export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = 
     // read the monthly data
     const profilePath = path.join(__dirname, '..', `data/${stockId}_pf.json`);
     const filePath = path.join(__dirname, '..', `data/${stockId}.json`);
-    if (!fs.existsSync(filePath) || !fs.existsSync(profilePath)) {
-      await seedStock(stockNumber);
-    }
+    await seedStock(stockNumber);
     const candles = JSON.parse(fs.readFileSync(filePath, { encoding: 'utf8' })) as Candle[];
     const profile = JSON.parse(fs.readFileSync(profilePath, { encoding: 'utf8' })) as TickerStockProfile;
     if (candles.length >= 4 ) {
@@ -751,7 +749,10 @@ export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = 
         console.log(`[${stockId}]: Fetching latest 4 days data from AAStock...`);
         const aasDatas = await Bluebird.mapSeries(
           last4TradingDates,
-          date => fetchAASTradingData(stockNumber, date),
+          date => {
+            const fPath = path.join(__dirname, '..', 'data', `${stockId}_${moment(date).format('YYYYMMDD')}.json`);
+            return JSON.parse(fs.readFileSync(fPath, { encoding: 'utf8' })) as AASTradingData[];
+          },
         );
         const latestData = aasDatas[aasDatas.length - 1];
 
@@ -760,12 +761,12 @@ export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = 
         if (activeRate < 0.1) console.log(`[${stockId}]: Active Rate < 0.1...`);
         if (!ignoreFilter && activeRate < 0.1) return null;
 
-        const ubbullVol = _.sumBy(latestData.filter(
-          d => d.category === 'ubbull'),
+        const ubbullVol = _.sumBy(
+          latestData.filter(d => d.category === 'ubbull'),
           'volume',
         );
-        const ubbearVol = _.sumBy(latestData.filter(
-          d => d.category === 'ubbear'),
+        const ubbearVol = _.sumBy(
+          latestData.filter(d => d.category === 'ubbear'),
           'volume',
         );
         if (bigNegativeCandle) {
@@ -781,8 +782,6 @@ export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = 
               aasDatas[aasDatas.length - 2].filter(d => d.category === 'ubbull' || d.category === 'ubbear'), 'price'),
             await convertAATradingDataTotopNVolData(
               aasDatas[aasDatas.length - 3].filter(d => d.category === 'ubbull' || d.category === 'ubbear'), 'price'),
-          //   await convertAATradingDataTotopNVolData(
-          //     aasDatas[aasDatas.length - 4].filter(d => d.category === 'ubbull' || d.category === 'ubbear'), 'price'),
           ];
           const topNVolDataByTime = [
             await convertAATradingDataTotopNVolData(
@@ -791,8 +790,6 @@ export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = 
               aasDatas[aasDatas.length - 2].filter(d => d.category === 'ubbull' || d.category === 'ubbear')),
             await convertAATradingDataTotopNVolData(
               aasDatas[aasDatas.length - 3].filter(d => d.category === 'ubbull' || d.category === 'ubbear')),
-          //   await convertAATradingDataTotopNVolData(
-          //     aasDatas[aasDatas.length - 4].filter(d => d.category === 'ubbull' || d.category === 'ubbear')),
           ];
           const summary = {
             stockNumber,
@@ -886,7 +883,9 @@ export async function sendStockToSlack(summary: StockSummary, channel: '#general
     process.env.SLACK_GENERAL_CHANNEL_WEBHOOK as string :
     process.env.SLACK_STOCK_CHANNEL_WEBHOOK as string,
   );
-  const lastTradingDate = await fetchLatestTradingDate();
+  const filePath = path.join(__dirname, '..', `data/${summary.stockNumber.toString().padStart(6, '0')}.HK.json`);
+  const candles = JSON.parse(fs.readFileSync(filePath, { encoding: 'utf8' })) as Candle[];
+  const last4TradingDates = _.takeRight(candles, 4).map(d => d.date).reverse();
   return new Bluebird((resolve, reject) => {
     const labels = summary.labels;
     const stockName = summary.name;
@@ -895,7 +894,7 @@ export async function sendStockToSlack(summary: StockSummary, channel: '#general
     const price = profile.open + profile.changePrice;
     const color = (profile.changePrice === 0 ? '#666' : profile.changePrice > 0 ? '#00DD00' : '#DD0000');
     const pretext = `*${stockName}* *${stockNumber.toString().padStart(5, '0')}.HK`
-      + `@${moment(lastTradingDate).format('YYYY-MM-DD')}*`;
+      + `@${moment(last4TradingDates[0]).format('YYYY-MM-DD')}*`;
     const earnPerUnit = (profile.pe != null) ? format(price / profile.pe) : '-';
     const pe = (profile.pe != null) ? format(+profile.pe) : '-';
     const topNVolDataByPrice = summary.tradings.topNVolDataByPrice;
@@ -906,8 +905,11 @@ export async function sendStockToSlack(summary: StockSummary, channel: '#general
         const topNBuyData = _.sortBy(d.filter(dt => dt.type === 'A'), 'volume').reverse();
         const topNSellData = _.sortBy(d.filter(dt => dt.type === 'B'), 'volume').reverse();
         return '' +
-          '_' + moment(lastTradingDate).subtract(j, 'day').format('YYYY-MM-DD') + '_' +
-          '  總成交量: *' + format(_.sumBy(tradingData[j], 'volume')) + '*\n' +
+          '_' + moment(last4TradingDates[j]).format('YYYY-MM-DD') + '_' +
+          '  總成交量: *' + format(_.sumBy(tradingData[j], 'volume')) + '*' +
+          ' 超大手買佔: *' + format(_.sumBy(tradingData[j].filter(d => d.category === 'ubbull'), 'volume')) + '*' +
+          ' 超大手賣佔: *' + format(_.sumBy(tradingData[j].filter(d => d.category === 'ubbear'), 'volume')) + '*' +
+          '\n' +
           new Array(Math.max(topNBuyData.length, topNSellData.length))
             .fill('').map(
             (dt, i) => {
@@ -931,8 +933,11 @@ export async function sendStockToSlack(summary: StockSummary, channel: '#general
       (d, j) => {
         const topNBuyData = _.sortBy(d.filter(dt => dt.type === 'A'), 'price').reverse();
         const topNSellData = _.sortBy(d.filter(dt => dt.type === 'B'), 'price').reverse();
-        return '_' + moment(lastTradingDate).subtract(j, 'day').format('YYYY-MM-DD') + '_' +
-          '  總成交量: *' + format(_.sumBy(tradingData[j], 'volume')) + '*\n' +
+        return '_' + moment(last4TradingDates[j]).format('YYYY-MM-DD') + '_' +
+          '  總成交量: *' + format(_.sumBy(tradingData[j], 'volume')) + '*' +
+          ' 大手買佔: *' + format(_.sumBy(tradingData[j].filter(d => d.category === 'bbull'), 'volume')) + '*' +
+          ' 大手賣佔: *' + format(_.sumBy(tradingData[j].filter(d => d.category === 'bbear'), 'volume')) + '*' +
+          '\n' +
           new Array(Math.max(topNBuyData.length, topNSellData.length))
             .fill('').map(
               (dt, i) => {
