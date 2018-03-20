@@ -231,7 +231,7 @@ async function fetchTickerStockName(stockNumber: number): Promise<string> {
   return assets[0].localized_full_name.tc;
 }
 
-async function fetchTickerStockProfile(stockId: number): Promise<TickerStockProfile> {
+export async function fetchTickerStockProfile(stockId: number): Promise<TickerStockProfile> {
   const { data } = await axios({
     method: 'get',
     url: `https://quote.ticker.com.hk/api/quote/detail/${stockId}.HK`,
@@ -687,6 +687,8 @@ export async function fetchStockNumbers(): Promise<number[]> {
 
 interface StockSummary {
   name: string;
+  buy: boolean;
+  sell: boolean;
   stockNumber: number;
   profile: TickerStockProfile;
   tradings: {
@@ -777,6 +779,7 @@ export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = 
           last4TradingDates,
           date => {
             const fPath = path.join(__dirname, '..', 'data', `${stockId}_${moment(date).format('YYYYMMDD')}.json`);
+            if (!fs.existsSync(fPath)) return [];
             return JSON.parse(fs.readFileSync(fPath, { encoding: 'utf8' })) as AASTradingData[];
           },
         );
@@ -809,6 +812,12 @@ export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = 
         }
         if (!(ubbullVol >= ubbearVol)) console.log(`[${stockId}]: Ultra Bullish < Ultra Bearish...`);
         if (ignoreFilter || (ubbullVol >= ubbearVol)) {
+          const buyVol = getTradingVolume(latestData.filter(d => d.type === 'A'));
+          const sellVol = getTradingVolume(latestData.filter(d => d.type === 'B'));
+          const buy = (buyVol / sellVol) >= 1.5;
+          if (buy) console.log(`[${stockId}]: Buy!`);
+          const sell = buyVol * 1.1 < sellVol;
+          if (sell) console.log(`[${stockId}]: Sell!`);
           const topNVolDataByPrice = [
             await convertAATradingDataTotopNVolData(
               latestData.filter(d => d.category === 'ubbull' || d.category === 'ubbear'), 'price'),
@@ -828,6 +837,8 @@ export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = 
           const stockName = await fetchTickerStockName(stockNumber);
           const summary = {
             stockNumber,
+            buy,
+            sell,
             name: stockName,
             profile: stockProfile,
             tradings: {
@@ -868,6 +879,51 @@ export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = 
   }
   console.log(`[${stockId}]: Ignored, condition not match...`);
   return null;
+}
+
+export async function sendTradingsToSlack(
+  trading: {
+    hold: number[];
+    buy: number[];
+    sell: number[];
+    balance: number;
+    transactions: { date: Date, stockNumber: number, type: 'A' | 'B' };
+  },
+  channel: '#general' | '#stock'
+) {
+  const slack = new Slack();
+  slack.setWebhook(
+    channel === '#general' ?
+    process.env.SLACK_GENERAL_CHANNEL_WEBHOOK as string :
+    process.env.SLACK_STOCK_CHANNEL_WEBHOOK as string,
+  );
+  return new Bluebird((resolve, reject) => {
+    slack.webhook(
+      {
+        username: 'stockBot',
+        attachments: [
+          {
+            color: '#0000FF',
+            pretext: 
+            `*程式現時組合: ${trading.hold.map(s => `\`${s.toString().padStart(6, '0')}.HK\``)}*\n` + 
+            `*程式現時收入: \`${format(trading.balance * 100)}%\`\n`,
+            fields: [
+              {
+                value:
+                  `*程式將會買入 ${trading.buy.map(s => `\`${s.toString().padStart(6, '0')}.HK\``)}*\n` +
+                  `*程式將會沽出 ${trading.sell.map(s => `\`${s.toString().padStart(6, '0')}.HK\``)}*\n`,
+                short: false,
+              },
+            ],
+          },
+        ],
+      },
+      (err, response) => {
+        if (err) reject(err);
+        else resolve();
+      },
+    );
+  });
 }
 
 export async function sendStockNumbersToSlack(stockNumbers: number[], channel: '#general' | '#stock') {

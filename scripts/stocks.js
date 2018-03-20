@@ -1,8 +1,9 @@
 const _ = require('lodash');
 const path = require('path');
-const fs = require('fs');
+const fs = require('fs-extra');
 const { spawn } = require('child_process');
 const Bluebird = require('bluebird');
+const moment = require('moment');
 
 const NODE_ENV = _.defaultTo(process.env.NODE_ENV, 'development');
 process.env.NODE_ENV = NODE_ENV;
@@ -35,23 +36,124 @@ process.on('uncaughtException', (err) => {
   process.exit(1);
 });
 
-const { fetchStockNumbers, analyzeStock, sendStockNumbersToSlack, sendStockToSlack } = require('../build/stock');
+const { fetchStockNumbers, analyzeStock, sendStockNumbersToSlack, sendStockToSlack, sendTradingsToSlack,
+  fetchTickerStockProfile, fetchLatestTradingDate } = require('../build/stock');
 (async () => {
   const [,, ...options] = process.argv;
   const ignoreFilter = options.findIndex(d => d === 'ignore') !== -1;
   const stockNumbers = await fetchStockNumbers();
-  // const stockNumbers = [
-  //   8, 19, 217, 335, 436, 659,
-  //   678, 709, 887, 1009, 1068, 1387,
-  //   1483, 1579, 1681, 1727, 1778, 1862,
-  //   1966, 2083, 3300, 3708,
-  // ];
   const summaries = await Bluebird.mapSeries(
     stockNumbers.filter(d => d !== 'ignore'),
     stockNumber => analyzeStock(+stockNumber, ignoreFilter),
   );
   const potentialStockNumbers = summaries.filter(d => d).map(summary => summary.stockNumber);
-  await sendStockNumbersToSlack(potentialStockNumbers, '#general');
-  await sendStockNumbersToSlack(potentialStockNumbers, '#stock');
-  await Bluebird.mapSeries(summaries.filter(d => d), summary => sendStockToSlack(summary, '#stock'));
+
+  const lastTradingDate = await fetchLatestTradingDate();
+
+  const hourDiff = moment().diff(moment(lastTradingDate).startOf('day'), 'hour');
+  if (hourDiff > 17 /* 5pm */ && hourDiff < 32 /* 8am */) {
+    const tradingFilePath2 = path.join(__dirname, '..', 'data', `trading${moment(lastTradingDate).format('YYYYMMDD')}.json`);
+    if (!fs.existsSync(tradingFilePath2)) {
+      const tradingFilePath = path.join(__dirname, '..', 'data', 'trading.json');
+      let tradings = {
+        balance: 0,
+        transactions: [],
+        hold: [],
+        buy: [],
+        sell: [],
+      };
+      if (fs.existsSync(tradingFilePath)) {
+        tradings = JSON.parse(fs.readFileSync(tradingFilePath, { encoding: 'utf8' }));
+      }
+
+      // buy transactions
+      ///////////////////////////////
+      const buyTransactions = await Bluebird.map(
+        tradings.buy,
+        async stockNumber => ({
+          stockNumber,
+          date: lastTradingDate,
+          type: 'A',
+          price: (await fetchTickerStockProfile(stockNumber)).open,
+        })
+      );
+      tradings.hold = [...tradings.hold, ...tradings.buy];
+      // sell transactions
+      const holdingStocksSummaries = await Bluebird.mapSeries(
+        tradings.hold,
+        stockNumber => analyzeStock(+stockNumber, true),
+      );
+      const sellTransactions = await Bluebird.map(
+        tradings.sell,
+        async stockNumber => ({
+          stockNumber,
+          date: lastTradingDate,
+          type: 'B',
+          price: (await fetchTickerStockProfile(stockNumber)).open,
+        })
+      );
+      // update transacitons
+      tradings.transactions = _.sortBy([...tradings.transactions, ...buyTransactions, ...sellTransactions], 'date');
+      // calculate overview
+      const allBuyData = _.reduce(
+        tradings.transactions.filter(t => t.type === 'A'),
+        (r, buyTrans) => Object.assign(
+          r, {
+            [buyTrans.stockNumber]: _.sortBy([
+              ...(r[buyTrans.stockNumber] || []),
+              buyTrans,
+            ], 'date'),
+          },
+        ), {}
+      );
+      const allSellData = _.reduce(
+        tradings.transactions.filter(t => t.type === 'B'),
+        (r, sellTrans) => Object.assign(
+          r, {
+            [sellTrans.stockNumber]: _.sortBy([
+              ...(r[sellTrans.stockNumber] || []),
+              sellTrans,
+            ], 'date'),
+          },
+        ), {}
+      );
+      const overview = _.mapValues(allBuyData, (buyData, stockNumber) => {
+        let balance = 0;
+        buyData.forEach((d, i) => {
+          if (allSellData[stockNumber] && allSellData[stockNumber][i]) {
+            balance += (allSellData[stockNumber][i].price - d.price) / d.price;
+          } else {
+            console.log(holdingStocksSummaries.find(s => s.stockNumber === +stockNumber).profile.close);
+            balance += (holdingStocksSummaries.find(s => s.stockNumber === +stockNumber).profile.close - d.price) / d.price;
+          }
+        });
+        return balance;
+      });
+      tradings.balance = _.sum(Object.values(overview));
+
+      tradings.overview = overview;
+      // update holding, remove all the sold stock
+      tradings.hold = _.remove(tradings.hold, n => tradings.sell.indexOf(n) === -1);
+      // buy stocks excluding holding stocks
+      const buyStocks = summaries.filter(d => d).filter(s => s.buy).map(s => s.stockNumber);
+      tradings.buy = _.remove(buyStocks, n => tradings.hold.indexOf(n) === -1);
+      // sell stocks excluding holding stocks
+      const sellStocks = holdingStocksSummaries.filter(d => d).filter(s => s.sell).map(s => s.stockNumber);
+      tradings.sell = _.remove(sellStocks, n => tradings.hold.indexOf(n) === -1);
+
+      // update tradings
+      fs.writeFileSync(tradingFilePath, JSON.stringify(tradings), { encoding:'utf8', flag: 'w' });
+      fs.writeFileSync(tradingFilePath2, JSON.stringify(tradings), { encoding:'utf8', flag: 'w' });
+      await sendTradingsToSlack(tradings, '#general');
+      await sendTradingsToSlack(tradings, '#stock');
+    } else {
+      const tradings = JSON.parse(fs.readFileSync(tradingFilePath2, { encoding:'utf8' }));
+      await sendTradingsToSlack(tradings, '#general');
+      await sendTradingsToSlack(tradings, '#stock');  
+    }
+  }
+  // await sendStockNumbersToSlack(potentialStockNumbers, '#general');
+  // await sendStockNumbersToSlack(potentialStockNumbers, '#stock');
+
+  // await Bluebird.mapSeries(summaries.filter(d => d), summary => sendStockToSlack(summary, '#stock'));
 })();
