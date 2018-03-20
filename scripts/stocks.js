@@ -152,8 +152,8 @@ const { fetchStockNumbers, analyzeStock, sendStockNumbersToSlack, sendStockToSla
       await sendTradingsToSlack(tradings, '#stock');  
     }
   }
-  // await sendStockNumbersToSlack(potentialStockNumbers, '#general');
-  // await sendStockNumbersToSlack(potentialStockNumbers, '#stock');
+  await sendStockNumbersToSlack(potentialStockNumbers, '#general');
+  await sendStockNumbersToSlack(potentialStockNumbers, '#stock');
 
-  // await Bluebird.mapSeries(summaries.filter(d => d), summary => sendStockToSlack(summary, '#stock'));
+  await Bluebird.mapSeries(summaries.filter(d => d), summary => sendStockToSlack(summary, '#stock'));
 })();

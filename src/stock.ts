@@ -906,7 +906,7 @@ export async function sendTradingsToSlack(
             color: '#0000FF',
             pretext: 
             `*程式現時組合: ${trading.hold.map(s => `\`${s.toString().padStart(6, '0')}.HK\``)}*\n` + 
-            `*程式現時收入: \`${format(trading.balance * 100)}%\`\n`,
+            `*程式現時收入: \`${format(trading.balance * 100)}%\`*\n`,
             fields: [
               {
                 value:
