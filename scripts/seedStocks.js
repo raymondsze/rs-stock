@@ -39,11 +39,11 @@ const { fetchStockNumbers } = require('../build/stock');
 (async () => {
   const stockNumbers = await fetchStockNumbers();
   // const threads = [[1548]];
-  const threads = _.chunk(stockNumbers, Math.round(stockNumbers.length / 1));
+  const threads = _.chunk(stockNumbers, Math.round(stockNumbers.length / 3));
   await Bluebird.map(
     threads,
     (thread, i) => new Promise((resolve, reject) => {
-      const exec = spawn('node', [path.join(__dirname, 'seedStock.js'), ...thread, 'ignore']);
+      const exec = spawn('node', [path.join(__dirname, 'seedStock.js'), ...thread]);
       exec.stdout.on('data', (data) => {
         console.log(`[Chunk ${i}]: ${data.toString()}`);
       });
@@ -52,7 +52,7 @@ const { fetchStockNumbers } = require('../build/stock');
         reject();
       });
       exec.on('exit', (code) => {
-        console.log(`[Chunk ${i}]: Seeding ${threads.map(thread => thread.toString())} is done`);
+        console.log(`[Chunk ${i}]: Seeding ${thread => thread.toString()} is done`);
         resolve();
       });
     }),

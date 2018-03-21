@@ -1,1 +1,1 @@
-[{"type":"A","date":"2018-03-20T03:38:06.000Z","volume":6000,"price":1.15,"category":"rbull"},{"type":"B","date":"2018-03-20T05:23:25.000Z","volume":56000,"price":1.11,"category":"bbear"}]
+[{"type":"A","date":"2018-03-20T03:38:06.000Z","volume":6000,"label":" ","price":1.15},{"type":"B","date":"2018-03-20T03:39:06.000Z","volume":10000,"label":" ","price":1.19},{"type":"B","date":"2018-03-20T05:23:25.000Z","volume":56000,"label":" ","price":1.11}]

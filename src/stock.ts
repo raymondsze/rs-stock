@@ -49,15 +49,15 @@ axios.interceptors.response.use(
   },
 );
 
-function getTradingVolume(candles: AASTradingData[]) {
+function getTradingVolume(candles: AASDetailTradingData[]) {
   return _.sumBy(candles, d => d.volume);
 }
 
-function getTradingCount(candles: AASTradingData[]) {
+function getTradingCount(candles: AASDetailTradingData[]) {
   return candles.length;
 }
 
-function getActiveRate(candles: AASTradingData[]) {
+function getActiveRate(candles: AASDetailTradingData[]) {
   const candlesInMin = convertAATradingDataToCandles(candles, 'minute');
   const start = moment('201801010900', 'YYYYMMDDHHmm');
   const end = moment('201801011600', 'YYYYMMDDHHmm');
@@ -264,13 +264,21 @@ interface TickerStockProfile {
   changePercent: number;
 }
 
-interface AASTradingData {
+// interface AASTradingData {
+//   type: string;
+//   date: Date;
+//   volume: number;
+//   auto: boolean;
+//   price: number;
+//   category: 'ubbull' | 'bbull' | 'rbull' | 'rbear' | 'bbear' | 'ubbear';
+// }
+
+interface AASDetailTradingData {
   type: string;
   date: Date;
+  label: string;
   volume: number;
-  auto: boolean;
   price: number;
-  category: 'ubbull' | 'bbull' | 'rbull' | 'rbear' | 'bbear' | 'ubbear';
 }
 
 interface AASCandle {
@@ -405,7 +413,7 @@ async function fetchSinaCandles(
     );
     return data;
   };
-  return getDataFromSina(trials);
+  return getDataFromSina(trials + 1);
 }
 
 export async function fetchLatestTradingDate(): Promise<Date> {
@@ -431,12 +439,12 @@ export async function fetchLatestTradingDate(): Promise<Date> {
     ).toDate();
   };
 
-  return getDataFromAAStock(trials);
+  return getDataFromAAStock(trials + 1);
 }
 
 function mapArrayToObject(
-  candles: Candle[],
-): { [index: string]: Candle } {
+  candles: { date: Date }[],
+): { [index: string]: { date: Date } } {
   return _.mapValues(
     _.groupBy(candles, candle =>
       moment(candle.date).toISOString(),
@@ -468,7 +476,7 @@ function mergeSinaNAASCandles(
 }
 
 function convertAATradingDataToCandles(
-  tradingData: AASTradingData[],
+  tradingData: AASDetailTradingData[],
   dividend: 'minute' | 'day',
 ): AASCandle[] {
   const data = _.groupBy(
@@ -476,9 +484,9 @@ function convertAATradingDataToCandles(
     d => moment(d.date).startOf(dividend).toISOString(),
   );
   return _.sortBy(
-    Object.values(_.mapValues(data, (d: AASTradingData[], date: string) => {
-      const highestPriceData = _.maxBy(d, 'price') as AASTradingData;
-      const lowestPriceData = _.minBy(d, 'price') as AASTradingData;
+    Object.values(_.mapValues(data, (d: AASDetailTradingData[], date: string) => {
+      const highestPriceData = _.maxBy(d, 'price') as AASDetailTradingData;
+      const lowestPriceData = _.minBy(d, 'price') as AASDetailTradingData;
       const totalBuyVolume = _.sumBy(d.filter(d => d.type === 'A'), d => d.volume);
       const totalSellVolume = _.sumBy(d.filter(d => d.type === 'B'), d => d.volume);
       return {
@@ -494,62 +502,62 @@ function convertAATradingDataToCandles(
   );
 }
 
-async function fetchAASTradingDataSet(
-  stockId: number,
-  type: 'ubbull' | 'bbull' | 'rbull' | 'ubbear' | 'bbear' | 'rbear',
-  date: Date,
-): Promise<AASTradingData[]> {
-  const trials = 0;
-  const getDataFromAAStock = async (trials: number): Promise<AASTradingData[]> => {
-    if (trials > 5) {
-      throw new Error('Unable to fetch latest trading transactions from AAStock');
-    }
-    const { data } = await axios({
-      method: 'get',
-      url: `http://wdata.aastocks.com/datafeed/getultrablocktradelog.ashx?` +
-        qs.stringify({
-          type,
-          symbol: stockId.toString().padStart(6, '0'),
-          lang: 'en',
-          dt: moment(date).format('YYYYMMDD'),
-          f: 1,
-        }),
-    });
-    // if error, retry getting data from aastock
-    if (data === '-1') {
-      return getDataFromAAStock(trials + 1);
-    }
-    const { tslog: tradingData } = data;
-    return tradingData.map(
-      (data: any) => ({
-        type: type.endsWith('bull') ? 'A' : 'B',
-        date: moment(moment(date).format('YYYYMMDD') + data.dt, 'YYYYMMDDHH:mm:ss')
-          .toDate(),
-        volume: +(data.v.replace(/,/g, '')),
-        price: +(data.p.replace(/,/g, '')),
-        category: type,
-      }),
-    ).filter((data: any) => data);
-  };
-  return getDataFromAAStock(trials);
-}
+// async function fetchAASTradingDataSet(
+//   stockId: number,
+//   type: 'ubbull' | 'bbull' | 'rbull' | 'ubbear' | 'bbear' | 'rbear',
+//   date: Date,
+// ): Promise<AASTradingData[]> {
+//   const trials = 0;
+//   const getDataFromAAStock = async (trials: number): Promise<AASTradingData[]> => {
+//     if (trials > 5) {
+//       throw new Error('Unable to fetch latest trading transactions from AAStock');
+//     }
+//     const { data } = await axios({
+//       method: 'get',
+//       url: `http://wdata.aastocks.com/datafeed/getultrablocktradelog.ashx?` +
+//         qs.stringify({
+//           type,
+//           symbol: stockId.toString().padStart(6, '0'),
+//           lang: 'en',
+//           dt: moment(date).format('YYYYMMDD'),
+//           f: 1,
+//         }),
+//     });
+//     // if error, retry getting data from aastock
+//     if (data === '-1') {
+//       return getDataFromAAStock(trials + 1);
+//     }
+//     const { tslog: tradingData } = data;
+//     return tradingData.map(
+//       (data: any) => ({
+//         type: type.endsWith('bull') ? 'A' : 'B',
+//         date: moment(moment(date).format('YYYYMMDD') + data.dt, 'YYYYMMDDHH:mm:ss')
+//           .toDate(),
+//         volume: +(data.v.replace(/,/g, '')),
+//         price: +(data.p.replace(/,/g, '')),
+//         category: type,
+//       }),
+//     ).filter((data: any) => data);
+//   };
+//   return getDataFromAAStock(trials + 1);
+// }
 
-async function fetchAASTradingData(stockId: number, date: Date): Promise<AASTradingData[]> {
-  const ubbullData = await fetchAASTradingDataSet(stockId, 'ubbull', date);
-  const bbullData = await fetchAASTradingDataSet(stockId, 'bbull', date);
-  const rbullData = await fetchAASTradingDataSet(stockId, 'rbull', date);
-  const rbearData = await fetchAASTradingDataSet(stockId, 'rbear', date);
-  const bbearData = await fetchAASTradingDataSet(stockId, 'bbear', date);
-  const ubbearData = await fetchAASTradingDataSet(stockId, 'ubbear', date);
-  return [
-    ...ubbullData,
-    ...bbullData,
-    ...rbullData,
-    ...rbearData,
-    ...bbearData,
-    ...ubbearData,
-  ];
-}
+// async function fetchAASTradingData(stockId: number, date: Date): Promise<AASTradingData[]> {
+//   const ubbullData = await fetchAASTradingDataSet(stockId, 'ubbull', date);
+//   const bbullData = await fetchAASTradingDataSet(stockId, 'bbull', date);
+//   const rbullData = await fetchAASTradingDataSet(stockId, 'rbull', date);
+//   const rbearData = await fetchAASTradingDataSet(stockId, 'rbear', date);
+//   const bbearData = await fetchAASTradingDataSet(stockId, 'bbear', date);
+//   const ubbearData = await fetchAASTradingDataSet(stockId, 'ubbear', date);
+//   return [
+//     ...ubbullData,
+//     ...bbullData,
+//     ...rbullData,
+//     ...rbearData,
+//     ...bbearData,
+//     ...ubbearData,
+//   ];
+// }
 
 interface AASTopVolData {
   startAt: Date;
@@ -559,7 +567,7 @@ interface AASTopVolData {
   type: string;
 }
 
-async function convertAATradingDataTotopNVolData(tradingData: AASTradingData[], groupBy?: 'price'): Promise<AASTopVolData[]> {
+async function convertAATradingDataTotopNVolData(tradingData: AASDetailTradingData[], groupBy?: 'price'): Promise<AASTopVolData[]> {
   const buyData = tradingData.filter(d => d.type === 'A');
   const buyGroupData = _.mapValues(
     groupBy? _.groupBy(buyData, groupBy) : _.chunk(buyData, 1),
@@ -596,65 +604,92 @@ export async function seedStock(stockNumber: number) {
     `${stockId}_pf.json`);
   const profilePath2 = path.join(__dirname, '../data', 
     `${stockId}_pf${moment(lastTradingDate).format('YYYYMMDD')}.json`);
-  if (fs.existsSync(profilePath)) {
-    if (moment(fs.statSync(profilePath).mtime).diff(lastTradingDate) < 0) {
-      console.log(`[${stockId}]: Fetching Stock profile from Ticker...`);
-      const profile = await fetchTickerStockProfile(stockNumber);
-      fs.writeFileSync(profilePath, JSON.stringify(profile), { encoding:'utf8', flag: 'w' });
-    }
+  if (
+    !fs.existsSync(profilePath) ||
+    (
+      fs.existsSync(profilePath) &&
+      moment(fs.statSync(profilePath).mtime).diff(lastTradingDate) < 0
+    )
+  ) {
+    console.log(`[${stockId}]: Fetching Stock profile from Ticker...`);
+    const profile = await fetchTickerStockProfile(stockNumber);
+    fs.writeFileSync(profilePath, JSON.stringify(profile), { encoding:'utf8', flag: 'w' });
     const data = fs.readFileSync(profilePath, { encoding: 'utf8' });
     fs.writeFileSync(profilePath2, data, { encoding:'utf8', flag: 'w' });
   }
 
+  const priceChartPath = path.join(
+    __dirname, 
+    '../data', 
+    `${stockId}_pc${moment(lastTradingDate).format('YYYYMMDD')}.json`,
+  );
+  if (
+    !fs.existsSync(priceChartPath) ||
+    (
+      fs.existsSync(priceChartPath) &&
+      moment(fs.statSync(priceChartPath).mtime).diff(lastTradingDate) < 0
+    )
+  ) {
+    console.log(`[${stockId}]: Fetching 5 day (in minute) data from Ticker...`);
+    const pcData = await fetchTicker5DaysData(stockNumber);
+    const output = _.sortBy(pcData, 'date');
+    fs.writeFileSync(priceChartPath,
+      JSON.stringify(output), { encoding:'utf8', flag: 'w' });
+  }
+
   const filePath = path.join(__dirname, '../data', `${stockId}.json`);
-  if (fs.existsSync(filePath)) {
-    if (moment(fs.statSync(filePath).mtime).diff(lastTradingDate) < 0) {
-      // fetch last 1 month data
-      console.log(`[${stockId}]: Fetching 1 year data from Sina...`);
-      const sinaCandles = await fetchSinaCandles(stockNumber);
-      // get the last valid trading 4 date
-      const lastNTradingDates = _.takeRight(sinaCandles, 1).map(d => d.date);
-      console.log(`[${stockId}]: Fetching latest 1 day data from AAStock...`);
-      const aasDatas = await Bluebird.mapSeries(
-        lastNTradingDates,
-        date => fetchAASTradingData(stockNumber, date),
-      );
-      const aasCandles = _.sortBy(
-        _.reduce(
-          await Bluebird.mapSeries(
-            aasDatas,
-            data => convertAATradingDataToCandles(data, 'day'),
-          ),
-          (result, d) => ([
-            ...result,
-            ...d,
-          ]),
-          [] as AASCandle[],
+  if (
+    !fs.existsSync(filePath) ||
+    (
+      fs.existsSync(filePath) &&
+      moment(fs.statSync(filePath).mtime).diff(lastTradingDate) < 0
+    )
+  ) {
+    // fetch last 1 month data
+    console.log(`[${stockId}]: Fetching 1 year data from Sina...`);
+    const sinaCandles = await fetchSinaCandles(stockNumber);
+    // get the last valid trading 4 date
+    const lastNTradingDates = _.takeRight(sinaCandles, 3).map(d => d.date);
+    console.log(`[${stockId}]: Fetching latest 1 day data from AAStock...`);
+    const aasDatas = await Bluebird.mapSeries(
+      lastNTradingDates,
+      date => fetchAASDetailTradingData(stockNumber, date),
+    );
+    const aasCandles = _.sortBy(
+      _.reduce(
+        await Bluebird.mapSeries(
+          aasDatas,
+          data => convertAATradingDataToCandles(data, 'day'),
         ),
-        'date',
-      );
-      console.log(`[${stockId}]: Merging Sina data and AAStock data...`);
-      const tradingData = await mergeSinaNAASCandles(aasCandles, sinaCandles);
-      console.log(`[${stockId}]: Updating database...`);
-      if (fs.existsSync(filePath)) {
-        const data = JSON.parse(fs.readFileSync(filePath, { encoding: 'utf8' }));
-        const output = _.sortBy(Object.values(_.merge(
-          mapArrayToObject(data),
-          mapArrayToObject(tradingData),
-        )), 'date');
-        fs.writeFileSync(filePath, JSON.stringify(output), { encoding:'utf8', flag: 'w' });
-      } else {
-        const output = tradingData;
-        fs.writeFileSync(filePath, JSON.stringify(output), { encoding:'utf8', flag: 'w' });  
-      }
-      lastNTradingDates.map(
-        (date, i) => fs.writeFileSync(
-          path.join(__dirname, '..', `data/${stockId}_${moment(date).format('YYYYMMDD')}.json`),
-          JSON.stringify(aasDatas[i]),
-          { encoding:'utf8', flag: 'w' },
-        ),
-      );  
+        (result, d) => ([
+          ...result,
+          ...d,
+        ]),
+        [] as AASCandle[],
+      ),
+      'date',
+    );
+    console.log(`[${stockId}]: Merging Sina data and AAStock data...`);
+    const tradingData = await mergeSinaNAASCandles(aasCandles, sinaCandles);
+    console.log(`[${stockId}]: Updating database...`);
+    if (fs.existsSync(filePath)) {
+      const data = JSON.parse(fs.readFileSync(filePath, { encoding: 'utf8' }));
+      const output = _.sortBy(Object.values(_.merge(
+        mapArrayToObject(data),
+        mapArrayToObject(tradingData),
+      )), 'date');
+      fs.writeFileSync(filePath, JSON.stringify(output), { encoding:'utf8', flag: 'w' });
+    } else {
+      const output = tradingData;
+      fs.writeFileSync(filePath, JSON.stringify(output), { encoding:'utf8', flag: 'w' });  
     }
+    lastNTradingDates.map(
+      (date, i) => fs.writeFileSync(
+        path.join(__dirname, '..', `data/${stockId}_${moment(date).format('YYYYMMDD')}.json`),
+        JSON.stringify(aasDatas[i]),
+        { encoding:'utf8', flag: 'w' },
+      ),
+    );  
   }
   console.log(`[${stockId}]: Fetching Done!`);
 }
@@ -692,9 +727,9 @@ interface StockSummary {
   stockNumber: number;
   profile: TickerStockProfile;
   tradings: {
-    topNVolDataByPrice: AASTopVolData[][];
-    topNVolDataByTime: AASTopVolData[][];
-    data: AASTradingData[][];
+    topNVolMorningDataByTime: AASTopVolData[][];
+    topNVolAfternoonDataByTime: AASTopVolData[][];
+    data: AASDetailTradingData[][];
   };
   labels: {
     positiveCandle: boolean;
@@ -710,6 +745,110 @@ interface StockSummary {
     active: boolean;
   };
   chart: string;
+}
+
+interface TickerTradingData {
+  date: Date;
+  close: number;
+  high: number;
+  low: number;
+  open: number;
+  volume: number;
+}
+
+async function fetchTicker5DaysData(
+  stockId: number,
+): Promise<TickerTradingData[]> {  const trials = 0;
+  const getDataFromTicker = async (trials: number): Promise<TickerTradingData[]> => {
+    if (trials > 5) {
+      return [];
+    }
+    const { data } = await axios({
+      url: `https://quote.ticker.com.hk/api/historical_data/detail/${
+        stockId
+      }.HK/5d`,
+      method: 'get',
+    });
+    return (data.data || []).map(
+      (d: any) => ({
+        date: new Date(+d.time * 1000),
+        close: +d.close,
+        high: +d.high,
+        low: +d.low,
+        open: +d.open,
+        volume: +d.volume,
+      })) as TickerTradingData[];
+  };
+  return getDataFromTicker(trials + 1);
+}
+
+let aasToken: any = null;
+async function fetchAASDetailTradingData(stockId: number, date: Date): Promise<AASDetailTradingData[]> {
+  const trials = 0;
+
+  const getDataFromAAStock = async (trials: number): Promise<AASDetailTradingData[]> => {
+    // if (trials > 5) {
+    //   return [];
+    // }
+    if (aasToken == null) {
+      // first visit to aastock page to obtain the csrf token
+      const res = await axios({
+        method: 'get',
+        url:
+          'http://www.aastocks.com/en/stocks/analysis/transaction.aspx?symbol=' +
+          `${stockId.toString().padStart(6, '0')}`,
+      });
+      const domData = res.data;
+      
+      // const searchUrl = 'http://tldata.aastocks.com/TradeLogServlet/getTradeLog?';
+      const test = domData.match(new RegExp(`.+"&(u=.+&t=.+&d=.+)".+`));
+      if (test != null) {
+        aasToken = test[1];
+      }
+    }
+
+    const query = qs.stringify({
+      ...qs.parse(aasToken),
+      id: `${stockId.toString().padStart(6, '0')}.HK`,
+      date: moment(date).format('YYYYMMDD'),
+    });
+    try {
+      const { data: tradingData } = await axios({
+        method: 'get',
+        url: `http://tldata.aastocks.com/TradeLogServlet/getTradeLog?${query}`,
+      });
+      if (`${tradingData}`.indexOf('#') === -1) {
+        aasToken = null;
+        return getDataFromAAStock(0);
+      }
+      return tradingData.substring(tradingData.indexOf('#') + 1).split('|').map(
+        (data: string) => {
+          const match = data.match(/(\d+);(\d+);(.);(\d+\.\d+);(.)/);
+          if (match !== null) {
+            const [,
+              dateStr,
+              volumeStr,
+              labelStr,
+              priceStr,
+              typeStr,
+            ] = match as any;
+            return {
+              type: typeStr,
+              date: moment(moment(date).format('YYYYMMDD') + dateStr, 'YYYYMMDDHHmmss'),
+              volume: +volumeStr,
+              label: labelStr,
+              price: +priceStr,
+            };
+          }
+          return null;
+        },
+      ).filter((data: any) => data);
+    } catch (e) {
+      aasToken = null;
+      return getDataFromAAStock(trials + 1);
+    }
+  };
+  return getDataFromAAStock(trials + 1);
 }
 
 export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = false): Promise<StockSummary | null> {
@@ -780,59 +919,80 @@ export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = 
           date => {
             const fPath = path.join(__dirname, '..', 'data', `${stockId}_${moment(date).format('YYYYMMDD')}.json`);
             if (!fs.existsSync(fPath)) return [];
-            return JSON.parse(fs.readFileSync(fPath, { encoding: 'utf8' })) as AASTradingData[];
+            return JSON.parse(fs.readFileSync(fPath, { encoding: 'utf8' })) as AASDetailTradingData[];
           },
         );
-        const latestData = aasDatas[aasDatas.length - 1];
+        const latestData = aasDatas[aasDatas.length - 1]
+          .filter(d => d.type === 'A' || d.type === 'B');
 
         const tradingVolume = getTradingVolume(latestData);
         if (tradingVolume < 1000000) console.log(`[${stockId}]: Block Trading Volume < 1000000...`);
         if (!ignoreFilter && tradingVolume < 1000000) return null;
 
         const tradingCount = getTradingCount(latestData);
-        if (tradingCount < 300) console.log(`[${stockId}]: Block Trading Count < 300...`);
-        if (!ignoreFilter && tradingCount < 300) return null;
+        if (tradingCount < 500) console.log(`[${stockId}]: Block Trading Count < 300...`);
+        if (!ignoreFilter && tradingCount < 500) return null;
 
         const activeRate = getActiveRate(latestData);
         const active = activeRate >= 0.7;
         // if (activeRate < 0.2) console.log(`[${stockId}]: Active Rate < 0.2...`);
         // if (!ignoreFilter && activeRate < 0.2) return null;
 
-        const ubbullVol = _.sumBy(
-          latestData.filter(d => d.category === 'ubbull'),
+        const buyVol = _.sumBy(
+          latestData.filter(d => d.type === 'A'),
           'volume',
         );
-        const ubbearVol = _.sumBy(
-          latestData.filter(d => d.category === 'ubbear'),
+        const sellVol = _.sumBy(
+          latestData.filter(d => d.type === 'B'),
           'volume',
         );
         if (!ignoreFilter && bigNegativeCandle) {
           console.log(`[${stockId}]: Big Negative Candlestick...`);
           return null;
         }
-        if (!(ubbullVol >= ubbearVol)) console.log(`[${stockId}]: Ultra Bullish < Ultra Bearish...`);
-        if (ignoreFilter || (ubbullVol >= ubbearVol)) {
+        if (!(buyVol >= sellVol)) console.log(`[${stockId}]: Bullish < Bearish...`);
+        if (ignoreFilter || (buyVol >= sellVol)) {
           const buyVol = getTradingVolume(latestData.filter(d => d.type === 'A'));
           const sellVol = getTradingVolume(latestData.filter(d => d.type === 'B'));
           const buy = (buyVol / sellVol) >= 1.5;
           if (buy) console.log(`[${stockId}]: Buy!`);
           const sell = buyVol * 1.1 < sellVol;
           if (sell) console.log(`[${stockId}]: Sell!`);
-          const topNVolDataByPrice = [
+          // const topNVolDataByPrice = [
+          //   await convertAATradingDataTotopNVolData(
+          //     latestData.filter(d => d.type === 'A' || d.type === 'B'), 'price'),
+          //   await convertAATradingDataTotopNVolData(
+          //     aasDatas[aasDatas.length - 2].filter(d => d.type === 'A' || d.type === 'B'), 'price'),
+          //   await convertAATradingDataTotopNVolData(
+          //     aasDatas[aasDatas.length - 3].filter(d => d.type === 'A' || d.type === 'B'), 'price'),
+          // ];
+          const topNVolMorningDataByTime = [
             await convertAATradingDataTotopNVolData(
-              latestData.filter(d => d.category === 'ubbull' || d.category === 'ubbear'), 'price'),
+              latestData.filter(
+                d => moment(d.date).hour() < 12 && (d.type === 'A' ||  d.type === 'B')),
+            ),
             await convertAATradingDataTotopNVolData(
-              aasDatas[aasDatas.length - 2].filter(d => d.category === 'ubbull' || d.category === 'ubbear'), 'price'),
+              aasDatas[aasDatas.length - 2].filter(
+                d => moment(d.date).hour() < 12 && (d.type === 'A' ||  d.type === 'B')),
+            ),
             await convertAATradingDataTotopNVolData(
-              aasDatas[aasDatas.length - 3].filter(d => d.category === 'ubbull' || d.category === 'ubbear'), 'price'),
+              aasDatas[aasDatas.length - 3].filter(
+                d => moment(d.date).hour() < 12 && (d.type === 'A' ||  d.type === 'B')),
+            ),
           ];
-          const topNVolDataByTime = [
+          const topNVolAfternoonDataByTime = [
             await convertAATradingDataTotopNVolData(
-              latestData.filter(d => d.category === 'ubbull' || d.category === 'ubbear')),
+              latestData.filter(
+                d => moment(d.date).hour() > 12 && (d.type === 'A' ||  d.type === 'B')),
+            ),
             await convertAATradingDataTotopNVolData(
-              aasDatas[aasDatas.length - 2].filter(d => d.category === 'ubbull' || d.category === 'ubbear')),
+              aasDatas[aasDatas.length - 2].filter(
+                d => moment(d.date).hour() > 12 && (d.type === 'A' ||  d.type === 'B')),
+            ),
             await convertAATradingDataTotopNVolData(
-              aasDatas[aasDatas.length - 3].filter(d => d.category === 'ubbull' || d.category === 'ubbear')),
+              aasDatas[aasDatas.length - 3].filter(
+                d => moment(d.date).hour() > 12 && (d.type === 'A' ||  d.type === 'B')),
+            ),
           ];
           const stockName = await fetchTickerStockName(stockNumber);
           const summary = {
@@ -842,8 +1002,8 @@ export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = 
             name: stockName,
             profile: stockProfile,
             tradings: {
-              topNVolDataByPrice,
-              topNVolDataByTime,
+              topNVolMorningDataByTime,
+              topNVolAfternoonDataByTime,
               data: [..._.takeRight(aasDatas, 3)].reverse(),
             },
             labels: {
@@ -988,18 +1148,17 @@ export async function sendStockToSlack(summary: StockSummary, channel: '#general
       + `@${moment(last4TradingDates[0]).format('YYYY-MM-DD')}*`;
     const earnPerUnit = (profile.pe != null) ? format(price / profile.pe) : '-';
     const pe = (profile.pe != null) ? format(+profile.pe) : '-';
-    const topNVolDataByPrice = summary.tradings.topNVolDataByPrice;
-    const topNVolDataByTime = summary.tradings.topNVolDataByTime;
+    const topNVolMorningDataByTime = summary.tradings.topNVolMorningDataByTime;
+    const topNVolAfternoonDataByTime = summary.tradings.topNVolAfternoonDataByTime;
     const tradingData = summary.tradings.data;
-    const topVolByTimeMsgs = topNVolDataByTime.map(
+    const topVolByTimeMsgs = topNVolMorningDataByTime.map(
       (d, j) => {
         const topNBuyData = _.sortBy(d.filter(dt => dt.type === 'A'), 'volume').reverse();
         const topNSellData = _.sortBy(d.filter(dt => dt.type === 'B'), 'volume').reverse();
         return '' +
-          '_' + moment(last4TradingDates[j]).format('YYYY-MM-DD') + '_' +
-          '  總成交量: *' + format(_.sumBy(tradingData[j], 'volume')) + '*' +
-          ' 超大手買佔: *' + format(_.sumBy(tradingData[j].filter(d => d.category === 'ubbull'), 'volume')) + '*' +
-          ' 超大手賣佔: *' + format(_.sumBy(tradingData[j].filter(d => d.category === 'ubbear'), 'volume')) + '*' +
+          '總成交量: *' + format(_.sumBy(tradingData[j].filter(d => moment(d.date).hour() < 12), 'volume')) + '*' +
+          ' 買佔: *' + format(_.sumBy(tradingData[j].filter(d => moment(d.date).hour() < 12 && d.type === 'A'), 'volume')) + '*' +
+          ' 賣佔: *' + format(_.sumBy(tradingData[j].filter(d => moment(d.date).hour() < 12 && d.type === 'B'), 'volume')) + '*' +
           '\n' +
           new Array(Math.max(topNBuyData.length, topNSellData.length))
             .fill('').map(
@@ -1020,14 +1179,14 @@ export async function sendStockToSlack(summary: StockSummary, channel: '#general
           ).join('\n');
       }
     ).join('\n');
-    const topVolByPriceMsgs = topNVolDataByPrice.map(
+    const topVolByPriceMsgs = topNVolAfternoonDataByTime.map(
       (d, j) => {
-        const topNBuyData = _.sortBy(d.filter(dt => dt.type === 'A'), 'price').reverse();
-        const topNSellData = _.sortBy(d.filter(dt => dt.type === 'B'), 'price').reverse();
-        return '_' + moment(last4TradingDates[j]).format('YYYY-MM-DD') + '_' +
-          '  總成交量: *' + format(_.sumBy(tradingData[j], 'volume')) + '*' +
-          ' 大手買佔: *' + format(_.sumBy(tradingData[j].filter(d => d.category === 'bbull'), 'volume')) + '*' +
-          ' 大手賣佔: *' + format(_.sumBy(tradingData[j].filter(d => d.category === 'bbear'), 'volume')) + '*' +
+        const topNBuyData = _.sortBy(d.filter(dt => dt.type === 'A'), 'volume').reverse();
+        const topNSellData = _.sortBy(d.filter(dt => dt.type === 'B'), 'volume').reverse();
+        return '' +
+          '總成交量: *' + format(_.sumBy(tradingData[j].filter(d => moment(d.date).hour() > 12), 'volume')) + '*' +
+          ' 買佔: *' + format(_.sumBy(tradingData[j].filter(d => moment(d.date).hour() > 12 && d.type === 'A'), 'volume')) + '*' +
+          ' 賣佔: *' + format(_.sumBy(tradingData[j].filter(d => moment(d.date).hour() > 12 && d.type === 'B'), 'volume')) + '*' +
           '\n' +
           new Array(Math.max(topNBuyData.length, topNSellData.length))
             .fill('').map(
@@ -1052,9 +1211,9 @@ export async function sendStockToSlack(summary: StockSummary, channel: '#general
 `股價: *${price.toFixed(2)}*
 每股盈利/市盈率: *${earnPerUnit}*, *${pe}*
 升幅 (百分率，股價): *${profile.changePercent.toFixed(2)}%*, *${profile.changePrice.toFixed(2)}*
-最高買入/賣出成交量(超大手) - 以時間分類 (時間, 成交量，股價):
+最近三日 上午9am - 12pm 最高買入/賣出成交量 (時間, 成交量，股價):
 ${topVolByTimeMsgs}
-最高買入/賣出成交量(超大手) - 以股價分類 (時間, 成交量，股價):
+最近三日 下午1pm - 4pm 最高買入/賣出成交量 (時間, 成交量，股價):
 ${topVolByPriceMsgs}
 訊號: ${[
   labels.bigPositiveCandle ? '*大陽燭*' : null,
@@ -1075,7 +1234,6 @@ ${topVolByPriceMsgs}
   (pe > 0) ? '*有盈利*' : null,
 ].filter(l => l).join(', ')}
 `;
-
     slack.webhook(
       {
         username: 'stockBot',

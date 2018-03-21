@@ -1,1 +1,1 @@
-[{"type":"B","date":"2018-03-20T03:56:06.000Z","volume":2000,"price":2.64,"category":"rbear"},{"type":"B","date":"2018-03-20T02:39:44.000Z","volume":34000,"price":2.61,"category":"ubbear"}]
+[{"type":"B","date":"2018-03-20T02:39:44.000Z","volume":34000,"label":" ","price":2.61},{"type":"B","date":"2018-03-20T03:56:06.000Z","volume":2000,"label":" ","price":2.64},{"type":"A","date":"2018-03-20T05:58:04.000Z","volume":8000,"label":" ","price":2.67},{"type":"A","date":"2018-03-20T07:58:28.000Z","volume":7000,"label":" ","price":2.67}]
