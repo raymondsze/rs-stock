@@ -806,7 +806,7 @@ export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = 
           latestData.filter(d => d.category === 'ubbear'),
           'volume',
         );
-        if (bigNegativeCandle) {
+        if (!ignoreFilter && bigNegativeCandle) {
           console.log(`[${stockId}]: Big Negative Candlestick...`);
           return null;
         }

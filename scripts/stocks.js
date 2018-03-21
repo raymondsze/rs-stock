@@ -42,6 +42,7 @@ const { fetchStockNumbers, analyzeStock, sendStockNumbersToSlack, sendStockToSla
   const [,, ...options] = process.argv;
   const ignoreFilter = options.findIndex(d => d === 'ignore') !== -1;
   const stockNumbers = await fetchStockNumbers();
+
   const summaries = await Bluebird.mapSeries(
     stockNumbers.filter(d => d !== 'ignore'),
     stockNumber => analyzeStock(+stockNumber, ignoreFilter),
@@ -139,7 +140,7 @@ const { fetchStockNumbers, analyzeStock, sendStockNumbersToSlack, sendStockToSla
       tradings.buy = _.remove(buyStocks, n => tradings.hold.indexOf(n) === -1);
       // sell stocks excluding holding stocks
       const sellStocks = holdingStocksSummaries.filter(d => d).filter(s => s.sell).map(s => s.stockNumber);
-      tradings.sell = _.remove(sellStocks, n => tradings.hold.indexOf(n) === -1);
+      tradings.sell = _.remove(sellStocks, n => tradings.hold.indexOf(n) !== -1);
 
       // update tradings
       fs.writeFileSync(tradingFilePath, JSON.stringify(tradings), { encoding:'utf8', flag: 'w' });
