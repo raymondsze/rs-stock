@@ -649,7 +649,10 @@ export async function seedStock(stockNumber: number) {
     console.log(`[${stockId}]: Fetching 1 year data from Sina...`);
     const sinaCandles = await fetchSinaCandles(stockNumber);
     // get the last valid trading 4 date
-    const lastNTradingDates = _.takeRight(sinaCandles, 3).map(d => d.date);
+    const lastNTradingDates = _.uniq([
+      ..._.takeRight(sinaCandles, 3).map(d => d.date),
+      lastTradingDate,
+    ]);
     console.log(`[${stockId}]: Fetching latest 1 day data from AAStock...`);
     const aasDatas = await Bluebird.mapSeries(
       lastNTradingDates,
@@ -1195,12 +1198,12 @@ export async function sendStockToSlack(summary: StockSummary, channel: '#general
                 const s = topNSellData[i];
                 return '    ' +
                   (b != null ?
-                    `*${moment(b.startAt).format('HH:mm')} - ${moment(b.endAt).format('HH:mm')}*, *${format(b.volume)}*, *${format(b.price)}*`
+                    `*${moment(b.startAt).format('HH:mm')}*, *${format(b.volume)}*, *${format(b.price)}*`
                     : '-'
                   ) +
                   '  |  ' +
                   (s != null ?
-                    `\`${moment(s.startAt).format('HH:mm')} - ${moment(s.endAt).format('HH:mm')}\`, \`${format(s.volume)}\`, \`${format(s.price)}\``
+                    `\`${moment(s.startAt).format('HH:mm')}}\`, \`${format(s.volume)}\`, \`${format(s.price)}\``
                     : '-'
                   ) 
               }
