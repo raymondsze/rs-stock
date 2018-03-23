@@ -41,19 +41,21 @@ const { fetchStockNumbers, analyzeStock, sendStockNumbersToSlack, sendStockToSla
 (async () => {
   const [,, ...options] = process.argv;
   const ignoreFilter = options.findIndex(d => d === 'ignore') !== -1;
+  const date = options.find(d => d.match(/\d{8}/));
   const stockNumbers = await fetchStockNumbers();
 
+  const lastTradingDate = date != null ? date : await fetchLatestTradingDate();
+
   const summaries = await Bluebird.mapSeries(
-    stockNumbers.filter(d => d !== 'ignore'),
-    stockNumber => analyzeStock(+stockNumber, ignoreFilter),
+    stockNumbers,
+    stockNumber => analyzeStock(+stockNumber, ignoreFilter, moment(lastTradingDate, 'YYYYMMDD').endOf('day')),
   );
   const potentialStockNumbers = summaries.filter(d => d).map(summary => summary.stockNumber);
-
-  const lastTradingDate = await fetchLatestTradingDate();
-
+  console.log(potentialStockNumbers);
   const hourDiff = moment().diff(moment(lastTradingDate).startOf('day'), 'hour');
-  if (hourDiff > 17 /* 5pm */ && hourDiff < 32 /* 8am */) {
-    const tradingFilePath2 = path.join(__dirname, '..', 'data', `trading${moment(lastTradingDate).format('YYYYMMDD')}.json`);
+  if (hourDiff > 17 /* 5pm */ /*&& hourDiff < 32 /* 8am */) {
+    const tradingFilePath2 = path.join(__dirname, '..', 'data',
+      `trading${moment(lastTradingDate).format('YYYYMMDD')}.json`);
     if (!fs.existsSync(tradingFilePath2)) {
       const tradingFilePath = path.join(__dirname, '..', 'data', 'trading.json');
       let tradings = {
@@ -118,19 +120,32 @@ const { fetchStockNumbers, analyzeStock, sendStockNumbersToSlack, sendStockToSla
           },
         ), {}
       );
+      let balance = 0;
+      let margin = 0;
       const overview = _.mapValues(allBuyData, (buyData, stockNumber) => {
-        let balance = 0;
+        let buyAvg = 0;
+        let closeSum = 0;
         buyData.forEach((d, i) => {
-          if (allSellData[stockNumber] && allSellData[stockNumber][i]) {
-            balance += (allSellData[stockNumber][i].price - d.price) / d.price;
+          buyAvg += d.price;
+          // if current balance enough
+          if (balance > 0) {
+            balance -= 1;
           } else {
-            console.log(holdingStocksSummaries.find(s => s.stockNumber === +stockNumber).profile.close);
-            balance += (holdingStocksSummaries.find(s => s.stockNumber === +stockNumber).profile.close - d.price) / d.price;
+            // if current balance is not enough, need borrow money
+            margin += 1;
+          }
+          if (allSellData[stockNumber] && allSellData[stockNumber][i]) {
+            // principal + gain
+            closeSum += allSellData[stockNumber][i].price;
+            balance += 1 + (allSellData[stockNumber][i].price - d.price) / d.price;
+          } else {
+            closeSum += holdingStocksSummaries.find(s => s.stockNumber === +stockNumber).profile.close;
+            balance += 1 + (holdingStocksSummaries.find(s => s.stockNumber === +stockNumber).profile.close - d.price) / d.price;
           }
         });
-        return balance;
+        return (closeSum - buyAvg) / (buyAvg / buyData.length);
       });
-      tradings.balance = _.sum(Object.values(overview));
+      tradings.balance = balance - margin;
 
       tradings.overview = overview;
       // update holding, remove all the sold stock

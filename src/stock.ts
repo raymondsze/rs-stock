@@ -854,10 +854,13 @@ async function fetchAASDetailTradingData(stockId: number, date: Date): Promise<A
   return getDataFromAAStock(trials + 1);
 }
 
-export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = false): Promise<StockSummary | null> {
+export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = false, date?: Date): Promise<StockSummary | null> {
   const stockId = `${stockNumber.toString().padStart(6, '0')}.HK`;
+  const pastProfilePath = path.join(__dirname, '..', `data/${stockId}_pf${moment(date).format('YYYYMMDD')}.json`);
   console.log(`[${stockId}]: Analyzing...`);
-  const stockProfile = await fetchTickerStockProfile(stockNumber);
+  const stockProfile = date != null ? 
+    (fs.existsSync(pastProfilePath) ? JSON.parse(fs.readFileSync(pastProfilePath, { encoding: 'utf8' })) : null) :
+    await fetchTickerStockProfile(stockNumber);
   if (stockProfile == null || stockProfile.volume == null) return null;
   if (stockProfile.mktCap <= 1000000000) console.log(`[${stockId}]: MarketCap <= 1000000000...`);
   if (stockProfile == null || (!ignoreFilter && stockProfile.mktCap <= 1000000000)) return null;
@@ -865,11 +868,10 @@ export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = 
   if (!ignoreFilter && !changeAcceptable) console.log(`[${stockId}]: Change is lower than -3%...`);
   if (ignoreFilter || changeAcceptable) {
     // read the monthly data
-    const profilePath = path.join(__dirname, '..', `data/${stockId}_pf.json`);
     const filePath = path.join(__dirname, '..', `data/${stockId}.json`);
     await seedStock(stockNumber);
-    const candles = JSON.parse(fs.readFileSync(filePath, { encoding: 'utf8' })) as Candle[];
-    const profile = JSON.parse(fs.readFileSync(profilePath, { encoding: 'utf8' })) as TickerStockProfile;
+    let candles = JSON.parse(fs.readFileSync(filePath, { encoding: 'utf8' })) as Candle[];
+    if (date != null) candles = candles.filter(c => moment(c.date).diff(date) < 0);
     if (candles.length >= 4 ) {
       const abnormalVol = isAbnormalVolume(candles);
       if (!abnormalVol) console.log(`[${stockId}]: Volume is not abnormal (300% from year average)...`);
@@ -877,9 +879,9 @@ export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = 
         // labelize trading data
         const maxTradingDiff = _.max(candles.map(candle => candle.close - candle.open)) as number;
         const positiveCandle = isPositiveCandle(candles[candles.length - 1]);
-        const bigPositiveCandle = isBigPositiveCandle(candles[candles.length - 1], profile.open * 0.025);
+        const bigPositiveCandle = isBigPositiveCandle(candles[candles.length - 1], stockProfile.open * 0.025);
         const negativeCandle = isNegativeCandle(candles[candles.length - 1]);
-        const bigNegativeCandle = isBigNegativeCandle(candles[candles.length - 1], profile.open * 0.025);
+        const bigNegativeCandle = isBigNegativeCandle(candles[candles.length - 1], stockProfile.open * 0.025);
         const sanBaiBing = isSanbaibing(
           candles[candles.length - 1],
           candles[candles.length - 2],
@@ -904,11 +906,11 @@ export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = 
           candles[candles.length - 1],
           candles[candles.length - 2],
           candles[candles.length - 3],
-          profile.open * 0.025,
+          stockProfile.open * 0.025,
         );
         const crossStar = isCrossStar(
           candles[candles.length - 1],
-          profile.open * 0.025,
+          stockProfile.open * 0.025,
         );
         const jumpyBuy = isJumpyBuy(
           candles[candles.length - 1],
@@ -1089,14 +1091,14 @@ export async function sendTradingsToSlack(
   });
 }
 
-export async function sendStockNumbersToSlack(stockNumbers: number[], channel: '#general' | '#stock') {
+export async function sendStockNumbersToSlack(stockNumbers: number[], channel: '#general' | '#stock', date?: Date) {
   const slack = new Slack();
   slack.setWebhook(
     channel === '#general' ?
     process.env.SLACK_GENERAL_CHANNEL_WEBHOOK as string :
     process.env.SLACK_STOCK_CHANNEL_WEBHOOK as string,
   );
-  const date = await fetchLatestTradingDate();
+  const currentDate = date == null ? await fetchLatestTradingDate() : date;
   const stockIds = stockNumbers.map(
     stockNumber => `${stockNumber.toString().padStart(6, '0')}.HK`,
   );
@@ -1112,7 +1114,7 @@ export async function sendStockNumbersToSlack(stockNumbers: number[], channel: '
             fields: [
               {
                 value:
-                  `*股市戰報@${moment(date).format('YYYY-MM-DD')}*\n` +
+                  `*股市戰報@${moment(currentDate).format('YYYY-MM-DD')}*\n` +
                   `心水股: ${stockIds.map(s => `*${s}*`).join(', ')}\n` +
                   `Command: \`/analyze ${stockNumbers.join(' ')}\``,
                 short: false,
@@ -1129,7 +1131,7 @@ export async function sendStockNumbersToSlack(stockNumbers: number[], channel: '
   });
 }
 
-export async function sendStockToSlack(summary: StockSummary, channel: '#general' | '#stock') {
+export async function sendStockToSlack(summary: StockSummary, channel: '#general' | '#stock', date?: Date) {
   // setup the slack
   const slack = new Slack();
   slack.setWebhook(
@@ -1137,9 +1139,7 @@ export async function sendStockToSlack(summary: StockSummary, channel: '#general
     process.env.SLACK_GENERAL_CHANNEL_WEBHOOK as string :
     process.env.SLACK_STOCK_CHANNEL_WEBHOOK as string,
   );
-  const filePath = path.join(__dirname, '..', `data/${summary.stockNumber.toString().padStart(6, '0')}.HK.json`);
-  const candles = JSON.parse(fs.readFileSync(filePath, { encoding: 'utf8' })) as Candle[];
-  const last4TradingDates = _.takeRight(candles, 4).map(d => d.date).reverse();
+  const lastTradingDate = date == null ? await fetchLatestTradingDate(): date;
   return new Bluebird((resolve, reject) => {
     const labels = summary.labels;
     const stockName = summary.name;
@@ -1148,7 +1148,7 @@ export async function sendStockToSlack(summary: StockSummary, channel: '#general
     const price = profile.close;
     const color = (profile.changePrice === 0 ? '#666' : profile.changePrice > 0 ? '#00DD00' : '#DD0000');
     const pretext = `*${stockName}* *${stockNumber.toString().padStart(5, '0')}.HK`
-      + `@${moment(last4TradingDates[0]).format('YYYY-MM-DD')}*`;
+      + `@${moment(lastTradingDate).format('YYYY-MM-DD')}*`;
     const earnPerUnit = (profile.pe != null) ? format(price / profile.pe) : '-';
     const pe = (profile.pe != null) ? format(+profile.pe) : '-';
     const topNVolMorningDataByTime = summary.tradings.topNVolMorningDataByTime;
@@ -1203,7 +1203,7 @@ export async function sendStockToSlack(summary: StockSummary, channel: '#general
                   ) +
                   '  |  ' +
                   (s != null ?
-                    `\`${moment(s.startAt).format('HH:mm')}}\`, \`${format(s.volume)}\`, \`${format(s.price)}\``
+                    `\`${moment(s.startAt).format('HH:mm')}\`, \`${format(s.volume)}\`, \`${format(s.price)}\``
                     : '-'
                   ) 
               }

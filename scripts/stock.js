@@ -2,6 +2,7 @@ const _ = require('lodash');
 const path = require('path');
 const fs = require('fs');
 const Bluebird = require('bluebird');
+const moment = require('moment');
 
 const NODE_ENV = _.defaultTo(process.env.NODE_ENV, 'development');
 process.env.NODE_ENV = NODE_ENV;
@@ -34,13 +35,15 @@ process.on('uncaughtException', (err) => {
   process.exit(1);
 });
 
-const { analyzeStock, sendStockToSlack } = require('../build/stock');
+const { analyzeStock, sendStockToSlack, fetchLatestTradingDate } = require('../build/stock');
 (async () => {
   const [,, ...stockNumbers] = process.argv;
   const ignoreFilter = stockNumbers.findIndex(d => d === 'ignore') !== -1;
+  const date = stockNumbers.find(d => d.match(/\d{8}/));
+  const lastTradingDate = date != null ? date : await fetchLatestTradingDate();
   const summaries = await Bluebird.mapSeries(
-    stockNumbers.filter(d => d !== 'ignore'),
-    stockNumber => analyzeStock(+stockNumber, ignoreFilter),
+    stockNumbers.filter(d => d !== 'ignore' && !d.match(/\d{8}/)),
+    stockNumber => analyzeStock(+stockNumber, ignoreFilter, moment(lastTradingDate, 'YYYYMMDD').endOf('day')),
   );
-  await Bluebird.mapSeries(summaries.filter(d => d), summary => sendStockToSlack(summary, '#stock'));
+  await Bluebird.mapSeries(summaries.filter(d => d), summary => sendStockToSlack(summary, '#stock', lastTradingDate));
 })();
