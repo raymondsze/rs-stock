@@ -58,12 +58,20 @@ app.post('/analyze', async (req, res) => {
       const summaries = await Bluebird.mapSeries(
         stockNumbers.filter(d => !d.match(/\d{8}/)),
         (stockNumber: any) => {
-          if (date != null) return analyzeStock(+stockNumber, true, moment(date, 'YYYYMMDD').toDate());
-          else return analyzeStock(+stockNumber, true);
+          if (date != null) {
+            return analyzeStock(+stockNumber, true, moment(date, 'YYYYMMDD').toDate());
+          }
+          return analyzeStock(+stockNumber, true);
         }
       );
       await Bluebird.mapSeries(
-        summaries.filter(d => d), summary => sendStockToSlack(summary as any, '#stock'));
+        summaries.filter(d => d), summary => {
+          if (date != null) {
+            return sendStockToSlack(summary as any, '#stock', moment(date, 'YYYYMMDD').toDate());
+          }
+          return sendStockToSlack(summary as any, '#stock');
+        }
+      );
     })();
     res.json({ text: '收到！宜家即刻幫你分析！' });
   } catch (e) {
