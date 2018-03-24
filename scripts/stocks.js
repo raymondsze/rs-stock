@@ -69,6 +69,13 @@ const { fetchStockNumbers, analyzeStock, sendStockNumbersToSlack, sendStockToSla
         tradings = JSON.parse(fs.readFileSync(tradingFilePath, { encoding: 'utf8' }));
       }
 
+      const getProfile = (stockNumber) => JSON.parse(fs.readFileSync(
+        path.join(
+          __dirname,
+          '../data', 
+          `${stockNumber.toString().padStart(6, '0')}.HK_pf${moment(lastTradingDate).format('YYYYMMDD')}.json`,
+        ),
+      ));
       // buy transactions
       ///////////////////////////////
       const buyTransactions = await Bluebird.map(
@@ -77,7 +84,7 @@ const { fetchStockNumbers, analyzeStock, sendStockNumbersToSlack, sendStockToSla
           stockNumber,
           date: lastTradingDate,
           type: 'A',
-          price: (await fetchTickerStockProfile(stockNumber)).open,
+          price: getProfile(stockNumber).open,
         })
       );
       tradings.hold = [...tradings.hold, ...tradings.buy];
@@ -92,7 +99,7 @@ const { fetchStockNumbers, analyzeStock, sendStockNumbersToSlack, sendStockToSla
           stockNumber,
           date: lastTradingDate,
           type: 'B',
-          price: (await fetchTickerStockProfile(stockNumber)).open,
+          price: getProfile(stockNumber).open,
         })
       );
       // update transacitons
@@ -123,10 +130,10 @@ const { fetchStockNumbers, analyzeStock, sendStockNumbersToSlack, sendStockToSla
       let balance = 0;
       let margin = 0;
       const overview = _.mapValues(allBuyData, (buyData, stockNumber) => {
-        let buyAvg = 0;
+        let buySum = 0;
         let closeSum = 0;
         buyData.forEach((d, i) => {
-          buyAvg += d.price;
+          buySum += d.price;
           // if current balance enough
           if (balance > 0) {
             balance -= 1;
@@ -143,7 +150,7 @@ const { fetchStockNumbers, analyzeStock, sendStockNumbersToSlack, sendStockToSla
             balance += 1 + (holdingStocksSummaries.find(s => s.stockNumber === +stockNumber).profile.close - d.price) / d.price;
           }
         });
-        return (closeSum - buyAvg) / (buyAvg / buyData.length);
+        return (closeSum - buySum) / buySum;
       });
       tradings.balance = balance - margin;
 
@@ -153,9 +160,11 @@ const { fetchStockNumbers, analyzeStock, sendStockNumbersToSlack, sendStockToSla
       // buy stocks excluding holding stocks
       const buyStocks = summaries.filter(d => d).filter(s => s.buy).map(s => s.stockNumber);
       tradings.buy = _.remove(buyStocks, n => tradings.hold.indexOf(n) === -1);
+      tradings.canBuy = buyStocks;
       // sell stocks excluding holding stocks
       const sellStocks = holdingStocksSummaries.filter(d => d).filter(s => s.sell).map(s => s.stockNumber);
       tradings.sell = _.remove(sellStocks, n => tradings.hold.indexOf(n) !== -1);
+      tradings.canSell = sellStocks;
 
       // update tradings
       fs.writeFileSync(tradingFilePath, JSON.stringify(tradings), { encoding:'utf8', flag: 'w' });

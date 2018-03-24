@@ -7,6 +7,7 @@ import * as _ from 'lodash';
 import * as uuid from 'uuid';
 import { analyzeStock, sendStockToSlack } from './stock';
 import * as Bluebird from 'bluebird';
+import * as moment from 'moment';
 
 const logLevel: bunyan.LogLevel = _.defaultTo(
   process.env.LOG_LEVEL,
@@ -51,11 +52,15 @@ app.post('/analyze', async (req, res) => {
       return;
     }
     const stockNumbers = _.defaultTo(text, '').split(' ') as string[];
+    const date = stockNumbers.find(d => d.match(/\d{8}/) !== null);
     // background job
     (async () => {
       const summaries = await Bluebird.mapSeries(
-        stockNumbers,
-        (stockNumber: any) => analyzeStock(+stockNumber, true),
+        stockNumbers.filter(d => !d.match(/\d{8}/)),
+        (stockNumber: any) => {
+          if (date != null) return analyzeStock(+stockNumber, true, moment(date, 'YYYYMMDD').toDate());
+          else return analyzeStock(+stockNumber, true);
+        }
       );
       await Bluebird.mapSeries(
         summaries.filter(d => d), summary => sendStockToSlack(summary as any, '#stock'));

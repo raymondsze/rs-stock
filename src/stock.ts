@@ -931,11 +931,11 @@ export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = 
           .filter(d => d.type === 'A' || d.type === 'B');
 
         const tradingVolume = getTradingVolume(latestData);
-        if (tradingVolume < 1000000) console.log(`[${stockId}]: Block Trading Volume < 1000000...`);
+        if (tradingVolume < 1000000) console.log(`[${stockId}]: Trading Volume < 1000000...`);
         if (!ignoreFilter && tradingVolume < 1000000) return null;
 
         const tradingCount = getTradingCount(latestData);
-        if (tradingCount < 500) console.log(`[${stockId}]: Block Trading Count < 300...`);
+        if (tradingCount < 500) console.log(`[${stockId}]: Trading Count < 300...`);
         if (!ignoreFilter && tradingCount < 500) return null;
 
         const activeRate = getActiveRate(latestData);
@@ -944,24 +944,26 @@ export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = 
         // if (!ignoreFilter && activeRate < 0.2) return null;
 
         const buyVol = _.sumBy(
-          latestData.filter(d => d.type === 'A'),
+          latestData.filter(
+            d => moment(d.date).hour() > 12 && d.type === 'A'),
           'volume',
         );
         const sellVol = _.sumBy(
-          latestData.filter(d => d.type === 'B'),
+          latestData.filter(
+            d => moment(d.date).hour() > 12 && d.type === 'B'),
           'volume',
         );
         if (!ignoreFilter && bigNegativeCandle) {
           console.log(`[${stockId}]: Big Negative Candlestick...`);
           return null;
         }
-        if (!(buyVol >= sellVol)) console.log(`[${stockId}]: Bullish < Bearish...`);
-        if (ignoreFilter || (buyVol >= sellVol)) {
+        if (!(buyVol >= sellVol * 1.5)) console.log(`[${stockId}]: Bullish < Bearish * 1.5...`);
+        if (ignoreFilter || (buyVol >= sellVol * 1.5)) {
           const buyVol = getTradingVolume(latestData.filter(d => d.type === 'A'));
           const sellVol = getTradingVolume(latestData.filter(d => d.type === 'B'));
           const buy = (buyVol / sellVol) >= 1.5;
           if (buy) console.log(`[${stockId}]: Buy!`);
-          const sell = buyVol * 1.1 < sellVol;
+          const sell = buyVol < sellVol;
           if (sell) console.log(`[${stockId}]: Sell!`);
           // const topNVolDataByPrice = [
           //   await convertAATradingDataTotopNVolData(
@@ -1050,7 +1052,9 @@ export async function sendTradingsToSlack(
   trading: {
     hold: number[];
     buy: number[];
+    canBuy: number[];
     sell: number[];
+    canSell: number[];
     balance: number;
     transactions: { date: Date, stockNumber: number, type: 'A' | 'B' };
   },
@@ -1075,8 +1079,8 @@ export async function sendTradingsToSlack(
             fields: [
               {
                 value:
-                  `*程式將會買入 ${trading.buy.map(s => `\`${s.toString().padStart(6, '0')}.HK\``)}*\n` +
-                  `*程式將會沽出 ${trading.sell.map(s => `\`${s.toString().padStart(6, '0')}.HK\``)}*\n`,
+                  `*程式將會買入 ${trading.canBuy.map(s => `\`${s.toString().padStart(6, '0')}.HK\``)}*\n` +
+                  `*程式將會沽出 ${trading.canSell.map(s => `\`${s.toString().padStart(6, '0')}.HK\``)}*\n`,
                 short: false,
               },
             ],
