@@ -62,15 +62,15 @@ app.post('/analyze', async (req, res) => {
             return analyzeStock(+stockNumber, true, moment(date, 'YYYYMMDD').toDate());
           }
           return analyzeStock(+stockNumber, true);
-        }
+        },
       );
       await Bluebird.mapSeries(
-        summaries.filter(d => d), summary => {
+        summaries.filter(d => d), (summary) => {
           if (date != null) {
             return sendStockToSlack(summary as any, '#stock', moment(date, 'YYYYMMDD').toDate());
           }
           return sendStockToSlack(summary as any, '#stock');
-        }
+        },
       );
     })();
     res.json({ text: '收到！宜家即刻幫你分析！' });
