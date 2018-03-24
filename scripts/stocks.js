@@ -160,11 +160,9 @@ const { fetchStockNumbers, analyzeStock, sendStockNumbersToSlack, sendStockToSla
       // buy stocks excluding holding stocks
       const buyStocks = summaries.filter(d => d).filter(s => s.buy).map(s => s.stockNumber);
       tradings.buy = _.remove(buyStocks, n => tradings.hold.indexOf(n) === -1);
-      tradings.canBuy = buyStocks;
       // sell stocks excluding holding stocks
       const sellStocks = holdingStocksSummaries.filter(d => d).filter(s => s.sell).map(s => s.stockNumber);
       tradings.sell = _.remove(sellStocks, n => tradings.hold.indexOf(n) !== -1);
-      tradings.canSell = sellStocks;
 
       // update tradings
       fs.writeFileSync(tradingFilePath, JSON.stringify(tradings), { encoding:'utf8', flag: 'w' });

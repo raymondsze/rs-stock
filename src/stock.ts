@@ -1079,8 +1079,8 @@ export async function sendTradingsToSlack(
             fields: [
               {
                 value:
-                  `*程式將會買入 ${trading.canBuy.map(s => `\`${s.toString().padStart(6, '0')}.HK\``)}*\n` +
-                  `*程式將會沽出 ${trading.canSell.map(s => `\`${s.toString().padStart(6, '0')}.HK\``)}*\n`,
+                  `*程式將會買入 ${trading.buy.map(s => `\`${s.toString().padStart(6, '0')}.HK\``)}*\n` +
+                  `*程式將會沽出 ${trading.sell.map(s => `\`${s.toString().padStart(6, '0')}.HK\``)}*\n`,
                 short: false,
               },
             ],
