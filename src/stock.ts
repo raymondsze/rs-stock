@@ -7,7 +7,7 @@ import * as moment from 'moment';
 import * as Slack from 'slack-node';
 import * as Bluebird from 'bluebird';
 import * as _ from 'lodash';
-
+// const glob = require("glob");
 const format = require('format-number')(({ truncate: 2 }));
 
 /* tslint:disable */
@@ -853,6 +853,14 @@ async function fetchAASDetailTradingData(stockId: number, date: Date): Promise<A
   };
   return getDataFromAAStock(trials + 1);
 }
+
+// export async function stockTransactionChart(stockNumber: number) {
+//   const globPath = `../data/${stockNumber.toString().padStart(6, '0')}.HK_*.json`;
+//   console.log(globPath);
+//   console.log(glob.sync(globPath));
+// }
+
+// stockTransactionChart(1);
 
 export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = false, date?: Date): Promise<StockSummary | null> {
   const stockId = `${stockNumber.toString().padStart(6, '0')}.HK`;
