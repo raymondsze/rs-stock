@@ -867,7 +867,8 @@ export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = 
   const pastProfilePath = path.join(__dirname, '..', `data/${stockId}_pf${moment(date).format('YYYYMMDD')}.json`);
   console.log(`[${stockId}]: Analyzing...`);
   const stockProfile = date != null ? 
-    (fs.existsSync(pastProfilePath) ? JSON.parse(fs.readFileSync(pastProfilePath, { encoding: 'utf8' })) : null) :
+    (fs.existsSync(pastProfilePath) ? JSON.parse(fs.readFileSync(pastProfilePath, { encoding: 'utf8' })) : 
+    await fetchTickerStockProfile(stockNumber)) :
     await fetchTickerStockProfile(stockNumber);
   if (stockProfile == null || stockProfile.volume == null) return null;
   if (stockProfile.mktCap <= 1000000000) console.log(`[${stockId}]: MarketCap <= 1000000000...`);
@@ -943,8 +944,8 @@ export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = 
         if (!ignoreFilter && tradingVolume < 1000000) return null;
 
         const tradingCount = getTradingCount(latestData);
-        if (tradingCount < 500) console.log(`[${stockId}]: Trading Count < 300...`);
-        if (!ignoreFilter && tradingCount < 500) return null;
+        if (tradingCount < 300) console.log(`[${stockId}]: Trading Count < 500...`);
+        if (!ignoreFilter && tradingCount < 300) return null;
 
         const activeRate = getActiveRate(latestData);
         const active = activeRate >= 0.7;
@@ -965,8 +966,8 @@ export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = 
           console.log(`[${stockId}]: Big Negative Candlestick...`);
           return null;
         }
-        if (!(buyVol >= sellVol * 1.5)) console.log(`[${stockId}]: Bullish < Bearish * 1.5...`);
-        if (ignoreFilter || (buyVol >= sellVol * 1.5)) {
+        if (!(buyVol >= sellVol * 1.2)) console.log(`[${stockId}]: Bullish < Bearish * 1.2...`);
+        if (ignoreFilter || true/* || (buyVol >= sellVol * 1.2)*/) {
           const buyVol = getTradingVolume(latestData.filter(d => d.type === 'A'));
           const sellVol = getTradingVolume(latestData.filter(d => d.type === 'B'));
           const buy = (buyVol / sellVol) >= 1.5;
