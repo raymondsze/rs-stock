@@ -69,10 +69,10 @@ function isAbnormalVolume(candles: Candle[]) {
   if (candles.length < 2) {
     throw new Error('At least 2 candles to calculate the volume difference');
   }
-  const lastDayData = candles[candles.length - 1];
+  const lastDayData = (candles[candles.length - 1].buyVolume || 0) - (candles[candles.length - 1].sellVolume || 0);
   const prevData = _.take(candles, candles.length - 1);
-  const avgVol = _.sumBy(prevData, 'volume') / prevData.length;
-  return _.defaultTo(lastDayData.volume, lastDayData.normVolume) >= 3 * avgVol;
+  const avgVol = _.meanBy(prevData.map(d => (d.buyVolume || 0 - d.sellVolume || 0)));
+  return Math.abs(lastDayData) >= 1.5 * Math.abs(avgVol);
 }
 
 function getTradingPriceRatio(candle: Candle) {
@@ -563,34 +563,43 @@ interface AASTopVolData {
   startAt: Date;
   endAt: Date;
   volume: number;
-  price: number;
+  netFlow: number;
+  buyVol: number;
+  buyPrice: number;
+  sellVol: number;
+  sellPrice: number;
+  avgPrice: number;
   type: string;
 }
 
-async function convertAATradingDataTotopNVolData(tradingData: AASDetailTradingData[], groupBy?: 'price'): Promise<AASTopVolData[]> {
-  const buyData = tradingData.filter(d => d.type === 'A');
-  const buyGroupData = _.mapValues(
-    groupBy? _.groupBy(buyData, groupBy) : _.chunk(buyData, 1),
-    (d, key) => ({
-      startAt: _.get(_.minBy(d, 'date'), 'date'),
-      endAt: _.get(_.maxBy(d, 'date'), 'date'),
-      volume: _.sumBy(d, 'volume'),
-      price: groupBy === 'price' ? +key : d[0].price,
-      type: 'A',
-    } as AASTopVolData));
-  const topNBuyData = _.takeRight(_.sortBy(Object.values(buyGroupData), 'volume'), 3);
-  const sellData = tradingData.filter(d => d.type === 'B');
-  const sellGroupData = _.mapValues(
-    groupBy? _.groupBy(sellData, groupBy) : _.chunk(sellData, 1),
-    (d, key) => ({
-      startAt: _.get(_.minBy(d, 'date'), 'date'),
-      endAt: _.get(_.maxBy(d, 'date'), 'date'),
-      volume: _.sumBy(d, 'volume'),
-      price: groupBy === 'price' ? +key : d[0].price,
-      type: 'B',
-    } as AASTopVolData));
-  const topNSellData = _.takeRight(_.sortBy(Object.values(sellGroupData), 'volume'), 3);
-  return [...topNBuyData, ...topNSellData];
+async function convertAATradingDataTotopNVolData(tradingData: AASDetailTradingData[]): Promise<AASTopVolData[]> {
+  const groupData = _.mapValues(
+    _.groupBy(tradingData, d => moment(d.date).hour()),
+    (d, key) => {
+      const maxBuy = _.maxBy(
+        d.filter(d => d.type === 'A'),
+        d => d.volume,
+      );
+      const maxSell = _.maxBy(
+        d.filter(d => d.type === 'B'),
+        d => d.volume,
+      );
+      const startDate = _.get(_.minBy(d, 'date'), 'date');
+      const endDate = _.get(_.maxBy(d, 'date'), 'date');
+      return {
+        startAt: moment(startDate).startOf('hour').toDate(),
+        endAt: moment(endDate).endOf('hour').toDate(),
+        volume: _.sumBy(d, 'volume'),
+        buyPrice: maxBuy ? maxBuy.price : 0,
+        buyVol: maxBuy ? maxBuy.volume : 0,
+        sellPrice: maxSell ? maxSell.price: 0,
+        sellVol: maxSell ? maxSell.volume: 0,
+        netFlow: _.sum(d.map(d => d.type === 'A' ? (d.volume * d.price) : -(d.volume * d.price))),
+        avgPrice: _.meanBy(d, d => d.price),
+      } as AASTopVolData;
+    });
+  const topNData = _.sortBy(_.values(groupData), d => d.startAt).reverse();
+  return topNData;
 }
 
 export async function seedStock(stockNumber: number) {
@@ -730,8 +739,7 @@ interface StockSummary {
   stockNumber: number;
   profile: TickerStockProfile;
   tradings: {
-    topNVolMorningDataByTime: AASTopVolData[][];
-    topNVolAfternoonDataByTime: AASTopVolData[][];
+    topNVolDataByTime: AASTopVolData[][];
     data: AASDetailTradingData[][];
   };
   labels: {
@@ -746,6 +754,7 @@ interface StockSummary {
     crossStar: boolean;
     jumpyBuy: boolean;
     active: boolean;
+    stupid: boolean;
   };
   chart: string;
 }
@@ -871,7 +880,7 @@ export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = 
     await fetchTickerStockProfile(stockNumber)) :
     await fetchTickerStockProfile(stockNumber);
   if (stockProfile == null || stockProfile.volume == null) return null;
-  if (stockProfile.mktCap <= 1000000000) console.log(`[${stockId}]: MarketCap <= 1000000000...`);
+  if (stockProfile.mktCap <= 200000000) console.log(`[${stockId}]: MarketCap <= 200000000...`);
   if (stockProfile == null || (!ignoreFilter && stockProfile.mktCap <= 1000000000)) return null;
   const changeAcceptable = true; // (stockProfile.changePercent >= -3);
   if (!ignoreFilter && !changeAcceptable) console.log(`[${stockId}]: Change is lower than -3%...`);
@@ -882,8 +891,8 @@ export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = 
     let candles = JSON.parse(fs.readFileSync(filePath, { encoding: 'utf8' })) as Candle[];
     if (date != null) candles = candles.filter(c => moment(c.date).diff(date) < 0);
     if (candles.length >= 4 ) {
-      const abnormalVol = isAbnormalVolume(candles);
-      if (!abnormalVol) console.log(`[${stockId}]: Volume is not abnormal (300% from year average)...`);
+      const abnormalVol = isAbnormalVolume(_.takeRight(candles, 5));
+      if (!abnormalVol) console.log(`[${stockId}]: Volume is not abnormal (150% from 5 days average)...`);
       if (ignoreFilter || abnormalVol) {
         // labelize trading data
         const maxTradingDiff = _.max(candles.map(candle => candle.close - candle.open)) as number;
@@ -926,10 +935,10 @@ export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = 
           candles[candles.length - 2],
           0.03,
         );
-        const last4TradingDates = _.takeRight(candles, 4).map(d => d.date);
+        const last10TradingDates = _.takeRight(candles, 10).map(d => d.date);
         console.log(`[${stockId}]: Get latest 4 days data...`);
         const aasDatas = await Bluebird.mapSeries(
-          last4TradingDates,
+          last10TradingDates,
           date => {
             const fPath = path.join(__dirname, '..', 'data', `${stockId}_${moment(date).format('YYYYMMDD')}.json`);
             if (!fs.existsSync(fPath)) return [];
@@ -944,7 +953,7 @@ export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = 
         if (!ignoreFilter && tradingVolume < 1000000) return null;
 
         const tradingCount = getTradingCount(latestData);
-        if (tradingCount < 300) console.log(`[${stockId}]: Trading Count < 500...`);
+        if (tradingCount < 200) console.log(`[${stockId}]: Trading Count < 200...`);
         if (!ignoreFilter && tradingCount < 300) return null;
 
         const activeRate = getActiveRate(latestData);
@@ -966,6 +975,14 @@ export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = 
           console.log(`[${stockId}]: Big Negative Candlestick...`);
           return null;
         }
+        const buyMax = _.get(_.maxBy(
+          latestData.filter(d => d.type === 'A'), 'volume'), 'volume', 0);
+        const mean = _.meanBy(latestData, 'volume');
+        let stupid = false;
+        if (buyMax > mean * 20) {
+          stupid = true;
+        }
+
         if (!(buyVol >= sellVol * 1.2)) console.log(`[${stockId}]: Bullish < Bearish * 1.2...`);
         if (ignoreFilter || true/* || (buyVol >= sellVol * 1.2)*/) {
           const buyVol = getTradingVolume(latestData.filter(d => d.type === 'A'));
@@ -982,32 +999,56 @@ export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = 
           //   await convertAATradingDataTotopNVolData(
           //     aasDatas[aasDatas.length - 3].filter(d => d.type === 'A' || d.type === 'B'), 'price'),
           // ];
-          const topNVolMorningDataByTime = [
+          const topNVolDataByTime = [
             await convertAATradingDataTotopNVolData(
               latestData.filter(
-                d => moment(d.date).hour() < 12 && (d.type === 'A' ||  d.type === 'B')),
+                d => d.type === 'A' ||  d.type === 'B',
+              ),
             ),
             await convertAATradingDataTotopNVolData(
               aasDatas[aasDatas.length - 2].filter(
-                d => moment(d.date).hour() < 12 && (d.type === 'A' ||  d.type === 'B')),
+                d => d.type === 'A' ||  d.type === 'B',
+              ),
             ),
             await convertAATradingDataTotopNVolData(
               aasDatas[aasDatas.length - 3].filter(
-                d => moment(d.date).hour() < 12 && (d.type === 'A' ||  d.type === 'B')),
-            ),
-          ];
-          const topNVolAfternoonDataByTime = [
-            await convertAATradingDataTotopNVolData(
-              latestData.filter(
-                d => moment(d.date).hour() > 12 && (d.type === 'A' ||  d.type === 'B')),
+                d => d.type === 'A' ||  d.type === 'B',
+              ),
             ),
             await convertAATradingDataTotopNVolData(
-              aasDatas[aasDatas.length - 2].filter(
-                d => moment(d.date).hour() > 12 && (d.type === 'A' ||  d.type === 'B')),
+              aasDatas[aasDatas.length - 4].filter(
+                d => d.type === 'A' ||  d.type === 'B',
+              ),
             ),
             await convertAATradingDataTotopNVolData(
-              aasDatas[aasDatas.length - 3].filter(
-                d => moment(d.date).hour() > 12 && (d.type === 'A' ||  d.type === 'B')),
+              aasDatas[aasDatas.length - 5].filter(
+                d => d.type === 'A' ||  d.type === 'B',
+              ),
+            ),
+            await convertAATradingDataTotopNVolData(
+              aasDatas[aasDatas.length - 6].filter(
+                d => d.type === 'A' ||  d.type === 'B',
+              ),
+            ),
+            await convertAATradingDataTotopNVolData(
+              aasDatas[aasDatas.length - 7].filter(
+                d => d.type === 'A' ||  d.type === 'B',
+              ),
+            ),
+            await convertAATradingDataTotopNVolData(
+              aasDatas[aasDatas.length - 8].filter(
+                d => d.type === 'A' ||  d.type === 'B',
+              ),
+            ),
+            await convertAATradingDataTotopNVolData(
+              aasDatas[aasDatas.length - 9].filter(
+                d => d.type === 'A' ||  d.type === 'B',
+              ),
+            ),
+            await convertAATradingDataTotopNVolData(
+              aasDatas[aasDatas.length - 10].filter(
+                d => d.type === 'A' ||  d.type === 'B',
+              ),
             ),
           ];
           const stockName = await fetchTickerStockName(stockNumber);
@@ -1018,9 +1059,8 @@ export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = 
             name: stockName,
             profile: stockProfile,
             tradings: {
-              topNVolMorningDataByTime,
-              topNVolAfternoonDataByTime,
-              data: [..._.takeRight(aasDatas, 3)].reverse(),
+              topNVolDataByTime,
+              data: [..._.takeRight(aasDatas, 10)].reverse(),
             },
             labels: {
               positiveCandle,
@@ -1034,6 +1074,7 @@ export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = 
               crossStar,
               jumpyBuy,
               active,
+              stupid,
             },
             chart: 'http://charts.aastocks.com/servlet/Charts?' +
               'fontsize=12&15MinDelay=T&lang=1&titlestyle=1&' + 
@@ -1164,73 +1205,27 @@ export async function sendStockToSlack(summary: StockSummary, channel: '#general
       + `@${moment(lastTradingDate).format('YYYY-MM-DD')}*`;
     const earnPerUnit = (profile.pe != null) ? format(price / profile.pe) : '-';
     const pe = (profile.pe != null) ? format(+profile.pe) : '-';
-    const topNVolMorningDataByTime = summary.tradings.topNVolMorningDataByTime;
-    const topNVolAfternoonDataByTime = summary.tradings.topNVolAfternoonDataByTime;
+    const topNVolDataByTime = summary.tradings.topNVolDataByTime;
     const tradingData = summary.tradings.data;
-    const topVolByTimeMsgs = topNVolMorningDataByTime.map(
+    const topVolByTimeMsgs = topNVolDataByTime.map(
       (d, j) => {
-        const topNBuyData = _.sortBy(d.filter(dt => dt.type === 'A'), 'volume').reverse();
-        const topNSellData = _.sortBy(d.filter(dt => dt.type === 'B'), 'volume').reverse();
-        return '' +
-          '總成交量: *' + format(_.sumBy(tradingData[j].filter(d => moment(d.date).hour() < 12), 'volume')) + '*' +
-          ' 買佔: *' + format(_.sumBy(tradingData[j].filter(d => moment(d.date).hour() < 12 && d.type === 'A'), 'volume')) + '*' +
-          ' 賣佔: *' + format(_.sumBy(tradingData[j].filter(d => moment(d.date).hour() < 12 && d.type === 'B'), 'volume')) + '*' +
-          '\n' +
-          new Array(Math.max(topNBuyData.length, topNSellData.length))
-            .fill('').map(
+        return `總成交量: *${format(_.sumBy(tradingData[j], d => d.volume) / 10000)}萬股* ` +
+          `總流入: *${format(_.sumBy(tradingData[j], d => d.type === 'A' ? (d.volume * d.price) : (-d.volume * d.price)) / 10000)}萬* ` +
+          `平均價: *${format(_.meanBy(tradingData[j], d => d.price))}*\n` +
+          d.map(
             (dt, i) => {
-              const b = topNBuyData[i];
-              const s = topNSellData[i];
-              return '    ' +
-                (b != null ?
-                  `*${moment(b.startAt).format('HH:mm')}*, *${format(b.volume)}*, *${format(b.price)}*`
-                  : '-'
-                ) +
-                '  |  ' +
-                (s != null ?
-                  `\`${moment(s.startAt).format('HH:mm')}\`, \`${format(s.volume)}\`, \`${format(s.price)}\``
-                  : '-'
-                )
+              return `_${moment(dt.startAt).format('HH:mm')}_ - _${moment(dt.endAt).format('HH:mm')}_ | ` + 
+                `*${format(dt.buyVol / 10000 || 0)}萬股*, *${format(dt.buyPrice)}* | ` +
+                `\`${format(dt.sellVol / 10000)}萬股\`, \`${format(dt.sellPrice)}\` | ` +
+                `*${format(dt.netFlow/ 10000)}萬*, ${format(dt.volume/ 10000)}萬股, ${format(dt.avgPrice)}`;
             }
           ).join('\n');
       }
-    ).join('\n');
-    const topVolByPriceMsgs = topNVolAfternoonDataByTime.map(
-      (d, j) => {
-        const topNBuyData = _.sortBy(d.filter(dt => dt.type === 'A'), 'volume').reverse();
-        const topNSellData = _.sortBy(d.filter(dt => dt.type === 'B'), 'volume').reverse();
-        return '' +
-          '總成交量: *' + format(_.sumBy(tradingData[j].filter(d => moment(d.date).hour() > 12), 'volume')) + '*' +
-          ' 買佔: *' + format(_.sumBy(tradingData[j].filter(d => moment(d.date).hour() > 12 && d.type === 'A'), 'volume')) + '*' +
-          ' 賣佔: *' + format(_.sumBy(tradingData[j].filter(d => moment(d.date).hour() > 12 && d.type === 'B'), 'volume')) + '*' +
-          '\n' +
-          new Array(Math.max(topNBuyData.length, topNSellData.length))
-            .fill('').map(
-              (dt, i) => {
-                const b = topNBuyData[i];
-                const s = topNSellData[i];
-                return '    ' +
-                  (b != null ?
-                    `*${moment(b.startAt).format('HH:mm')}*, *${format(b.volume)}*, *${format(b.price)}*`
-                    : '-'
-                  ) +
-                  '  |  ' +
-                  (s != null ?
-                    `\`${moment(s.startAt).format('HH:mm')}\`, \`${format(s.volume)}\`, \`${format(s.price)}\``
-                    : '-'
-                  ) 
-              }
-            ).join('\n');
-      }
-    ).join('\n');
+    ).join('\n\n');
     const message =
-`股價: *${price.toFixed(2)}*
+`股價/市值: *${price.toFixed(2)}*, *${format(profile.mktCap/100000000)}億*
 每股盈利/市盈率: *${earnPerUnit}*, *${pe}*
 升幅 (百分率，股價): *${profile.changePercent.toFixed(2)}%*, *${profile.changePrice.toFixed(2)}*
-最近三日 上午9am - 12pm 最高買入/賣出成交量 (時間, 成交量，股價):
-${topVolByTimeMsgs}
-最近三日 下午1pm - 4pm 最高買入/賣出成交量 (時間, 成交量，股價):
-${topVolByPriceMsgs}
 訊號: ${[
   labels.bigPositiveCandle ? '*大陽燭*' : null,
   !labels.bigPositiveCandle && labels.positiveCandle ? '*陽燭*' : null,
@@ -1248,21 +1243,23 @@ ${topVolByPriceMsgs}
   labels.jumpyBuy ? '*跳價高買*' : null,
   labels.active ? '*活躍股*' : null,
   (pe > 0) ? '*有盈利*' : null,
+  labels.stupid ? '*傻強出沒請注意*' : null,
 ].filter(l => l).join(', ')}
 `;
     slack.webhook(
       {
+        text: pretext + '\n' + message,
         username: 'stockBot',
         attachments: [
           {
             color,
-            pretext,
+            pretext: '*====最近十日成交表====*',
             fields: [
               {
-                value: message,
                 short: false,
               },
             ],
+            text: `時間 | (最高買入) 量，股價 | (最高賣出) 量，股價 | 淨流入，總量，平均價:\n${topVolByTimeMsgs}`,
             footer: `http://www.aastocks.com/tc/stocks/quote/detail-quote.aspx?symbol=${
               stockNumber.toString().padStart(6, '0')
             }`,
