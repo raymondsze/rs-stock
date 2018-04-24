@@ -658,10 +658,7 @@ export async function seedStock(stockNumber: number) {
     console.log(`[${stockId}]: Fetching 1 year data from Sina...`);
     const sinaCandles = await fetchSinaCandles(stockNumber);
     // get the last valid trading 4 date
-    const lastNTradingDates = _.uniq([
-      ..._.takeRight(sinaCandles, 3).map(d => d.date),
-      lastTradingDate,
-    ]);
+    const lastNTradingDates = _.uniq([lastTradingDate]);
     console.log(`[${stockId}]: Fetching latest 1 day data from AAStock...`);
     const aasDatas = await Bluebird.mapSeries(
       lastNTradingDates,
@@ -941,7 +938,10 @@ export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = 
           last10TradingDates,
           date => {
             const fPath = path.join(__dirname, '..', 'data', `${stockId}_${moment(date).format('YYYYMMDD')}.json`);
+            // console.log(fPath);
             if (!fs.existsSync(fPath)) return [];
+            // console.log('EXISTS');
+            // console.log(fs.readFileSync(fPath, { encoding: 'utf8' }));
             return JSON.parse(fs.readFileSync(fPath, { encoding: 'utf8' })) as AASDetailTradingData[];
           },
         );
@@ -999,6 +999,7 @@ export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = 
           //   await convertAATradingDataTotopNVolData(
           //     aasDatas[aasDatas.length - 3].filter(d => d.type === 'A' || d.type === 'B'), 'price'),
           // ];
+          // process.exit(1);
           const topNVolDataByTime = [
             await convertAATradingDataTotopNVolData(
               latestData.filter(
