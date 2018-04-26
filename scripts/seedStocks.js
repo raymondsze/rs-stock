@@ -3,6 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const { spawn } = require('child_process');
 const Bluebird = require('bluebird');
+const moment = require('moment');
 
 const NODE_ENV = _.defaultTo(process.env.NODE_ENV, 'development');
 process.env.NODE_ENV = NODE_ENV;
@@ -35,11 +36,14 @@ process.on('uncaughtException', (err) => {
   process.exit(1);
 });
 
-const { fetchStockNumbers } = require('../build/stock');
+const { fetchStockNumbers, fetchLatestTradingDate, getPositiveRTAI, getNegativeRTAI } = require('../build/stock');
 (async () => {
   const stockNumbers = await fetchStockNumbers();
   // const threads = [[1548]];
   const threads = _.chunk(stockNumbers, Math.round(stockNumbers.length / 3));
+  const lastTradingDate = await fetchLatestTradingDate();
+  fs.writeFileSync(`${__dirname}/../data/posSignals_${moment(lastTradingDate).format('YYYYMMDD')}.json`, JSON.stringify(await getPositiveRTAI()));
+  fs.writeFileSync(`${__dirname}/../data/negSignals_${moment(lastTradingDate).format('YYYYMMDD')}.json`, JSON.stringify(await getNegativeRTAI()));
   await Bluebird.map(
     threads,
     (thread, i) => new Promise((resolve, reject) => {

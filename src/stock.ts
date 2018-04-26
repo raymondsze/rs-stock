@@ -783,6 +783,21 @@ interface StockSummary {
     jumpyBuy: boolean;
     active: boolean;
     stupid: boolean;
+    posPick1: boolean;
+    posPick2: boolean;
+    posPick3: boolean;
+    posPick4: boolean;
+    posPick5: boolean;
+    posPick6: boolean;
+    posPick7: boolean;
+    posPick8: boolean;
+    negPick1: boolean;
+    negPick2: boolean;
+    negPick3: boolean;
+    negPick4: boolean;
+    negPick5: boolean;
+    negPick6: boolean;
+    negPick7: boolean;
   };
   chart: string;
 }
@@ -899,7 +914,78 @@ async function fetchAASDetailTradingData(stockId: number, date: Date): Promise<A
 
 // stockTransactionChart(1);
 
+export async function getPositiveRTAI() {
+  const { data: htmlData } = await axios({
+    method: 'get',
+    url: 'http://www.aastocks.com/sc/LTP/RTAI.aspx',
+  });
+  const $ = cheerio.load(htmlData);
+  // 头肩底
+  const pick1 = $('img#img1').parent().parent().text().match(/(\d{5})\.HK/g) || [];
+  // 黄金交叉
+  const pick2 = $('img#img2').parent().parent().text().match(/(\d{5})\.HK/g) || [];
+  // 区域突破
+  const pick3 = $('img#img3').parent().parent().text().match(/(\d{5})\.HK/g) || [];
+  // 三角突破
+  const pick4 = $('img#img4').parent().parent().text().match(/(\d{5})\.HK/g) || [];
+  // 三重底
+  const pick5 = $('img#img5').parent().parent().text().match(/(\d{5})\.HK/g) || [];
+  // 超卖启示
+  const pick6 = $('img#img6').parent().parent().text().match(/(\d{5})\.HK/g) || [];
+  // 趋势逆转
+  const pick7 = $('img#img7').parent().parent().text().match(/(\d{5})\.HK/g) || [];
+  // 杯柄突破
+  const pick8 = $('img#img8').parent().parent().text().match(/(\d{5})\.HK/g) || [];
+  return {
+    pick1,
+    pick2,
+    pick3,
+    pick4,
+    pick5,
+    pick6,
+    pick7,
+    pick8,
+  };
+}
+
+export async function getNegativeRTAI() {
+  const { data: htmlData } = await axios({
+    method: 'get',
+    url: 'http://www.aastocks.com/sc/LTP/RTAI.aspx?type=2',
+  });
+  const $ = cheerio.load(htmlData);
+  // 头肩顶
+  const pick1 = $('img#img1').parent().parent().text().match(/(\d{5})\.HK/g) || [];
+  // 死亡交叉
+  const pick2 = $('img#img2').parent().parent().text().match(/(\d{5})\.HK/g) || [];
+  // 区域突破
+  const pick3 = $('img#img3').parent().parent().text().match(/(\d{5})\.HK/g) || [];
+  // 三角突破
+  const pick4 = $('img#img4').parent().parent().text().match(/(\d{5})\.HK/g) || [];
+  // 三重顶
+  const pick5 = $('img#img5').parent().parent().text().match(/(\d{5})\.HK/g) || [];
+  // 超买启示
+  const pick6 = $('img#img6').parent().parent().text().match(/(\d{5})\.HK/g) || [];
+  // 趋势逆转
+  const pick7 = $('img#img7').parent().parent().text().match(/(\d{5})\.HK/g) || [];
+  return {
+    pick1,
+    pick2,
+    pick3,
+    pick4,
+    pick5,
+    pick6,
+    pick7,
+  };
+}
+
 export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = false, date?: Date): Promise<StockSummary | null> {
+  const posSignalsPath = path.join(__dirname, '..', `data/posSignals_${moment(date).format('YYYYMMDD')}.json`);
+  const posSignals = !fs.existsSync(posSignalsPath) ? await getPositiveRTAI() : JSON.parse(fs.readFileSync(posSignalsPath, { encoding: 'utf8' }));
+
+  const negSignalsPath = path.join(__dirname, '..', `data/negSignals_${moment(date).format('YYYYMMDD')}.json`);
+  const negSignals = !fs.existsSync(negSignalsPath) ? await getNegativeRTAI() : JSON.parse(fs.readFileSync(negSignalsPath, { encoding: 'utf8' }));
+
   const stockId = `${stockNumber.toString().padStart(6, '0')}.HK`;
   const pastProfilePath = path.join(__dirname, '..', `data/${stockId}_pf${moment(date).format('YYYYMMDD')}.json`);
   console.log(`[${stockId}]: Analyzing...`);
@@ -909,9 +995,15 @@ export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = 
     await fetchTickerStockProfile(stockNumber);
   if (stockProfile == null || stockProfile.volume == null) return null;
   if (stockProfile.mktCap <= 200000000) console.log(`[${stockId}]: MarketCap <= 200000000...`);
-  if (stockProfile == null || (!ignoreFilter && stockProfile.mktCap <= 1000000000)) return null;
+  if (stockProfile == null || (!ignoreFilter && stockProfile.mktCap <= 200000000)) return null;
   const changeAcceptable = true; // (stockProfile.changePercent >= -3);
-  if (!ignoreFilter && !changeAcceptable) console.log(`[${stockId}]: Change is lower than -3%...`);
+  // if (!ignoreFilter && !changeAcceptable) console.log(`[${stockId}]: Change is lower than -3%...`);
+  // at least match one positive signals from TA
+  const hasPositveSignal = _.reduce(posSignals, (r, v) => (r || v.indexOf(`${stockNumber.toString().padStart(5, '0')}.HK`) >= 0), false);
+  if (!ignoreFilter && !hasPositveSignal) {
+    console.log('No positive signal match...');
+    return null;
+  }
   if (ignoreFilter || changeAcceptable) {
     // read the monthly data
     const filePath = path.join(__dirname, '..', `data/${stockId}.json`);
@@ -919,7 +1011,7 @@ export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = 
     let candles = JSON.parse(fs.readFileSync(filePath, { encoding: 'utf8' })) as Candle[];
     if (date != null) candles = candles.filter(c => moment(c.date).diff(date) < 0);
     if (candles.length >= 4 ) {
-      const abnormalVol = isAbnormalVolume(_.takeRight(candles, 5));
+      const abnormalVol = true || isAbnormalVolume(_.takeRight(candles, 5));
       if (!abnormalVol) console.log(`[${stockId}]: Volume is not abnormal (150% from 5 days average)...`);
       if (ignoreFilter || abnormalVol) {
         // labelize trading data
@@ -1015,7 +1107,7 @@ export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = 
         }
 
         if (!(buyVol >= sellVol * 1.2)) console.log(`[${stockId}]: Bullish < Bearish * 1.2...`);
-        if (ignoreFilter || true/* || (buyVol >= sellVol * 1.2)*/) {
+        if (ignoreFilter || (buyVol >= sellVol * 1.2)) {
           const buyVol = getTradingVolume(latestData.filter(d => d.type === 'A'));
           const sellVol = getTradingVolume(latestData.filter(d => d.type === 'B'));
           const buy = (buyVol / sellVol) >= 1.5;
@@ -1068,6 +1160,21 @@ export async function analyzeStock(stockNumber: number, ignoreFilter: boolean = 
               jumpyBuy,
               active,
               stupid,
+              posPick1: posSignals.pick1.indexOf(`${stockNumber.toString().padStart(5, '0')}.HK`) >= 0,
+              posPick2: posSignals.pick2.indexOf(`${stockNumber.toString().padStart(5, '0')}.HK`) >= 0,
+              posPick3: posSignals.pick3.indexOf(`${stockNumber.toString().padStart(5, '0')}.HK`) >= 0,
+              posPick4: posSignals.pick4.indexOf(`${stockNumber.toString().padStart(5, '0')}.HK`) >= 0,
+              posPick5: posSignals.pick5.indexOf(`${stockNumber.toString().padStart(5, '0')}.HK`) >= 0,
+              posPick6: posSignals.pick6.indexOf(`${stockNumber.toString().padStart(5, '0')}.HK`) >= 0,
+              posPick7: posSignals.pick7.indexOf(`${stockNumber.toString().padStart(5, '0')}.HK`) >= 0,
+              posPick8: posSignals.pick8.indexOf(`${stockNumber.toString().padStart(5, '0')}.HK`) >= 0,
+              negPick1: negSignals.pick1.indexOf(`${stockNumber.toString().padStart(5, '0')}.HK`) >= 0,
+              negPick2: negSignals.pick2.indexOf(`${stockNumber.toString().padStart(5, '0')}.HK`) >= 0,
+              negPick3: negSignals.pick3.indexOf(`${stockNumber.toString().padStart(5, '0')}.HK`) >= 0,
+              negPick4: negSignals.pick4.indexOf(`${stockNumber.toString().padStart(5, '0')}.HK`) >= 0,
+              negPick5: negSignals.pick5.indexOf(`${stockNumber.toString().padStart(5, '0')}.HK`) >= 0,
+              negPick6: negSignals.pick6.indexOf(`${stockNumber.toString().padStart(5, '0')}.HK`) >= 0,
+              negPick7: negSignals.pick7.indexOf(`${stockNumber.toString().padStart(5, '0')}.HK`) >= 0,
             },
             chart: 'http://charts.aastocks.com/servlet/Charts?' +
               'fontsize=12&15MinDelay=T&lang=1&titlestyle=1&' + 
@@ -1256,6 +1363,21 @@ export async function sendStockToSlack(summary: StockSummary, channel: '#general
   labels.active ? '*活躍股*' : null,
   (pe > 0) ? '*有盈利*' : null,
   labels.stupid ? '*傻強出沒請注意*' : null,
+  labels.posPick1 ? '*頭肩底*' : null,
+  labels.posPick2 ? '*黃金交叉*' : null,
+  labels.posPick3 ? '*區域突破*' : null,
+  labels.posPick4 ? '*三角突破*' : null,
+  labels.posPick5 ? '*三重底*' : null,
+  labels.posPick6 ? '*超賣啟示*' : null,
+  labels.posPick7 ? '*趨勢逆轉*' : null,
+  labels.posPick8 ? '*杯柄突破*' : null,
+  labels.negPick1 ? '`頭肩頂`' : null,
+  labels.negPick2 ? '`死亡交叉`' : null,
+  labels.negPick3 ? '`區域突破`' : null,
+  labels.negPick4 ? '`三角突破`' : null,
+  labels.negPick5 ? '`三重頂`' : null,
+  labels.negPick6 ? '`超買啟示`' : null,
+  labels.negPick7 ? '`趨勢逆轉`' : null,
 ].filter(l => l).join(', ')}
 `;
     slack.webhook(
