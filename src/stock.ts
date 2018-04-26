@@ -1200,7 +1200,7 @@ export async function sendStockToSlack(summary: StockSummary, channel: '#general
     const pe = (profile.pe != null) ? format(+profile.pe) : '-';
     const topNVolDataByTime = summary.tradings.topNVolDataByTime;
     const tradingData = summary.tradings.data;
-    const topVolByTimeMsgs = `*平均流入 ${format(_.meanBy(_.flatten(topNVolDataByTime), d => d.netFlow) / 10000)}萬* ` +
+    const topVolByTimeMsgs = `*平均流入 ${format(_.meanBy(_.flatten(topNVolDataByTime), d => d.netFlow) / 10000)}萬*\n` +
       topNVolDataByTime.map(
       (d, j) => {
         return `總成交量: *${format(_.sumBy(tradingData[j], d => d.volume) / 10000)}萬股* ` +
